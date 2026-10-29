@@ -1,0 +1,69 @@
+{
+  "name": "@shield/engine-contracts",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Shield engine adapter contracts and OSHIELD_* endpoint configuration",
+  "files": [
+    "dist"
+  ],
+  "type": "commonjs",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "shield-source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./engine-endpoints": {
+      "shield-source": "./src/engine-endpoints.ts",
+      "types": "./dist/engine-endpoints.d.ts",
+      "default": "./dist/engine-endpoints.js"
+    },
+    "./oshield-env": {
+      "shield-source": "./src/oshield-env.ts",
+      "types": "./dist/oshield-env.d.ts",
+      "default": "./dist/oshield-env.js"
+    },
+    "./engine-endpoint-overrides": {
+      "shield-source": "./src/engine-endpoint-overrides.ts",
+      "types": "./dist/engine-endpoint-overrides.d.ts",
+      "default": "./dist/engine-endpoint-overrides.js"
+    },
+    "./engine-adapter": {
+      "shield-source": "./src/engine-adapter.ts",
+      "types": "./dist/engine-adapter.d.ts",
+      "default": "./dist/engine-adapter.js"
+    },
+    "./wazuh-adapter-contract": {
+      "shield-source": "./src/wazuh-adapter-contract.ts",
+      "types": "./dist/wazuh-adapter-contract.d.ts",
+      "default": "./dist/wazuh-adapter-contract.js"
+    },
+    "./mythic-adapter-contract": {
+      "shield-source": "./src/mythic-adapter-contract.ts",
+      "types": "./dist/mythic-adapter-contract.d.ts",
+      "default": "./dist/mythic-adapter-contract.js"
+    },
+    "./caldera-adapter-contract": {
+      "shield-source": "./src/caldera-adapter-contract.ts",
+      "types": "./dist/caldera-adapter-contract.d.ts",
+      "default": "./dist/caldera-adapter-contract.js"
+    }
+  },
+  "scripts": {
+    "build": "tsx --conditions=shield-source scripts/build-dist.mjs",
+    "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.test.json",
+    "test": "vitest run --config vitest.config.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^18.19.130",
+    "proper-lockfile": "4.1.2",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vitest": "^3.2.7"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

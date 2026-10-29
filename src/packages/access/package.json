@@ -1,0 +1,47 @@
+{
+  "name": "@shield/access",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Shield RBAC evaluation, MFA session types, and the append-only audit hash chain",
+  "files": [
+    "dist"
+  ],
+  "type": "commonjs",
+  "main": "./dist/permission-domain.js",
+  "types": "./dist/permission-domain.d.ts",
+  "exports": {
+    ".": {
+      "shield-source": "./src/permission-domain.ts",
+      "types": "./dist/permission-domain.d.ts",
+      "default": "./dist/permission-domain.js"
+    },
+    "./audit-chain": {
+      "shield-source": "./src/audit-chain.ts",
+      "types": "./dist/audit-chain.d.ts",
+      "default": "./dist/audit-chain.js"
+    },
+    "./audit-chain-sha256": {
+      "shield-source": "./src/audit-chain-sha256.ts",
+      "types": "./dist/audit-chain-sha256.d.ts",
+      "default": "./dist/audit-chain-sha256.js"
+    },
+    "./permission-evaluate": {
+      "shield-source": "./src/permission-evaluate.ts",
+      "types": "./dist/permission-evaluate.d.ts",
+      "default": "./dist/permission-evaluate.js"
+    }
+  },
+  "scripts": {
+    "build": "tsx --conditions=shield-source scripts/build-dist.mjs",
+    "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.test.json",
+    "test": "vitest run --config vitest.config.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^18.19.130",
+    "typescript": "^7.0.2",
+    "vitest": "^3.2.7"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

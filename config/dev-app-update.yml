@@ -1,0 +1,4 @@
+provider: github
+owner: octopusshield
+repo: shield
+updaterCacheDirName: shield-updater

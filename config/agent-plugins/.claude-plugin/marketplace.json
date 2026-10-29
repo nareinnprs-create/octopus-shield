@@ -1,0 +1,12 @@
+{
+  "name": "shield-agent-plugins",
+  "owner": { "name": "Shield" },
+  "description": "Repository-local plugins for coding agents working in Shield",
+  "plugins": [
+    {
+      "name": "shield-typescript",
+      "source": "./shield-typescript",
+      "description": "TypeScript 7 diagnostics and code navigation from the repo's own compiler"
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+name: packages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/packages/**'
+      - '.github/workflows/packages.yml'
+  pull_request:
+    paths:
+      - 'src/packages/**'
+      - '.github/workflows/packages.yml'
+
+concurrency:
+  group: packages-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      packages: ${{ steps.discover.outputs.packages }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: discover
+        shell: bash
+        run: |
+          list=$(ls -d src/packages/*/ | jq -R -s -c 'split("\n") | map(select(length > 0)) | map(split("/")[-2])')
+          echo "packages=$list" >> "$GITHUB_OUTPUT"
+
+  package:
+    needs: matrix
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        package: ${{ fromJson(needs.matrix.outputs.packages) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 12.14.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+      - name: Install (scripts off; no native toolchain on this lane)
+        run: pnpm install --ignore-scripts --frozen-lockfile
+      - name: Typecheck
+        run: pnpm --filter "@shield/${{ matrix.package }}" typecheck
+      - name: Test
+        run: pnpm --filter "@shield/${{ matrix.package }}" test --if-present
+      - name: Build dist
+        run: pnpm --filter "@shield/${{ matrix.package }}" build
+      - name: No dist in git (source-only packaging)
+        shell: bash
+        run: |
+          if git ls-files --error-unmatch "src/packages/${{ matrix.package }}/dist" >/dev/null 2>&1; then
+            echo "::error::dist/ is tracked in git for ${{ matrix.package }}"
+            exit 1
+          fi

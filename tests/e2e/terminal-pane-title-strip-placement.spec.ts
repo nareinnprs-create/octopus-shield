@@ -1,0 +1,273 @@
+import type { Page } from '@stablyai/playwright-test'
+import { test, expect } from './helpers/shield-app'
+import {
+  moveTerminalPaneByLeafId,
+  readPaneIdentitySnapshot,
+  readTerminalPaneDomLeafOrder,
+  splitActiveTerminalPane,
+  waitForPaneIdentitySnapshot,
+  waitForPaneCount
+} from './helpers/terminal'
+import { setPaneTitleFromTerminalMenu } from './helpers/terminal-pane-title-actions'
+import { registerTerminalPaneMountReadiness } from './helpers/terminal-pane-mount-readiness'
+
+async function expectPaneTitleAttachedToLeaf(
+  page: Page,
+  title: string,
+  leafId: string
+): Promise<void> {
+  await expect
+    .poll(
+      () =>
+        page.evaluate(
+          ({ title, leafId }) => {
+            const titleBar = Array.from(
+              document.querySelectorAll<HTMLElement>('.pane-title-bar')
+            ).find((element) => element.textContent?.includes(title))
+            const pane = document.querySelector<HTMLElement>(`.pane[data-leaf-id="${leafId}"]`)
+            if (!titleBar || !pane) {
+              return false
+            }
+            const titleRect = titleBar.getBoundingClientRect()
+            const paneRect = pane.getBoundingClientRect()
+            return (
+              Math.abs(titleRect.left - paneRect.left) < 1 &&
+              Math.abs(titleRect.top - paneRect.top) < 1 &&
+              Math.abs(titleRect.width - paneRect.width) < 1
+            )
+          },
+          { title, leafId }
+        ),
+      {
+        timeout: 5_000,
+        message: 'Pane title overlay did not stay attached to its pane'
+      }
+    )
+    .toBe(true)
+}
+
+// Serialize headful scenarios; visible-window runs require an isolated display.
+test.describe.configure({ mode: 'serial' })
+test.describe('Terminal Panes', () => {
+  registerTerminalPaneMountReadiness()
+
+  test('Set Title strip accepts file-path drops without changing the active pane', async ({
+    shieldPage
+  }) => {
+    const title = `Drop target title ${Date.now()}`
+    const droppedPath = `/tmp/title-drop-${Date.now()}.txt`
+
+    await setPaneTitleFromTerminalMenu(shieldPage, title)
+    const initialSnapshot = await waitForPaneIdentitySnapshot(shieldPage, 1)
+    const titledLeafId = initialSnapshot.activeLeafId ?? initialSnapshot.panes[0]?.leafId
+    if (!titledLeafId) {
+      throw new Error('No titled pane leaf id found before split')
+    }
+
+    await splitActiveTerminalPane(shieldPage, 'vertical')
+    await waitForPaneCount(shieldPage, 2)
+    const splitSnapshot = await waitForPaneIdentitySnapshot(shieldPage, 2)
+    const otherPane = splitSnapshot.panes.find((pane) => pane.leafId !== titledLeafId)
+    if (!otherPane) {
+      throw new Error('No inactive pane found for title-strip drop test')
+    }
+
+    await shieldPage.evaluate(
+      ({ tabId, paneId }) => {
+        window.__paneManagers?.get(tabId)?.setActivePane(paneId, { focus: false })
+      },
+      { tabId: splitSnapshot.tabId, paneId: otherPane.numericPaneId }
+    )
+    await expect
+      .poll(async () => (await readPaneIdentitySnapshot(shieldPage))?.activeLeafId ?? null)
+      .toBe(otherPane.leafId)
+
+    const titleBar = shieldPage.locator('.pane-title-bar', { hasText: title }).first()
+    await expect(titleBar).toHaveAttribute('data-os-file-drop-owner', '')
+    await expect(titleBar).toHaveAttribute('data-terminal-tab-id', splitSnapshot.tabId)
+
+    await titleBar.evaluate((element, path) => {
+      const dataTransfer = new DataTransfer()
+      dataTransfer.setData('text/x-shield-file-path', path)
+      // Internal drops are refused without the source owner an Explorer drag records.
+      dataTransfer.setData(
+        'application/x-shield-workspace-file-source',
+        JSON.stringify({
+          executionHostId: 'local',
+          workspaceId: window.__store?.getState().activeWorktreeId,
+          version: 1
+        })
+      )
+      element.dispatchEvent(
+        new DragEvent('dragover', { bubbles: true, cancelable: true, dataTransfer })
+      )
+      element.dispatchEvent(
+        new DragEvent('drop', { bubbles: true, cancelable: true, dataTransfer })
+      )
+    }, droppedPath)
+
+    await expect
+      .poll(
+        () =>
+          shieldPage.evaluate(
+            ({ tabId, targetLeafId, otherLeafId, droppedPath }) => {
+              const manager = window.__paneManagers?.get(tabId)
+              const panes = manager?.getPanes() ?? []
+              const content = (leafId: string) =>
+                panes.find((pane) => pane.leafId === leafId)?.serializeAddon?.serialize() ?? ''
+              return {
+                activeLeafId: manager?.getActivePane()?.leafId ?? null,
+                targetHasPath: content(targetLeafId).includes(droppedPath),
+                otherHasPath: content(otherLeafId).includes(droppedPath)
+              }
+            },
+            {
+              tabId: splitSnapshot.tabId,
+              targetLeafId: titledLeafId,
+              otherLeafId: otherPane.leafId,
+              droppedPath
+            }
+          ),
+        { timeout: 5_000, message: 'Title-strip drop changed selection or missed its target' }
+      )
+      .toEqual({ activeLeafId: otherPane.leafId, targetHasPath: true, otherHasPath: false })
+  })
+
+  test('Set Title overlay follows its pane after same-count pane move', async ({ shieldPage }) => {
+    const title = `Moved overlay title ${Date.now()}`
+
+    await setPaneTitleFromTerminalMenu(shieldPage, title)
+    const initialSnapshot = await waitForPaneIdentitySnapshot(shieldPage, 1)
+    const titledLeafId = initialSnapshot.activeLeafId ?? initialSnapshot.panes[0]?.leafId
+    if (!titledLeafId) {
+      throw new Error('No titled pane leaf id found before move')
+    }
+
+    await splitActiveTerminalPane(shieldPage, 'vertical')
+    await waitForPaneCount(shieldPage, 2)
+    const beforeMove = await waitForPaneIdentitySnapshot(shieldPage, 2)
+    const target = beforeMove.panes.find((pane) => pane.leafId !== titledLeafId)
+    if (!target) {
+      throw new Error('No target pane found for titled pane move')
+    }
+    const beforeOrder = await readTerminalPaneDomLeafOrder(shieldPage)
+
+    await expectPaneTitleAttachedToLeaf(shieldPage, title, titledLeafId)
+    await moveTerminalPaneByLeafId(shieldPage, titledLeafId, target.leafId, 'right')
+
+    await expect
+      .poll(async () => readTerminalPaneDomLeafOrder(shieldPage), {
+        timeout: 10_000,
+        message: 'Pane move did not update DOM order'
+      })
+      .not.toEqual(beforeOrder)
+    await expectPaneTitleAttachedToLeaf(shieldPage, title, titledLeafId)
+  })
+
+  test('Set Title keeps the pane drag handle available over the title strip', async ({
+    shieldPage
+  }) => {
+    const title = `Draggable title ${Date.now()}`
+
+    await setPaneTitleFromTerminalMenu(shieldPage, title)
+    const initialSnapshot = await waitForPaneIdentitySnapshot(shieldPage, 1)
+    const titledLeafId = initialSnapshot.activeLeafId ?? initialSnapshot.panes[0]?.leafId
+    if (!titledLeafId) {
+      throw new Error('No titled pane leaf id found before split')
+    }
+
+    await splitActiveTerminalPane(shieldPage, 'vertical')
+    await waitForPaneCount(shieldPage, 2)
+    await expectPaneTitleAttachedToLeaf(shieldPage, title, titledLeafId)
+
+    const titleTopHit = await shieldPage.evaluate(
+      ({ title, titledLeafId }) => {
+        const titleBar = Array.from(document.querySelectorAll<HTMLElement>('.pane-title-bar')).find(
+          (element) => element.textContent?.includes(title)
+        )
+        const titleDragHandle =
+          titleBar?.querySelector<HTMLElement>('.pane-title-drag-handle') ?? null
+        const pane = document.querySelector<HTMLElement>(`.pane[data-leaf-id="${titledLeafId}"]`)
+        if (!titleBar || !pane || !titleDragHandle) {
+          return null
+        }
+        const titleRect = titleBar.getBoundingClientRect()
+        const hitElement = document.elementFromPoint(
+          titleRect.left + titleRect.width / 2,
+          titleRect.top + 4
+        )
+        return {
+          hitDragHandle:
+            hitElement instanceof HTMLElement &&
+            hitElement.closest('.pane-title-drag-handle') !== null,
+          pointerEvents: getComputedStyle(titleDragHandle).pointerEvents,
+          titleTop: titleRect.top,
+          handleTop: titleDragHandle.getBoundingClientRect().top
+        }
+      },
+      { title, titledLeafId }
+    )
+
+    expect(titleTopHit).not.toBeNull()
+    expect(titleTopHit?.hitDragHandle).toBe(true)
+    expect(titleTopHit?.pointerEvents).toBe('auto')
+    expect(Math.abs((titleTopHit?.handleTop ?? 0) - (titleTopHit?.titleTop ?? 0))).toBeLessThan(1)
+
+    await shieldPage.locator('.pane-title-bar', { hasText: title }).click({
+      position: { x: 20, y: 18 }
+    })
+    await expect(shieldPage.locator('.pane-title-input')).toBeVisible()
+  })
+
+  test('@headful Set Title pane can be dragged from the title strip', async ({ shieldPage }) => {
+    const title = `Dragged title ${Date.now()}`
+
+    await setPaneTitleFromTerminalMenu(shieldPage, title)
+    const initialSnapshot = await waitForPaneIdentitySnapshot(shieldPage, 1)
+    const titledLeafId = initialSnapshot.activeLeafId ?? initialSnapshot.panes[0]?.leafId
+    if (!titledLeafId) {
+      throw new Error('No titled pane leaf id found before drag')
+    }
+
+    await splitActiveTerminalPane(shieldPage, 'vertical')
+    await waitForPaneCount(shieldPage, 2)
+    const beforeDrag = await waitForPaneIdentitySnapshot(shieldPage, 2)
+    const target = beforeDrag.panes.find((pane) => pane.leafId !== titledLeafId)
+    if (!target) {
+      throw new Error('No target pane found for titled pane drag')
+    }
+    const beforeOrder = await readTerminalPaneDomLeafOrder(shieldPage)
+
+    const titleDragHandle = shieldPage
+      .locator('.pane-title-bar', { hasText: title })
+      .locator('.pane-title-drag-handle')
+    await expect(titleDragHandle).toBeVisible({ timeout: 3_000 })
+    const sourceBox = await titleDragHandle.boundingBox()
+    const targetBox = await shieldPage.locator(`.pane[data-leaf-id="${target.leafId}"]`).boundingBox()
+    expect(sourceBox).not.toBeNull()
+    expect(targetBox).not.toBeNull()
+    const sourceIndex = beforeOrder.indexOf(titledLeafId)
+    const targetIndex = beforeOrder.indexOf(target.leafId)
+    const targetDropX =
+      sourceIndex < targetIndex ? targetBox!.x + targetBox!.width - 8 : targetBox!.x + 8
+
+    await shieldPage.mouse.move(sourceBox!.x + sourceBox!.width / 2, sourceBox!.y + 4)
+    await shieldPage.mouse.down()
+    await shieldPage.mouse.move(targetDropX, targetBox!.y + targetBox!.height / 2, {
+      steps: 20
+    })
+    await shieldPage.mouse.up()
+
+    await expect
+      .poll(async () => readTerminalPaneDomLeafOrder(shieldPage), {
+        timeout: 10_000,
+        message: 'Title-strip pane drag did not update DOM order'
+      })
+      .not.toEqual(beforeOrder)
+    const afterDrag = await waitForPaneIdentitySnapshot(shieldPage, 2)
+    expect(afterDrag.panes.map((pane) => pane.leafId).sort()).toEqual(
+      beforeDrag.panes.map((pane) => pane.leafId).sort()
+    )
+    await expectPaneTitleAttachedToLeaf(shieldPage, title, titledLeafId)
+  })
+})

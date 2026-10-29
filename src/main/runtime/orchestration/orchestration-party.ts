@@ -1,0 +1,115 @@
+import {
+  formatShieldSessionAddress,
+  isShieldSessionId,
+  parseShieldSessionAddress,
+  type ShieldSessionId
+} from '../../../shared/shield-session-address'
+import { ORCHESTRATION_SESSION_CALLER_ERROR_CODES as CODES } from '../../../shared/orchestration-session-caller-codes'
+import {
+  isRecordedStructuredWorkerSession,
+  resolveStructuredWorkerIdentity,
+  resolveStructuredWorkerIdentityForRoot
+} from '../structured-worker-authority'
+import { canonicalShieldSessionId } from './canonical-shield-session-id'
+import type { AgentSessionRecordReader } from './structured-session-lineage'
+import type { OrchestrationDb } from './db'
+import { mailboxAddressOf, type OrchestrationCallerIdentity } from './orchestration-caller-identity'
+import { OrchestrationError } from './orchestration-error'
+
+/** A party as Run binding and mail routing match it; `address` is its one mailbox address. */
+export type OrchestrationParty = OrchestrationCallerIdentity
+
+/** A party named by an Shield session id: a structured worker, or a chat. */
+export type OrchestrationSessionParty = OrchestrationParty &
+  Readonly<{ shieldSessionId: ShieldSessionId }>
+
+const NO_EFFECTS = { effectsApplied: false } as const
+
+/** Every param naming a party other than the caller; a new one is added here with its own test. */
+export const ORCHESTRATION_TARGET_PARAM: Readonly<
+  Record<string, 'to' | 'terminal' | 'sessionId' | 'address'>
+> = {
+  'orchestration.send': 'to',
+  'orchestration.ask': 'to',
+  'orchestration.dispatch': 'to',
+  'orchestration.inbox': 'terminal',
+  'orchestration.sessionAddress': 'sessionId',
+  'orchestration.partyLocation': 'address',
+  'orchestration.workerStart': 'terminal'
+}
+
+/** The party an Shield session id names. Throws when it is a worker this host lost the identity of. */
+export function resolveShieldSessionParty(
+  shieldSessionId: ShieldSessionId,
+  db: OrchestrationDb | null | undefined,
+  store?: Pick<AgentSessionRecordReader, 'listRecords'> | null
+): OrchestrationSessionParty {
+  const id = canonicalShieldSessionId(shieldSessionId, store)
+  const worker = resolveStructuredWorkerIdentityForRoot(id, db)
+  if (!worker && db && isRecordedStructuredWorkerSession(id, db)) {
+    // Without its handle, one worker would split into two parties and bind as a chat.
+    throw new OrchestrationError(
+      CODES.notLive,
+      `Agent session ${id} is a structured worker whose worker identity this host no longer has, so orchestration cannot address it. No effects were applied.`,
+      NO_EFFECTS
+    )
+  }
+  const key = { terminalHandle: worker?.handle ?? null, shieldSessionId: id }
+  return {
+    ...key,
+    address: mailboxAddressOf(key) ?? formatShieldSessionAddress(id),
+    paneKey: worker?.paneKey ?? null
+  }
+}
+
+/** The party an address names; a PTY handle is itself and costs no lookup. */
+export function resolveOrchestrationParty(
+  address: string,
+  db: OrchestrationDb | null | undefined
+): OrchestrationParty {
+  const shieldSessionId = parseShieldSessionAddress(address)
+  if (shieldSessionId) {
+    return resolveShieldSessionParty(shieldSessionId, db)
+  }
+  const worker = resolveStructuredWorkerIdentity(address, db)
+  return {
+    address,
+    terminalHandle: address,
+    paneKey: worker?.paneKey ?? null,
+    shieldSessionId:
+      worker && isShieldSessionId(worker.sessionId) ? canonicalShieldSessionId(worker.sessionId) : null
+  }
+}
+
+/** How a preamble names a party: a session by its Shield session ID (its `/clear` root), else its handle. */
+export function shieldSessionIdOrHandle(
+  address: string,
+  db: OrchestrationDb | null | undefined
+): string {
+  const { shieldSessionId } = resolveOrchestrationParty(address, db)
+  return shieldSessionId === null ? address : formatShieldSessionAddress(shieldSessionId)
+}
+
+/** A caller named by a param: naming a chat's address proves nothing, unlike its own session id. */
+export function resolveDeclaredCallerParty(
+  address: string,
+  db: OrchestrationDb | null | undefined
+): OrchestrationParty {
+  const party = resolveOrchestrationParty(address, db)
+  if (party.terminalHandle === null) {
+    throw new OrchestrationError(
+      CODES.chatNotDeclarable,
+      `Agent session ${party.shieldSessionId} is a chat, and a chat is identified only by the Shield session ID its own environment sends, never by naming it. No effects were applied.`,
+      NO_EFFECTS
+    )
+  }
+  return party
+}
+
+/** Resolve terminals, workers and chats; chat assignments use the /clear root address for later reports. */
+export function resolveDispatchAssigneeParty(
+  address: string,
+  db: OrchestrationDb | null | undefined
+): OrchestrationParty {
+  return resolveOrchestrationParty(address, db)
+}

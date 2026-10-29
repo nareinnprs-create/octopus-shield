@@ -1,0 +1,64 @@
+{
+  "name": "@shield/audit-store",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Shield Postgres audit-ledger sink persisting @shield/access audit-chain events into nucleus audit_events",
+  "files": [
+    "dist"
+  ],
+  "type": "commonjs",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "shield-source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./audit-store": {
+      "shield-source": "./src/audit-store.ts",
+      "types": "./dist/audit-store.d.ts",
+      "default": "./dist/audit-store.js"
+    },
+    "./audit-store-pg": {
+      "shield-source": "./src/audit-store-pg.ts",
+      "types": "./dist/audit-store-pg.d.ts",
+      "default": "./dist/audit-store-pg.js"
+    },
+    "./audit-verify": {
+      "shield-source": "./src/audit-verify.ts",
+      "types": "./dist/audit-verify.d.ts",
+      "default": "./dist/audit-verify.js"
+    },
+    "./audit-verify-cli": {
+      "shield-source": "./src/audit-verify-cli.ts",
+      "types": "./dist/audit-verify-cli.d.ts",
+      "default": "./dist/audit-verify-cli.js"
+    },
+    "./audit-watch": {
+      "shield-source": "./src/audit-watch.ts",
+      "types": "./dist/audit-watch.d.ts",
+      "default": "./dist/audit-watch.js"
+    }
+  },
+  "scripts": {
+    "build": "tsx --conditions=shield-source scripts/build-dist.mjs",
+    "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.test.json",
+    "test": "vitest run --config vitest.config.ts"
+  },
+  "dependencies": {
+    "@shield/access": "workspace:*",
+    "pg": "^8.16.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.19.130",
+    "@types/pg": "^8.15.0",
+    "proper-lockfile": "4.1.2",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vitest": "5.0.5"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

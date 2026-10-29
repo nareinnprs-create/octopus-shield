@@ -1,0 +1,81 @@
+{
+  "name": "@shield/spar",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Shield SPAR: the Eternal Opposition loop skeleton — engagement model, referee scoring, round runner, scoreboards, and spar.* event vocabulary (phase 1: injected fakes, no real attacks)",
+  "bin": {
+    "spar": "./dist/spar-cli.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "type": "commonjs",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "shield-source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./spar-engagement": {
+      "shield-source": "./src/spar-engagement.ts",
+      "types": "./dist/spar-engagement.d.ts",
+      "default": "./dist/spar-engagement.js"
+    },
+    "./spar-referee": {
+      "shield-source": "./src/spar-referee.ts",
+      "types": "./dist/spar-referee.d.ts",
+      "default": "./dist/spar-referee.js"
+    },
+    "./spar-scoreboard": {
+      "shield-source": "./src/spar-scoreboard.ts",
+      "types": "./dist/spar-scoreboard.d.ts",
+      "default": "./dist/spar-scoreboard.js"
+    },
+    "./spar-runner": {
+      "shield-source": "./src/spar-runner.ts",
+      "types": "./dist/spar-runner.d.ts",
+      "default": "./dist/spar-runner.js"
+    },
+    "./spar-engagement-store": {
+      "shield-source": "./src/spar-engagement-store.ts",
+      "types": "./dist/spar-engagement-store.d.ts",
+      "default": "./dist/spar-engagement-store.js"
+    },
+    "./spar-events": {
+      "shield-source": "./src/spar-events.ts",
+      "types": "./dist/spar-events.d.ts",
+      "default": "./dist/spar-events.js"
+    },
+    "./spar-cli-argv": {
+      "shield-source": "./src/spar-cli-argv.ts",
+      "types": "./dist/spar-cli-argv.d.ts",
+      "default": "./dist/spar-cli-argv.js"
+    },
+    "./spar-cli-render": {
+      "shield-source": "./src/spar-cli-render.ts",
+      "types": "./dist/spar-cli-render.d.ts",
+      "default": "./dist/spar-cli-render.js"
+    },
+    "./spar-cli": {
+      "shield-source": "./src/spar-cli.ts",
+      "types": "./dist/spar-cli.d.ts",
+      "default": "./dist/spar-cli.js"
+    }
+  },
+  "scripts": {
+    "build": "tsx --conditions=shield-source scripts/build-dist.mjs",
+    "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.test.json",
+    "test": "vitest run --config vitest.config.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^18.19.130",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vitest": "^3.2.7"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img">
+  <title>Octopus Shield mark, colored</title>
+  <desc>Dark-surface variant: abyss plate with a blue-to-violet ganglion glow on the mantle dome and teal sucker dots. Uses the dark UI palette.</desc>
+  <defs>
+    <linearGradient id="gOSPlate" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#262626"/>
+      <stop offset="1" stop-color="#171717"/>
+    </linearGradient>
+    <linearGradient id="gOSGlow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4493f8"/>
+      <stop offset="1" stop-color="#8250df"/>
+    </linearGradient>
+  </defs>
+  <path fill="url(#gOSPlate)" d="M256 96 A112 112 0 0 1 368 208 C384 240 392 268 392 296 C392 360 336 420 256 448 C176 420 120 360 120 296 C120 268 128 240 144 208 A112 112 0 0 1 256 96 Z"/>
+  <path fill="url(#gOSGlow)" d="M144 208 A112 112 0 0 1 368 208 Z"/>
+  <path fill="none" stroke="#0a0a0a" stroke-width="16" stroke-linecap="round" d="M256 116 L256 408"/>
+  <circle cx="208" cy="176" r="18" fill="#0a0a0a"/>
+  <circle cx="304" cy="176" r="18" fill="#0a0a0a"/>
+  <g fill="#40b0a6" opacity="0.5">
+    <circle cx="168" cy="264" r="12"/>
+    <circle cx="196" cy="312" r="12"/>
+    <circle cx="228" cy="352" r="12"/>
+    <circle cx="344" cy="264" r="12"/>
+    <circle cx="316" cy="312" r="12"/>
+    <circle cx="284" cy="352" r="12"/>
+  </g>
+</svg>

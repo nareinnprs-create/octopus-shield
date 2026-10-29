@@ -1,0 +1,75 @@
+// @vitest-environment happy-dom
+
+import { act } from 'react'
+import { createRoot, type Root } from 'react-dom/client'
+import { afterEach, beforeEach, describe, expect, it } from 'vitest'
+import { MatchedText, ProjectOptionDetail } from './ProjectComboboxRow'
+import { rankProjectOptions } from './project-combobox-matching'
+import type { NewWorkspaceProjectOption } from '@/lib/new-workspace-project-options'
+
+let container: HTMLDivElement
+let root: Root
+
+beforeEach(() => {
+  container = document.createElement('div')
+  document.body.appendChild(container)
+  root = createRoot(container)
+})
+
+afterEach(() => {
+  act(() => {
+    root.unmount()
+  })
+  container.remove()
+})
+
+function markedText(): string {
+  return Array.from(container.querySelectorAll('mark'))
+    .map((mark) => mark.textContent ?? '')
+    .join('')
+}
+
+describe('MatchedText', () => {
+  // UTF-16 hit offsets and code-point rendering differ for emoji; marks must stay on the matched glyphs.
+  it('aligns marks with the query when the name starts with an emoji', () => {
+    const option: NewWorkspaceProjectOption = {
+      kind: 'project',
+      id: 'p1',
+      projectId: 'p1',
+      displayName: '🚀 shield',
+      badgeColor: '#111111',
+      detail: '~/dev/shield'
+    }
+    const [match] = rankProjectOptions([option], 'shield', [])
+    expect(match).toBeDefined()
+
+    act(() => {
+      root.render(<MatchedText text={option.displayName} hits={match!.nameHits} />)
+    })
+
+    expect(markedText()).toBe('shield')
+  })
+
+  it('leaves text unmarked when there are no hits', () => {
+    act(() => {
+      root.render(<MatchedText text="🚀 shield" hits={[]} />)
+    })
+
+    expect(container.querySelectorAll('mark')).toHaveLength(0)
+    expect(container.textContent).toBe('🚀 shield')
+  })
+})
+
+describe('ProjectOptionDetail', () => {
+  it('keeps Windows path matches highlighted in the preserved tail', () => {
+    const detail = 'C:\\Users\\ada\\projects\\shield\\src\\renderer\\app.ts'
+    const start = detail.indexOf('src')
+
+    act(() => {
+      root.render(<ProjectOptionDetail detail={detail} hits={[start, start + 1, start + 2]} />)
+    })
+
+    expect(container.textContent).toBe(detail)
+    expect(markedText()).toBe('src')
+  })
+})

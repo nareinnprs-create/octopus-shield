@@ -1,0 +1,9 @@
+{
+  "platforms": ["ios", "android"],
+  "ios": {
+    "modules": ["ShieldMobileWebShellModule"]
+  },
+  "android": {
+    "modules": ["expo.modules.shieldmobilewebshell.ShieldMobileWebShellModule"]
+  }
+}

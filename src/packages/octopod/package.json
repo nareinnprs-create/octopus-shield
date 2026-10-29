@@ -1,0 +1,73 @@
+{
+  "name": "@shield/octopod",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Shield octopod daemon entrypoint composing ganglion, engine contracts, health probes, and the NATS event bus",
+  "bin": {
+    "octopod": "./dist/octopod-cli.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "type": "commonjs",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "shield-source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./octopod-events": {
+      "shield-source": "./src/octopod-events.ts",
+      "types": "./dist/octopod-events.d.ts",
+      "default": "./dist/octopod-events.js"
+    },
+    "./octopod-main": {
+      "shield-source": "./src/octopod-main.ts",
+      "types": "./dist/octopod-main.d.ts",
+      "default": "./dist/octopod-main.js"
+    },
+    "./octopod-cli": {
+      "shield-source": "./src/octopod-cli.ts",
+      "types": "./dist/octopod-cli.d.ts",
+      "default": "./dist/octopod-cli.js"
+    },
+    "./engine-probes": {
+      "shield-source": "./src/engine-probes.ts",
+      "types": "./dist/engine-probes.d.ts",
+      "default": "./dist/engine-probes.js"
+    },
+    "./local-event-bus": {
+      "shield-source": "./src/local-event-bus.ts",
+      "types": "./dist/local-event-bus.d.ts",
+      "default": "./dist/local-event-bus.js"
+    },
+    "./nats-event-bus": {
+      "shield-source": "./src/nats-event-bus.ts",
+      "types": "./dist/nats-event-bus.d.ts",
+      "default": "./dist/nats-event-bus.js"
+    }
+  },
+  "dependencies": {
+    "@shield/engine-contracts": "workspace:*",
+    "@shield/ganglion": "workspace:*",
+    "nats": "^2.29.3"
+  },
+  "scripts": {
+    "build": "tsx --conditions=shield-source scripts/build-dist.mjs",
+    "once": "tsx --conditions=shield-source src/octopod-cli.ts --once",
+    "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.test.json",
+    "test": "vitest run --config vitest.config.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^18.19.130",
+    "proper-lockfile": "4.1.2",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vitest": "^3.2.7"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

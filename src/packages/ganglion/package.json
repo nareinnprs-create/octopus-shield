@@ -1,0 +1,77 @@
+{
+  "name": "@shield/ganglion",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Shield ganglion agent-graph domain types and pure registry queries",
+  "files": [
+    "dist"
+  ],
+  "type": "commonjs",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "shield-source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./tentacle": {
+      "shield-source": "./src/tentacle.ts",
+      "types": "./dist/tentacle.d.ts",
+      "default": "./dist/tentacle.js"
+    },
+    "./ganglion-graph": {
+      "shield-source": "./src/ganglion-graph.ts",
+      "types": "./dist/ganglion-graph.d.ts",
+      "default": "./dist/ganglion-graph.js"
+    },
+    "./ganglion-registry": {
+      "shield-source": "./src/ganglion-registry.ts",
+      "types": "./dist/ganglion-registry.d.ts",
+      "default": "./dist/ganglion-registry.js"
+    },
+    "./runtime": {
+      "shield-source": "./src/runtime.ts",
+      "types": "./dist/runtime.d.ts",
+      "default": "./dist/runtime.js"
+    },
+    "./ganglion-subagent": {
+      "shield-source": "./src/ganglion-subagent.ts",
+      "types": "./dist/ganglion-subagent.d.ts",
+      "default": "./dist/ganglion-subagent.js"
+    },
+    "./ganglion-runtime-events": {
+      "shield-source": "./src/ganglion-runtime-events.ts",
+      "types": "./dist/ganglion-runtime-events.d.ts",
+      "default": "./dist/ganglion-runtime-events.js"
+    },
+    "./ganglion-task-record": {
+      "shield-source": "./src/ganglion-task-record.ts",
+      "types": "./dist/ganglion-task-record.d.ts",
+      "default": "./dist/ganglion-task-record.js"
+    },
+    "./ganglion-runtime-audit": {
+      "shield-source": "./src/ganglion-runtime-audit.ts",
+      "types": "./dist/ganglion-runtime-audit.d.ts",
+      "default": "./dist/ganglion-runtime-audit.js"
+    }
+  },
+  "bin": {
+    "ganglion-runtime": "./dist/ganglion-runtime-cli.js"
+  },
+  "scripts": {
+    "build": "tsx --conditions=shield-source scripts/build-dist.mjs",
+    "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.test.json",
+    "test": "vitest run --config vitest.config.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^18.19.130",
+    "proper-lockfile": "4.1.2",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vitest": "^3.2.7"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

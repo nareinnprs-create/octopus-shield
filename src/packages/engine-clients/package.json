@@ -1,0 +1,77 @@
+{
+  "name": "@shield/engine-clients",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Shield typed HTTP/GraphQL clients for the Wazuh, Caldera, and Mythic engines",
+  "files": [
+    "dist"
+  ],
+  "type": "commonjs",
+  "main": "./dist/caldera.js",
+  "types": "./dist/caldera.d.ts",
+  "exports": {
+    ".": {
+      "shield-source": "./src/caldera.ts",
+      "types": "./dist/caldera.d.ts",
+      "default": "./dist/caldera.js"
+    },
+    "./caldera": {
+      "shield-source": "./src/caldera.ts",
+      "types": "./dist/caldera.d.ts",
+      "default": "./dist/caldera.js"
+    },
+    "./caldera-routes": {
+      "shield-source": "./src/caldera-routes.ts",
+      "types": "./dist/caldera-routes.d.ts",
+      "default": "./dist/caldera-routes.js"
+    },
+    "./wazuh": {
+      "shield-source": "./src/wazuh.ts",
+      "types": "./dist/wazuh.d.ts",
+      "default": "./dist/wazuh.js"
+    },
+    "./wazuh-routes": {
+      "shield-source": "./src/wazuh-routes.ts",
+      "types": "./dist/wazuh-routes.d.ts",
+      "default": "./dist/wazuh-routes.js"
+    },
+    "./mythic": {
+      "shield-source": "./src/mythic.ts",
+      "types": "./dist/mythic.d.ts",
+      "default": "./dist/mythic.js"
+    },
+    "./mythic-operations": {
+      "shield-source": "./src/mythic-operations.ts",
+      "types": "./dist/mythic-operations.d.ts",
+      "default": "./dist/mythic-operations.js"
+    },
+    "./config": {
+      "shield-source": "./src/config.ts",
+      "types": "./dist/config.d.ts",
+      "default": "./dist/config.js"
+    },
+    "./engine-transport": {
+      "shield-source": "./src/engine-transport.ts",
+      "types": "./dist/engine-transport.d.ts",
+      "default": "./dist/engine-transport.js"
+    }
+  },
+  "scripts": {
+    "build": "tsx --conditions=shield-source scripts/build-dist.mjs",
+    "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.test.json",
+    "test": "vitest run --config vitest.config.ts"
+  },
+  "dependencies": {
+    "@shield/engine-contracts": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^18.19.130",
+    "proper-lockfile": "4.1.2",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vitest": "^3.2.7"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

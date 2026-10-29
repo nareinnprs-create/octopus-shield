@@ -1,0 +1,350 @@
+=== groupBy=none pinnedInGroups=false ===
+visible: shield-ssh::/w/remote-x shared::/w/same shield-ssh::/shield-ssh
+PENDING key=pending:creation-1 creation=creation-1 repo=api
+HEADER key=pinned collapseKey=pinned:host:ssh:gpu-vm label="Pinned" count=2 tone="text-foreground" icon=Pin hostCounts={ssh:gpu-vm:2} hostIds={ssh:gpu-vm:[shield-ssh::/w/remote-x,shared::/w/same]} ids=[shield-ssh::/w/remote-x,shared::/w/same]
+ITEM rowKey=pinned:ssh:gpu-vm|shield-ssh::/w/remote-x depth=0 groupDepth=0 children=0 placement=pinned owning=project:p-shield
+ITEM rowKey=pinned:ssh:gpu-vm|shared::/w/same depth=0 groupDepth=0 lastChild=true children=0 placement=pinned owning=project:repo:shared
+HEADER key=all collapseKey=all:host:ssh:gpu-vm label="All" count=2 tone="text-foreground" icon=List hostCounts={ssh:gpu-vm:2} hostIds={ssh:gpu-vm:[shield-ssh::/shield-ssh]} ids=[shield-ssh::/shield-ssh]
+ITEM rowKey=all:|shield-ssh::/shield-ssh depth=0 groupDepth=0 lastChild=true children=0 placement=natural owning=project:p-shield
+FOLDER key=folder-workspace:ssh:gpu-vm|folder:fw-remote projectGroup=pg-remote-folders depth=0 groupDepth=0
+renderedKeys: 8
+placeholders: -
+selectionOrder: ssh:gpu-vm|shield-ssh::/w/remote-x ssh:gpu-vm|shared::/w/same |shield-ssh::/shield-ssh ssh:gpu-vm|folder:fw-remote
+cmd1-9 mounted: 1=shield-ssh::/w/remote-x@ssh:gpu-vm 2=shared::/w/same@ssh:gpu-vm 3=shield-ssh::/shield-ssh 4=folder:fw-remote@ssh:gpu-vm
+cmd1-9 unmounted: 1=shield-ssh::/w/remote-x@ssh:gpu-vm 2=shared::/w/same@ssh:gpu-vm 3=shield-ssh::/shield-ssh 4=folder:fw-remote@ssh:gpu-vm
+cmd ids unmounted: shield-ssh::/w/remote-x shared::/w/same shield-ssh::/shield-ssh folder:fw-remote
+-- collapsed: pinned:host:ssh:gpu-vm --
+visible: shield-ssh::/w/remote-x shared::/w/same shield-ssh::/shield-ssh
+PENDING key=pending:creation-1 creation=creation-1 repo=api
+HEADER key=pinned collapseKey=pinned:host:ssh:gpu-vm label="Pinned" count=2 tone="text-foreground" icon=Pin hostCounts={ssh:gpu-vm:2} hostIds={ssh:gpu-vm:[shield-ssh::/w/remote-x,shared::/w/same]} ids=[shield-ssh::/w/remote-x,shared::/w/same]
+HEADER key=all collapseKey=all:host:ssh:gpu-vm label="All" count=2 tone="text-foreground" icon=List hostCounts={ssh:gpu-vm:2} hostIds={ssh:gpu-vm:[shield-ssh::/shield-ssh]} ids=[shield-ssh::/shield-ssh]
+ITEM rowKey=all:|shield-ssh::/shield-ssh depth=0 groupDepth=0 lastChild=true children=0 placement=natural owning=project:p-shield
+FOLDER key=folder-workspace:ssh:gpu-vm|folder:fw-remote projectGroup=pg-remote-folders depth=0 groupDepth=0
+-- rows before host sections --
+PENDING key=pending:creation-1 creation=creation-1 repo=api
+HEADER key=pinned label="Pinned" count=2 tone="text-foreground" icon=Pin hostCounts={ssh:gpu-vm:2} hostIds={ssh:gpu-vm:[shield-ssh::/w/remote-x,shared::/w/same]} ids=[shield-ssh::/w/remote-x,shared::/w/same]
+ITEM rowKey=pinned:ssh:gpu-vm|shield-ssh::/w/remote-x depth=0 groupDepth=0 children=0 placement=pinned owning=project:p-shield
+ITEM rowKey=pinned:ssh:gpu-vm|shared::/w/same depth=0 groupDepth=0 lastChild=true children=0 placement=pinned owning=project:repo:shared
+HEADER key=all label="All" count=2 tone="text-foreground" icon=List hostCounts={ssh:gpu-vm:2} hostIds={ssh:gpu-vm:[shield-ssh::/shield-ssh]} ids=[shield-ssh::/shield-ssh]
+ITEM rowKey=all:|shield-ssh::/shield-ssh depth=0 groupDepth=0 lastChild=true children=0 placement=natural owning=project:p-shield
+FOLDER key=folder-workspace:ssh:gpu-vm|folder:fw-remote projectGroup=pg-remote-folders depth=0 groupDepth=0
+SECTION pinned: pinned:ssh:gpu-vm|shield-ssh::/w/remote-x pinned:ssh:gpu-vm|shared::/w/same
+renderedKeys: 6
+placeholders: -
+selectionOrder: |shield-ssh::/shield-ssh ssh:gpu-vm|folder:fw-remote
+cmd1-9 mounted: 1=shield-ssh::/shield-ssh 2=folder:fw-remote@ssh:gpu-vm
+cmd1-9 unmounted: 1=shield-ssh::/w/remote-x@ssh:gpu-vm 2=shared::/w/same@ssh:gpu-vm 3=shield-ssh::/shield-ssh 4=folder:fw-remote@ssh:gpu-vm
+cmd ids unmounted: shield-ssh::/w/remote-x shared::/w/same shield-ssh::/shield-ssh folder:fw-remote
+=== groupBy=none pinnedInGroups=true ===
+visible: shield-ssh::/w/remote-x shared::/w/same shield-ssh::/shield-ssh
+PENDING key=pending:creation-1 creation=creation-1 repo=api
+HEADER key=pinned collapseKey=pinned:host:ssh:gpu-vm label="Pinned" count=2 tone="text-foreground" icon=Pin hostCounts={ssh:gpu-vm:2} hostIds={ssh:gpu-vm:[shield-ssh::/w/remote-x,shared::/w/same]} ids=[shield-ssh::/w/remote-x,shared::/w/same]
+ITEM rowKey=pinned:ssh:gpu-vm|shield-ssh::/w/remote-x depth=0 groupDepth=0 children=0 placement=pinned owning=project:p-shield
+ITEM rowKey=pinned:ssh:gpu-vm|shared::/w/same depth=0 groupDepth=0 lastChild=true children=0 placement=pinned owning=project:repo:shared
+HEADER key=all collapseKey=all:host:ssh:gpu-vm label="All" count=4 tone="text-foreground" icon=List hostCounts={ssh:gpu-vm:4} hostIds={ssh:gpu-vm:[shield-ssh::/w/remote-x,shared::/w/same,shield-ssh::/shield-ssh]} ids=[shield-ssh::/w/remote-x,shared::/w/same,shield-ssh::/shield-ssh]
+ITEM rowKey=all:ssh:gpu-vm|shield-ssh::/w/remote-x depth=0 groupDepth=0 children=0 placement=natural owning=project:p-shield
+ITEM rowKey=all:ssh:gpu-vm|shared::/w/same depth=0 groupDepth=0 children=0 placement=natural owning=project:repo:shared
+ITEM rowKey=all:|shield-ssh::/shield-ssh depth=0 groupDepth=0 lastChild=true children=0 placement=natural owning=project:p-shield
+FOLDER key=folder-workspace:ssh:gpu-vm|folder:fw-remote projectGroup=pg-remote-folders depth=0 groupDepth=0
+PREFERRED ssh:gpu-vm|shield-ssh::/w/remote-x -> all:ssh:gpu-vm|shield-ssh::/w/remote-x
+PREFERRED ssh:gpu-vm|shared::/w/same -> all:ssh:gpu-vm|shared::/w/same
+renderedKeys: 10
+placeholders: -
+selectionOrder: ssh:gpu-vm|shield-ssh::/w/remote-x ssh:gpu-vm|shared::/w/same |shield-ssh::/shield-ssh ssh:gpu-vm|folder:fw-remote
+cmd1-9 mounted: 1=shield-ssh::/w/remote-x@ssh:gpu-vm 2=shared::/w/same@ssh:gpu-vm 3=shield-ssh::/shield-ssh 4=folder:fw-remote@ssh:gpu-vm
+cmd1-9 unmounted: 1=shield-ssh::/w/remote-x@ssh:gpu-vm 2=shared::/w/same@ssh:gpu-vm 3=shield-ssh::/shield-ssh 4=folder:fw-remote@ssh:gpu-vm
+cmd ids unmounted: shield-ssh::/w/remote-x shared::/w/same shield-ssh::/shield-ssh folder:fw-remote
+-- collapsed: pinned:host:ssh:gpu-vm --
+visible: shield-ssh::/w/remote-x shared::/w/same shield-ssh::/shield-ssh
+PENDING key=pending:creation-1 creation=creation-1 repo=api
+HEADER key=pinned collapseKey=pinned:host:ssh:gpu-vm label="Pinned" count=2 tone="text-foreground" icon=Pin hostCounts={ssh:gpu-vm:2} hostIds={ssh:gpu-vm:[shield-ssh::/w/remote-x,shared::/w/same]} ids=[shield-ssh::/w/remote-x,shared::/w/same]
+HEADER key=all collapseKey=all:host:ssh:gpu-vm label="All" count=4 tone="text-foreground" icon=List hostCounts={ssh:gpu-vm:4} hostIds={ssh:gpu-vm:[shield-ssh::/w/remote-x,shared::/w/same,shield-ssh::/shield-ssh]} ids=[shield-ssh::/w/remote-x,shared::/w/same,shield-ssh::/shield-ssh]
+ITEM rowKey=all:ssh:gpu-vm|shield-ssh::/w/remote-x depth=0 groupDepth=0 children=0 placement=natural owning=project:p-shield
+ITEM rowKey=all:ssh:gpu-vm|shared::/w/same depth=0 groupDepth=0 children=0 placement=natural owning=project:repo:shared
+ITEM rowKey=all:|shield-ssh::/shield-ssh depth=0 groupDepth=0 lastChild=true children=0 placement=natural owning=project:p-shield
+FOLDER key=folder-workspace:ssh:gpu-vm|folder:fw-remote projectGroup=pg-remote-folders depth=0 groupDepth=0
+-- rows before host sections --
+PENDING key=pending:creation-1 creation=creation-1 repo=api
+HEADER key=pinned label="Pinned" count=2 tone="text-foreground" icon=Pin hostCounts={ssh:gpu-vm:2} hostIds={ssh:gpu-vm:[shield-ssh::/w/remote-x,shared::/w/same]} ids=[shield-ssh::/w/remote-x,shared::/w/same]
+ITEM rowKey=pinned:ssh:gpu-vm|shield-ssh::/w/remote-x depth=0 groupDepth=0 children=0 placement=pinned owning=project:p-shield
+ITEM rowKey=pinned:ssh:gpu-vm|shared::/w/same depth=0 groupDepth=0 lastChild=true children=0 placement=pinned owning=project:repo:shared
+HEADER key=all label="All" count=4 tone="text-foreground" icon=List hostCounts={ssh:gpu-vm:4} hostIds={ssh:gpu-vm:[shield-ssh::/w/remote-x,shared::/w/same,shield-ssh::/shield-ssh]} ids=[shield-ssh::/w/remote-x,shared::/w/same,shield-ssh::/shield-ssh]
+ITEM rowKey=all:ssh:gpu-vm|shield-ssh::/w/remote-x depth=0 groupDepth=0 children=0 placement=natural owning=project:p-shield
+ITEM rowKey=all:ssh:gpu-vm|shared::/w/same depth=0 groupDepth=0 children=0 placement=natural owning=project:repo:shared
+ITEM rowKey=all:|shield-ssh::/shield-ssh depth=0 groupDepth=0 lastChild=true children=0 placement=natural owning=project:p-shield
+FOLDER key=folder-workspace:ssh:gpu-vm|folder:fw-remote projectGroup=pg-remote-folders depth=0 groupDepth=0
+SECTION pinned: pinned:ssh:gpu-vm|shield-ssh::/w/remote-x pinned:ssh:gpu-vm|shared::/w/same
+PREFERRED ssh:gpu-vm|shield-ssh::/w/remote-x -> all:ssh:gpu-vm|shield-ssh::/w/remote-x
+PREFERRED ssh:gpu-vm|shared::/w/same -> all:ssh:gpu-vm|shared::/w/same
+renderedKeys: 8
+placeholders: -
+selectionOrder: ssh:gpu-vm|shield-ssh::/w/remote-x ssh:gpu-vm|shared::/w/same |shield-ssh::/shield-ssh ssh:gpu-vm|folder:fw-remote
+cmd1-9 mounted: 1=shield-ssh::/w/remote-x@ssh:gpu-vm 2=shared::/w/same@ssh:gpu-vm 3=shield-ssh::/shield-ssh 4=folder:fw-remote@ssh:gpu-vm
+cmd1-9 unmounted: 1=shield-ssh::/w/remote-x@ssh:gpu-vm 2=shared::/w/same@ssh:gpu-vm 3=shield-ssh::/shield-ssh 4=folder:fw-remote@ssh:gpu-vm
+cmd ids unmounted: shield-ssh::/w/remote-x shared::/w/same shield-ssh::/shield-ssh folder:fw-remote
+=== groupBy=repo pinnedInGroups=false ===
+visible: shield-ssh::/w/remote-x shared::/w/same shield-ssh::/shield-ssh
+HEADER key=pinned collapseKey=pinned:host:ssh:gpu-vm label="Pinned" count=2 tone="text-foreground" icon=Pin hostCounts={ssh:gpu-vm:2} hostIds={ssh:gpu-vm:[shield-ssh::/w/remote-x,shared::/w/same]} ids=[shield-ssh::/w/remote-x,shared::/w/same]
+ITEM rowKey=pinned:ssh:gpu-vm|shield-ssh::/w/remote-x depth=0 groupDepth=0 children=0 placement=pinned owning=project:p-shield
+ITEM rowKey=pinned:ssh:gpu-vm|shared::/w/same depth=0 groupDepth=0 lastChild=true children=0 placement=pinned owning=project:repo:shared
+HEADER key=project-group:pg-remote-folders label="Remote folders" count=1 tone="text-foreground" icon=FolderTree projectGroup=pg-remote-folders projectGroupDepth=0
+FOLDER key=folder-workspace:ssh:gpu-vm|folder:fw-remote projectGroup=pg-remote-folders depth=0 groupDepth=1
+HEADER key=project:p-shield label="shield" count=1 tone="text-foreground" icon=FolderTree repo=shield-ssh projectGroupDepth=0
+ITEM rowKey=project:p-shield:|shield-ssh::/shield-ssh depth=0 groupDepth=0 lastChild=true children=0 placement=natural owning=project:p-shield
+HEADER key=project:repo:api label="api" count=0 tone="text-foreground" icon=FolderTree repo=api projectGroupDepth=0
+PENDING key=pending:creation-1 creation=creation-1 repo=api
+SECTION project:repo:api: -
+renderedKeys: 10
+placeholders: -
+selectionOrder: ssh:gpu-vm|shield-ssh::/w/remote-x ssh:gpu-vm|shared::/w/same ssh:gpu-vm|folder:fw-remote |shield-ssh::/shield-ssh
+cmd1-9 mounted: 1=shield-ssh::/w/remote-x@ssh:gpu-vm 2=shared::/w/same@ssh:gpu-vm 3=folder:fw-remote@ssh:gpu-vm 4=shield-ssh::/shield-ssh
+cmd1-9 unmounted: 1=shield-ssh::/w/remote-x@ssh:gpu-vm 2=shared::/w/same@ssh:gpu-vm 3=folder:fw-remote@ssh:gpu-vm 4=shield-ssh::/shield-ssh
+cmd ids unmounted: shield-ssh::/w/remote-x shared::/w/same folder:fw-remote shield-ssh::/shield-ssh
+-- collapsed: pinned:host:ssh:gpu-vm project:p-shield --
+visible: shield-ssh::/w/remote-x shared::/w/same shield-ssh::/shield-ssh
+HEADER key=pinned collapseKey=pinned:host:ssh:gpu-vm label="Pinned" count=2 tone="text-foreground" icon=Pin hostCounts={ssh:gpu-vm:2} hostIds={ssh:gpu-vm:[shield-ssh::/w/remote-x,shared::/w/same]} ids=[shield-ssh::/w/remote-x,shared::/w/same]
+HEADER key=project-group:pg-remote-folders label="Remote folders" count=1 tone="text-foreground" icon=FolderTree projectGroup=pg-remote-folders projectGroupDepth=0
+FOLDER key=folder-workspace:ssh:gpu-vm|folder:fw-remote projectGroup=pg-remote-folders depth=0 groupDepth=1
+HEADER key=project:p-shield label="shield" count=1 tone="text-foreground" icon=FolderTree repo=shield-ssh projectGroupDepth=0
+HEADER key=project:repo:api label="api" count=0 tone="text-foreground" icon=FolderTree repo=api projectGroupDepth=0
+PENDING key=pending:creation-1 creation=creation-1 repo=api
+-- rows before host sections --
+HEADER key=pinned label="Pinned" count=2 tone="text-foreground" icon=Pin hostCounts={ssh:gpu-vm:2} hostIds={ssh:gpu-vm:[shield-ssh::/w/remote-x,shared::/w/same]} ids=[shield-ssh::/w/remote-x,shared::/w/same]
+ITEM rowKey=pinned:ssh:gpu-vm|shield-ssh::/w/remote-x depth=0 groupDepth=0 children=0 placement=pinned owning=project:p-shield
+ITEM rowKey=pinned:ssh:gpu-vm|shared::/w/same depth=0 groupDepth=0 lastChild=true children=0 placement=pinned owning=project:repo:shared
+HEADER key=project-group:pg-remote-folders label="Remote folders" count=1 tone="text-foreground" icon=FolderTree projectGroup=pg-remote-folders projectGroupDepth=0
+FOLDER key=folder-workspace:ssh:gpu-vm|folder:fw-remote projectGroup=pg-remote-folders depth=0 groupDepth=1
+HEADER key=project:p-shield label="shield" count=1 tone="text-foreground" icon=FolderTree repo=shield-ssh projectGroupDepth=0
+HEADER key=project:repo:api label="api" count=0 tone="text-foreground" icon=FolderTree repo=api projectGroupDepth=0
+PENDING key=pending:creation-1 creation=creation-1 repo=api
+SECTION pinned: pinned:ssh:gpu-vm|shield-ssh::/w/remote-x pinned:ssh:gpu-vm|shared::/w/same
+SECTION project:p-shield: project:p-shield:|shield-ssh::/shield-ssh
+SECTION project:repo:api: -
+renderedKeys: 7
+placeholders: -
+selectionOrder: ssh:gpu-vm|folder:fw-remote
+cmd1-9 mounted: 1=folder:fw-remote@ssh:gpu-vm
+cmd1-9 unmounted: 1=shield-ssh::/w/remote-x@ssh:gpu-vm 2=shared::/w/same@ssh:gpu-vm 3=folder:fw-remote@ssh:gpu-vm
+cmd ids unmounted: shield-ssh::/w/remote-x shared::/w/same folder:fw-remote
+=== groupBy=repo pinnedInGroups=true ===
+visible: shield-ssh::/w/remote-x shared::/w/same shield-ssh::/shield-ssh
+HEADER key=pinned collapseKey=pinned:host:ssh:gpu-vm label="Pinned" count=2 tone="text-foreground" icon=Pin hostCounts={ssh:gpu-vm:2} hostIds={ssh:gpu-vm:[shield-ssh::/w/remote-x,shared::/w/same]} ids=[shield-ssh::/w/remote-x,shared::/w/same]
+ITEM rowKey=pinned:ssh:gpu-vm|shield-ssh::/w/remote-x depth=0 groupDepth=0 children=0 placement=pinned owning=project:p-shield
+ITEM rowKey=pinned:ssh:gpu-vm|shared::/w/same depth=0 groupDepth=0 lastChild=true children=0 placement=pinned owning=project:repo:shared
+HEADER key=project-group:pg-remote-folders label="Remote folders" count=1 tone="text-foreground" icon=FolderTree projectGroup=pg-remote-folders projectGroupDepth=0
+FOLDER key=folder-workspace:ssh:gpu-vm|folder:fw-remote projectGroup=pg-remote-folders depth=0 groupDepth=1
+HEADER key=project:p-shield label="shield" count=2 tone="text-foreground" icon=FolderTree repo=shield-ssh projectGroupDepth=0
+ITEM rowKey=project:p-shield:|shield-ssh::/shield-ssh depth=0 groupDepth=0 children=0 placement=natural owning=project:p-shield
+ITEM rowKey=project:p-shield:ssh:gpu-vm|shield-ssh::/w/remote-x depth=0 groupDepth=0 lastChild=true children=0 placement=natural owning=project:p-shield
+HEADER key=project:repo:api label="api" count=0 tone="text-foreground" icon=FolderTree repo=api projectGroupDepth=0
+PENDING key=pending:creation-1 creation=creation-1 repo=api
+HEADER key=project:repo:shared label="shared" count=1 tone="text-foreground" icon=FolderTree repo=shared projectGroupDepth=0
+ITEM rowKey=project:repo:shared:ssh:gpu-vm|shared::/w/same depth=0 groupDepth=0 lastChild=true children=0 placement=natural owning=project:repo:shared
+SECTION project:repo:api: -
+PREFERRED ssh:gpu-vm|shield-ssh::/w/remote-x -> project:p-shield:ssh:gpu-vm|shield-ssh::/w/remote-x
+PREFERRED ssh:gpu-vm|shared::/w/same -> project:repo:shared:ssh:gpu-vm|shared::/w/same
+renderedKeys: 13
+placeholders: -
+selectionOrder: ssh:gpu-vm|folder:fw-remote |shield-ssh::/shield-ssh ssh:gpu-vm|shield-ssh::/w/remote-x ssh:gpu-vm|shared::/w/same
+cmd1-9 mounted: 1=folder:fw-remote@ssh:gpu-vm 2=shield-ssh::/shield-ssh 3=shield-ssh::/w/remote-x@ssh:gpu-vm 4=shared::/w/same@ssh:gpu-vm
+cmd1-9 unmounted: 1=folder:fw-remote@ssh:gpu-vm 2=shield-ssh::/shield-ssh 3=shield-ssh::/w/remote-x@ssh:gpu-vm 4=shared::/w/same@ssh:gpu-vm
+cmd ids unmounted: folder:fw-remote shield-ssh::/shield-ssh shield-ssh::/w/remote-x shared::/w/same
+-- collapsed: pinned:host:ssh:gpu-vm project:p-shield project:repo:shared --
+visible: shield-ssh::/w/remote-x shared::/w/same shield-ssh::/shield-ssh
+HEADER key=pinned collapseKey=pinned:host:ssh:gpu-vm label="Pinned" count=2 tone="text-foreground" icon=Pin hostCounts={ssh:gpu-vm:2} hostIds={ssh:gpu-vm:[shield-ssh::/w/remote-x,shared::/w/same]} ids=[shield-ssh::/w/remote-x,shared::/w/same]
+HEADER key=project-group:pg-remote-folders label="Remote folders" count=1 tone="text-foreground" icon=FolderTree projectGroup=pg-remote-folders projectGroupDepth=0
+FOLDER key=folder-workspace:ssh:gpu-vm|folder:fw-remote projectGroup=pg-remote-folders depth=0 groupDepth=1
+HEADER key=project:p-shield label="shield" count=2 tone="text-foreground" icon=FolderTree repo=shield-ssh projectGroupDepth=0
+HEADER key=project:repo:api label="api" count=0 tone="text-foreground" icon=FolderTree repo=api projectGroupDepth=0
+PENDING key=pending:creation-1 creation=creation-1 repo=api
+HEADER key=project:repo:shared label="shared" count=1 tone="text-foreground" icon=FolderTree repo=shared projectGroupDepth=0
+-- rows before host sections --
+HEADER key=pinned label="Pinned" count=2 tone="text-foreground" icon=Pin hostCounts={ssh:gpu-vm:2} hostIds={ssh:gpu-vm:[shield-ssh::/w/remote-x,shared::/w/same]} ids=[shield-ssh::/w/remote-x,shared::/w/same]
+ITEM rowKey=pinned:ssh:gpu-vm|shield-ssh::/w/remote-x depth=0 groupDepth=0 children=0 placement=pinned owning=project:p-shield
+ITEM rowKey=pinned:ssh:gpu-vm|shared::/w/same depth=0 groupDepth=0 lastChild=true children=0 placement=pinned owning=project:repo:shared
+HEADER key=project-group:pg-remote-folders label="Remote folders" count=1 tone="text-foreground" icon=FolderTree projectGroup=pg-remote-folders projectGroupDepth=0
+FOLDER key=folder-workspace:ssh:gpu-vm|folder:fw-remote projectGroup=pg-remote-folders depth=0 groupDepth=1
+HEADER key=project:p-shield label="shield" count=2 tone="text-foreground" icon=FolderTree repo=shield-ssh projectGroupDepth=0
+HEADER key=project:repo:api label="api" count=0 tone="text-foreground" icon=FolderTree repo=api projectGroupDepth=0
+PENDING key=pending:creation-1 creation=creation-1 repo=api
+HEADER key=project:repo:shared label="shared" count=1 tone="text-foreground" icon=FolderTree repo=shared projectGroupDepth=0
+SECTION pinned: pinned:ssh:gpu-vm|shield-ssh::/w/remote-x pinned:ssh:gpu-vm|shared::/w/same
+SECTION project:p-shield: project:p-shield:|shield-ssh::/shield-ssh project:p-shield:ssh:gpu-vm|shield-ssh::/w/remote-x
+SECTION project:repo:api: -
+SECTION project:repo:shared: project:repo:shared:ssh:gpu-vm|shared::/w/same
+PREFERRED ssh:gpu-vm|shield-ssh::/w/remote-x -> project:p-shield:ssh:gpu-vm|shield-ssh::/w/remote-x
+PREFERRED ssh:gpu-vm|shared::/w/same -> project:repo:shared:ssh:gpu-vm|shared::/w/same
+renderedKeys: 8
+placeholders: -
+selectionOrder: ssh:gpu-vm|folder:fw-remote
+cmd1-9 mounted: 1=folder:fw-remote@ssh:gpu-vm
+cmd1-9 unmounted: 1=shield-ssh::/w/remote-x@ssh:gpu-vm 2=shared::/w/same@ssh:gpu-vm 3=folder:fw-remote@ssh:gpu-vm
+cmd ids unmounted: shield-ssh::/w/remote-x shared::/w/same folder:fw-remote
+=== groupBy=workspace-status pinnedInGroups=false ===
+visible: shield-ssh::/w/remote-x shared::/w/same shield-ssh::/shield-ssh
+PENDING key=pending:creation-1 creation=creation-1 repo=api
+HEADER key=pinned collapseKey=pinned:host:ssh:gpu-vm label="Pinned" count=2 tone="text-foreground" icon=Pin hostCounts={ssh:gpu-vm:2} hostIds={ssh:gpu-vm:[shield-ssh::/w/remote-x,shared::/w/same]} ids=[shield-ssh::/w/remote-x,shared::/w/same]
+ITEM rowKey=pinned:ssh:gpu-vm|shield-ssh::/w/remote-x depth=0 groupDepth=0 children=0 placement=pinned owning=project:p-shield
+ITEM rowKey=pinned:ssh:gpu-vm|shared::/w/same depth=0 groupDepth=0 lastChild=true children=0 placement=pinned owning=project:repo:shared
+HEADER key=workspace-status:in-progress collapseKey=workspace-status:in-progress:host:ssh:gpu-vm label="In progress" count=2 tone="text-[#d4a300]" icon=ConductorProgressIcon hostCounts={ssh:gpu-vm:2} hostIds={ssh:gpu-vm:[shield-ssh::/shield-ssh]} ids=[shield-ssh::/shield-ssh]
+ITEM rowKey=workspace-status:in-progress:|shield-ssh::/shield-ssh depth=0 groupDepth=0 lastChild=true children=0 placement=natural owning=project:p-shield
+FOLDER key=folder-workspace:ssh:gpu-vm|folder:fw-remote projectGroup=pg-remote-folders depth=0 groupDepth=0
+renderedKeys: 8
+placeholders: -
+selectionOrder: ssh:gpu-vm|shield-ssh::/w/remote-x ssh:gpu-vm|shared::/w/same |shield-ssh::/shield-ssh ssh:gpu-vm|folder:fw-remote
+cmd1-9 mounted: 1=shield-ssh::/w/remote-x@ssh:gpu-vm 2=shared::/w/same@ssh:gpu-vm 3=shield-ssh::/shield-ssh 4=folder:fw-remote@ssh:gpu-vm
+cmd1-9 unmounted: 1=shield-ssh::/w/remote-x@ssh:gpu-vm 2=shared::/w/same@ssh:gpu-vm 3=shield-ssh::/shield-ssh 4=folder:fw-remote@ssh:gpu-vm
+cmd ids unmounted: shield-ssh::/w/remote-x shared::/w/same shield-ssh::/shield-ssh folder:fw-remote
+-- collapsed: pinned:host:ssh:gpu-vm --
+visible: shield-ssh::/w/remote-x shared::/w/same shield-ssh::/shield-ssh
+PENDING key=pending:creation-1 creation=creation-1 repo=api
+HEADER key=pinned collapseKey=pinned:host:ssh:gpu-vm label="Pinned" count=2 tone="text-foreground" icon=Pin hostCounts={ssh:gpu-vm:2} hostIds={ssh:gpu-vm:[shield-ssh::/w/remote-x,shared::/w/same]} ids=[shield-ssh::/w/remote-x,shared::/w/same]
+HEADER key=workspace-status:in-progress collapseKey=workspace-status:in-progress:host:ssh:gpu-vm label="In progress" count=2 tone="text-[#d4a300]" icon=ConductorProgressIcon hostCounts={ssh:gpu-vm:2} hostIds={ssh:gpu-vm:[shield-ssh::/shield-ssh]} ids=[shield-ssh::/shield-ssh]
+ITEM rowKey=workspace-status:in-progress:|shield-ssh::/shield-ssh depth=0 groupDepth=0 lastChild=true children=0 placement=natural owning=project:p-shield
+FOLDER key=folder-workspace:ssh:gpu-vm|folder:fw-remote projectGroup=pg-remote-folders depth=0 groupDepth=0
+-- rows before host sections --
+PENDING key=pending:creation-1 creation=creation-1 repo=api
+HEADER key=pinned label="Pinned" count=2 tone="text-foreground" icon=Pin hostCounts={ssh:gpu-vm:2} hostIds={ssh:gpu-vm:[shield-ssh::/w/remote-x,shared::/w/same]} ids=[shield-ssh::/w/remote-x,shared::/w/same]
+ITEM rowKey=pinned:ssh:gpu-vm|shield-ssh::/w/remote-x depth=0 groupDepth=0 children=0 placement=pinned owning=project:p-shield
+ITEM rowKey=pinned:ssh:gpu-vm|shared::/w/same depth=0 groupDepth=0 lastChild=true children=0 placement=pinned owning=project:repo:shared
+HEADER key=workspace-status:in-progress label="In progress" count=2 tone="text-[#d4a300]" icon=ConductorProgressIcon hostCounts={ssh:gpu-vm:2} hostIds={ssh:gpu-vm:[shield-ssh::/shield-ssh]} ids=[shield-ssh::/shield-ssh]
+ITEM rowKey=workspace-status:in-progress:|shield-ssh::/shield-ssh depth=0 groupDepth=0 lastChild=true children=0 placement=natural owning=project:p-shield
+FOLDER key=folder-workspace:ssh:gpu-vm|folder:fw-remote projectGroup=pg-remote-folders depth=0 groupDepth=0
+SECTION pinned: pinned:ssh:gpu-vm|shield-ssh::/w/remote-x pinned:ssh:gpu-vm|shared::/w/same
+renderedKeys: 6
+placeholders: -
+selectionOrder: |shield-ssh::/shield-ssh ssh:gpu-vm|folder:fw-remote
+cmd1-9 mounted: 1=shield-ssh::/shield-ssh 2=folder:fw-remote@ssh:gpu-vm
+cmd1-9 unmounted: 1=shield-ssh::/w/remote-x@ssh:gpu-vm 2=shared::/w/same@ssh:gpu-vm 3=shield-ssh::/shield-ssh 4=folder:fw-remote@ssh:gpu-vm
+cmd ids unmounted: shield-ssh::/w/remote-x shared::/w/same shield-ssh::/shield-ssh folder:fw-remote
+=== groupBy=workspace-status pinnedInGroups=true ===
+visible: shield-ssh::/w/remote-x shared::/w/same shield-ssh::/shield-ssh
+PENDING key=pending:creation-1 creation=creation-1 repo=api
+HEADER key=pinned collapseKey=pinned:host:ssh:gpu-vm label="Pinned" count=2 tone="text-foreground" icon=Pin hostCounts={ssh:gpu-vm:2} hostIds={ssh:gpu-vm:[shield-ssh::/w/remote-x,shared::/w/same]} ids=[shield-ssh::/w/remote-x,shared::/w/same]
+ITEM rowKey=pinned:ssh:gpu-vm|shield-ssh::/w/remote-x depth=0 groupDepth=0 children=0 placement=pinned owning=project:p-shield
+ITEM rowKey=pinned:ssh:gpu-vm|shared::/w/same depth=0 groupDepth=0 lastChild=true children=0 placement=pinned owning=project:repo:shared
+HEADER key=workspace-status:in-progress collapseKey=workspace-status:in-progress:host:ssh:gpu-vm label="In progress" count=4 tone="text-[#d4a300]" icon=ConductorProgressIcon hostCounts={ssh:gpu-vm:4} hostIds={ssh:gpu-vm:[shield-ssh::/w/remote-x,shared::/w/same,shield-ssh::/shield-ssh]} ids=[shield-ssh::/w/remote-x,shared::/w/same,shield-ssh::/shield-ssh]
+ITEM rowKey=workspace-status:in-progress:ssh:gpu-vm|shield-ssh::/w/remote-x depth=0 groupDepth=0 children=0 placement=natural owning=project:p-shield
+ITEM rowKey=workspace-status:in-progress:ssh:gpu-vm|shared::/w/same depth=0 groupDepth=0 children=0 placement=natural owning=project:repo:shared
+ITEM rowKey=workspace-status:in-progress:|shield-ssh::/shield-ssh depth=0 groupDepth=0 lastChild=true children=0 placement=natural owning=project:p-shield
+FOLDER key=folder-workspace:ssh:gpu-vm|folder:fw-remote projectGroup=pg-remote-folders depth=0 groupDepth=0
+PREFERRED ssh:gpu-vm|shield-ssh::/w/remote-x -> workspace-status:in-progress:ssh:gpu-vm|shield-ssh::/w/remote-x
+PREFERRED ssh:gpu-vm|shared::/w/same -> workspace-status:in-progress:ssh:gpu-vm|shared::/w/same
+renderedKeys: 10
+placeholders: -
+selectionOrder: ssh:gpu-vm|shield-ssh::/w/remote-x ssh:gpu-vm|shared::/w/same |shield-ssh::/shield-ssh ssh:gpu-vm|folder:fw-remote
+cmd1-9 mounted: 1=shield-ssh::/w/remote-x@ssh:gpu-vm 2=shared::/w/same@ssh:gpu-vm 3=shield-ssh::/shield-ssh 4=folder:fw-remote@ssh:gpu-vm
+cmd1-9 unmounted: 1=shield-ssh::/w/remote-x@ssh:gpu-vm 2=shared::/w/same@ssh:gpu-vm 3=shield-ssh::/shield-ssh 4=folder:fw-remote@ssh:gpu-vm
+cmd ids unmounted: shield-ssh::/w/remote-x shared::/w/same shield-ssh::/shield-ssh folder:fw-remote
+-- collapsed: pinned:host:ssh:gpu-vm --
+visible: shield-ssh::/w/remote-x shared::/w/same shield-ssh::/shield-ssh
+PENDING key=pending:creation-1 creation=creation-1 repo=api
+HEADER key=pinned collapseKey=pinned:host:ssh:gpu-vm label="Pinned" count=2 tone="text-foreground" icon=Pin hostCounts={ssh:gpu-vm:2} hostIds={ssh:gpu-vm:[shield-ssh::/w/remote-x,shared::/w/same]} ids=[shield-ssh::/w/remote-x,shared::/w/same]
+HEADER key=workspace-status:in-progress collapseKey=workspace-status:in-progress:host:ssh:gpu-vm label="In progress" count=4 tone="text-[#d4a300]" icon=ConductorProgressIcon hostCounts={ssh:gpu-vm:4} hostIds={ssh:gpu-vm:[shield-ssh::/w/remote-x,shared::/w/same,shield-ssh::/shield-ssh]} ids=[shield-ssh::/w/remote-x,shared::/w/same,shield-ssh::/shield-ssh]
+ITEM rowKey=workspace-status:in-progress:ssh:gpu-vm|shield-ssh::/w/remote-x depth=0 groupDepth=0 children=0 placement=natural owning=project:p-shield
+ITEM rowKey=workspace-status:in-progress:ssh:gpu-vm|shared::/w/same depth=0 groupDepth=0 children=0 placement=natural owning=project:repo:shared
+ITEM rowKey=workspace-status:in-progress:|shield-ssh::/shield-ssh depth=0 groupDepth=0 lastChild=true children=0 placement=natural owning=project:p-shield
+FOLDER key=folder-workspace:ssh:gpu-vm|folder:fw-remote projectGroup=pg-remote-folders depth=0 groupDepth=0
+-- rows before host sections --
+PENDING key=pending:creation-1 creation=creation-1 repo=api
+HEADER key=pinned label="Pinned" count=2 tone="text-foreground" icon=Pin hostCounts={ssh:gpu-vm:2} hostIds={ssh:gpu-vm:[shield-ssh::/w/remote-x,shared::/w/same]} ids=[shield-ssh::/w/remote-x,shared::/w/same]
+ITEM rowKey=pinned:ssh:gpu-vm|shield-ssh::/w/remote-x depth=0 groupDepth=0 children=0 placement=pinned owning=project:p-shield
+ITEM rowKey=pinned:ssh:gpu-vm|shared::/w/same depth=0 groupDepth=0 lastChild=true children=0 placement=pinned owning=project:repo:shared
+HEADER key=workspace-status:in-progress label="In progress" count=4 tone="text-[#d4a300]" icon=ConductorProgressIcon hostCounts={ssh:gpu-vm:4} hostIds={ssh:gpu-vm:[shield-ssh::/w/remote-x,shared::/w/same,shield-ssh::/shield-ssh]} ids=[shield-ssh::/w/remote-x,shared::/w/same,shield-ssh::/shield-ssh]
+ITEM rowKey=workspace-status:in-progress:ssh:gpu-vm|shield-ssh::/w/remote-x depth=0 groupDepth=0 children=0 placement=natural owning=project:p-shield
+ITEM rowKey=workspace-status:in-progress:ssh:gpu-vm|shared::/w/same depth=0 groupDepth=0 children=0 placement=natural owning=project:repo:shared
+ITEM rowKey=workspace-status:in-progress:|shield-ssh::/shield-ssh depth=0 groupDepth=0 lastChild=true children=0 placement=natural owning=project:p-shield
+FOLDER key=folder-workspace:ssh:gpu-vm|folder:fw-remote projectGroup=pg-remote-folders depth=0 groupDepth=0
+SECTION pinned: pinned:ssh:gpu-vm|shield-ssh::/w/remote-x pinned:ssh:gpu-vm|shared::/w/same
+PREFERRED ssh:gpu-vm|shield-ssh::/w/remote-x -> workspace-status:in-progress:ssh:gpu-vm|shield-ssh::/w/remote-x
+PREFERRED ssh:gpu-vm|shared::/w/same -> workspace-status:in-progress:ssh:gpu-vm|shared::/w/same
+renderedKeys: 8
+placeholders: -
+selectionOrder: ssh:gpu-vm|shield-ssh::/w/remote-x ssh:gpu-vm|shared::/w/same |shield-ssh::/shield-ssh ssh:gpu-vm|folder:fw-remote
+cmd1-9 mounted: 1=shield-ssh::/w/remote-x@ssh:gpu-vm 2=shared::/w/same@ssh:gpu-vm 3=shield-ssh::/shield-ssh 4=folder:fw-remote@ssh:gpu-vm
+cmd1-9 unmounted: 1=shield-ssh::/w/remote-x@ssh:gpu-vm 2=shared::/w/same@ssh:gpu-vm 3=shield-ssh::/shield-ssh 4=folder:fw-remote@ssh:gpu-vm
+cmd ids unmounted: shield-ssh::/w/remote-x shared::/w/same shield-ssh::/shield-ssh folder:fw-remote
+=== groupBy=pr-status pinnedInGroups=false ===
+visible: shield-ssh::/w/remote-x shared::/w/same shield-ssh::/shield-ssh
+PENDING key=pending:creation-1 creation=creation-1 repo=api
+HEADER key=pinned collapseKey=pinned:host:ssh:gpu-vm label="Pinned" count=2 tone="text-foreground" icon=Pin hostCounts={ssh:gpu-vm:2} hostIds={ssh:gpu-vm:[shield-ssh::/w/remote-x,shared::/w/same]} ids=[shield-ssh::/w/remote-x,shared::/w/same]
+ITEM rowKey=pinned:ssh:gpu-vm|shield-ssh::/w/remote-x depth=0 groupDepth=0 children=0 placement=pinned owning=project:p-shield
+ITEM rowKey=pinned:ssh:gpu-vm|shared::/w/same depth=0 groupDepth=0 lastChild=true children=0 placement=pinned owning=project:repo:shared
+HEADER key=pr:in-progress collapseKey=pr:in-progress:host:ssh:gpu-vm label="In progress" count=2 tone="text-workspace-status-progress" icon=ConductorProgressIcon hostCounts={ssh:gpu-vm:2} hostIds={ssh:gpu-vm:[shield-ssh::/shield-ssh]} ids=[shield-ssh::/shield-ssh]
+ITEM rowKey=pr:in-progress:|shield-ssh::/shield-ssh depth=0 groupDepth=0 lastChild=true children=0 placement=natural owning=project:p-shield
+FOLDER key=folder-workspace:ssh:gpu-vm|folder:fw-remote projectGroup=pg-remote-folders depth=0 groupDepth=0
+renderedKeys: 8
+placeholders: -
+selectionOrder: ssh:gpu-vm|shield-ssh::/w/remote-x ssh:gpu-vm|shared::/w/same |shield-ssh::/shield-ssh ssh:gpu-vm|folder:fw-remote
+cmd1-9 mounted: 1=shield-ssh::/w/remote-x@ssh:gpu-vm 2=shared::/w/same@ssh:gpu-vm 3=shield-ssh::/shield-ssh 4=folder:fw-remote@ssh:gpu-vm
+cmd1-9 unmounted: 1=shield-ssh::/w/remote-x@ssh:gpu-vm 2=shared::/w/same@ssh:gpu-vm 3=shield-ssh::/shield-ssh 4=folder:fw-remote@ssh:gpu-vm
+cmd ids unmounted: shield-ssh::/w/remote-x shared::/w/same shield-ssh::/shield-ssh folder:fw-remote
+-- collapsed: pinned:host:ssh:gpu-vm --
+visible: shield-ssh::/w/remote-x shared::/w/same shield-ssh::/shield-ssh
+PENDING key=pending:creation-1 creation=creation-1 repo=api
+HEADER key=pinned collapseKey=pinned:host:ssh:gpu-vm label="Pinned" count=2 tone="text-foreground" icon=Pin hostCounts={ssh:gpu-vm:2} hostIds={ssh:gpu-vm:[shield-ssh::/w/remote-x,shared::/w/same]} ids=[shield-ssh::/w/remote-x,shared::/w/same]
+HEADER key=pr:in-progress collapseKey=pr:in-progress:host:ssh:gpu-vm label="In progress" count=2 tone="text-workspace-status-progress" icon=ConductorProgressIcon hostCounts={ssh:gpu-vm:2} hostIds={ssh:gpu-vm:[shield-ssh::/shield-ssh]} ids=[shield-ssh::/shield-ssh]
+ITEM rowKey=pr:in-progress:|shield-ssh::/shield-ssh depth=0 groupDepth=0 lastChild=true children=0 placement=natural owning=project:p-shield
+FOLDER key=folder-workspace:ssh:gpu-vm|folder:fw-remote projectGroup=pg-remote-folders depth=0 groupDepth=0
+-- rows before host sections --
+PENDING key=pending:creation-1 creation=creation-1 repo=api
+HEADER key=pinned label="Pinned" count=2 tone="text-foreground" icon=Pin hostCounts={ssh:gpu-vm:2} hostIds={ssh:gpu-vm:[shield-ssh::/w/remote-x,shared::/w/same]} ids=[shield-ssh::/w/remote-x,shared::/w/same]
+ITEM rowKey=pinned:ssh:gpu-vm|shield-ssh::/w/remote-x depth=0 groupDepth=0 children=0 placement=pinned owning=project:p-shield
+ITEM rowKey=pinned:ssh:gpu-vm|shared::/w/same depth=0 groupDepth=0 lastChild=true children=0 placement=pinned owning=project:repo:shared
+HEADER key=pr:in-progress label="In progress" count=2 tone="text-workspace-status-progress" icon=ConductorProgressIcon hostCounts={ssh:gpu-vm:2} hostIds={ssh:gpu-vm:[shield-ssh::/shield-ssh]} ids=[shield-ssh::/shield-ssh]
+ITEM rowKey=pr:in-progress:|shield-ssh::/shield-ssh depth=0 groupDepth=0 lastChild=true children=0 placement=natural owning=project:p-shield
+FOLDER key=folder-workspace:ssh:gpu-vm|folder:fw-remote projectGroup=pg-remote-folders depth=0 groupDepth=0
+SECTION pinned: pinned:ssh:gpu-vm|shield-ssh::/w/remote-x pinned:ssh:gpu-vm|shared::/w/same
+renderedKeys: 6
+placeholders: -
+selectionOrder: |shield-ssh::/shield-ssh ssh:gpu-vm|folder:fw-remote
+cmd1-9 mounted: 1=shield-ssh::/shield-ssh 2=folder:fw-remote@ssh:gpu-vm
+cmd1-9 unmounted: 1=shield-ssh::/w/remote-x@ssh:gpu-vm 2=shared::/w/same@ssh:gpu-vm 3=shield-ssh::/shield-ssh 4=folder:fw-remote@ssh:gpu-vm
+cmd ids unmounted: shield-ssh::/w/remote-x shared::/w/same shield-ssh::/shield-ssh folder:fw-remote
+=== groupBy=pr-status pinnedInGroups=true ===
+visible: shield-ssh::/w/remote-x shared::/w/same shield-ssh::/shield-ssh
+PENDING key=pending:creation-1 creation=creation-1 repo=api
+HEADER key=pinned collapseKey=pinned:host:ssh:gpu-vm label="Pinned" count=2 tone="text-foreground" icon=Pin hostCounts={ssh:gpu-vm:2} hostIds={ssh:gpu-vm:[shield-ssh::/w/remote-x,shared::/w/same]} ids=[shield-ssh::/w/remote-x,shared::/w/same]
+ITEM rowKey=pinned:ssh:gpu-vm|shield-ssh::/w/remote-x depth=0 groupDepth=0 children=0 placement=pinned owning=project:p-shield
+ITEM rowKey=pinned:ssh:gpu-vm|shared::/w/same depth=0 groupDepth=0 lastChild=true children=0 placement=pinned owning=project:repo:shared
+HEADER key=pr:in-progress collapseKey=pr:in-progress:host:ssh:gpu-vm label="In progress" count=4 tone="text-workspace-status-progress" icon=ConductorProgressIcon hostCounts={ssh:gpu-vm:4} hostIds={ssh:gpu-vm:[shield-ssh::/w/remote-x,shared::/w/same,shield-ssh::/shield-ssh]} ids=[shield-ssh::/w/remote-x,shared::/w/same,shield-ssh::/shield-ssh]
+ITEM rowKey=pr:in-progress:ssh:gpu-vm|shield-ssh::/w/remote-x depth=0 groupDepth=0 children=0 placement=natural owning=project:p-shield
+ITEM rowKey=pr:in-progress:ssh:gpu-vm|shared::/w/same depth=0 groupDepth=0 children=0 placement=natural owning=project:repo:shared
+ITEM rowKey=pr:in-progress:|shield-ssh::/shield-ssh depth=0 groupDepth=0 lastChild=true children=0 placement=natural owning=project:p-shield
+FOLDER key=folder-workspace:ssh:gpu-vm|folder:fw-remote projectGroup=pg-remote-folders depth=0 groupDepth=0
+PREFERRED ssh:gpu-vm|shield-ssh::/w/remote-x -> pr:in-progress:ssh:gpu-vm|shield-ssh::/w/remote-x
+PREFERRED ssh:gpu-vm|shared::/w/same -> pr:in-progress:ssh:gpu-vm|shared::/w/same
+renderedKeys: 10
+placeholders: -
+selectionOrder: ssh:gpu-vm|shield-ssh::/w/remote-x ssh:gpu-vm|shared::/w/same |shield-ssh::/shield-ssh ssh:gpu-vm|folder:fw-remote
+cmd1-9 mounted: 1=shield-ssh::/w/remote-x@ssh:gpu-vm 2=shared::/w/same@ssh:gpu-vm 3=shield-ssh::/shield-ssh 4=folder:fw-remote@ssh:gpu-vm
+cmd1-9 unmounted: 1=shield-ssh::/w/remote-x@ssh:gpu-vm 2=shared::/w/same@ssh:gpu-vm 3=shield-ssh::/shield-ssh 4=folder:fw-remote@ssh:gpu-vm
+cmd ids unmounted: shield-ssh::/w/remote-x shared::/w/same shield-ssh::/shield-ssh folder:fw-remote
+-- collapsed: pinned:host:ssh:gpu-vm --
+visible: shield-ssh::/w/remote-x shared::/w/same shield-ssh::/shield-ssh
+PENDING key=pending:creation-1 creation=creation-1 repo=api
+HEADER key=pinned collapseKey=pinned:host:ssh:gpu-vm label="Pinned" count=2 tone="text-foreground" icon=Pin hostCounts={ssh:gpu-vm:2} hostIds={ssh:gpu-vm:[shield-ssh::/w/remote-x,shared::/w/same]} ids=[shield-ssh::/w/remote-x,shared::/w/same]
+HEADER key=pr:in-progress collapseKey=pr:in-progress:host:ssh:gpu-vm label="In progress" count=4 tone="text-workspace-status-progress" icon=ConductorProgressIcon hostCounts={ssh:gpu-vm:4} hostIds={ssh:gpu-vm:[shield-ssh::/w/remote-x,shared::/w/same,shield-ssh::/shield-ssh]} ids=[shield-ssh::/w/remote-x,shared::/w/same,shield-ssh::/shield-ssh]
+ITEM rowKey=pr:in-progress:ssh:gpu-vm|shield-ssh::/w/remote-x depth=0 groupDepth=0 children=0 placement=natural owning=project:p-shield
+ITEM rowKey=pr:in-progress:ssh:gpu-vm|shared::/w/same depth=0 groupDepth=0 children=0 placement=natural owning=project:repo:shared
+ITEM rowKey=pr:in-progress:|shield-ssh::/shield-ssh depth=0 groupDepth=0 lastChild=true children=0 placement=natural owning=project:p-shield
+FOLDER key=folder-workspace:ssh:gpu-vm|folder:fw-remote projectGroup=pg-remote-folders depth=0 groupDepth=0
+-- rows before host sections --
+PENDING key=pending:creation-1 creation=creation-1 repo=api
+HEADER key=pinned label="Pinned" count=2 tone="text-foreground" icon=Pin hostCounts={ssh:gpu-vm:2} hostIds={ssh:gpu-vm:[shield-ssh::/w/remote-x,shared::/w/same]} ids=[shield-ssh::/w/remote-x,shared::/w/same]
+ITEM rowKey=pinned:ssh:gpu-vm|shield-ssh::/w/remote-x depth=0 groupDepth=0 children=0 placement=pinned owning=project:p-shield
+ITEM rowKey=pinned:ssh:gpu-vm|shared::/w/same depth=0 groupDepth=0 lastChild=true children=0 placement=pinned owning=project:repo:shared
+HEADER key=pr:in-progress label="In progress" count=4 tone="text-workspace-status-progress" icon=ConductorProgressIcon hostCounts={ssh:gpu-vm:4} hostIds={ssh:gpu-vm:[shield-ssh::/w/remote-x,shared::/w/same,shield-ssh::/shield-ssh]} ids=[shield-ssh::/w/remote-x,shared::/w/same,shield-ssh::/shield-ssh]
+ITEM rowKey=pr:in-progress:ssh:gpu-vm|shield-ssh::/w/remote-x depth=0 groupDepth=0 children=0 placement=natural owning=project:p-shield
+ITEM rowKey=pr:in-progress:ssh:gpu-vm|shared::/w/same depth=0 groupDepth=0 children=0 placement=natural owning=project:repo:shared
+ITEM rowKey=pr:in-progress:|shield-ssh::/shield-ssh depth=0 groupDepth=0 lastChild=true children=0 placement=natural owning=project:p-shield
+FOLDER key=folder-workspace:ssh:gpu-vm|folder:fw-remote projectGroup=pg-remote-folders depth=0 groupDepth=0
+SECTION pinned: pinned:ssh:gpu-vm|shield-ssh::/w/remote-x pinned:ssh:gpu-vm|shared::/w/same
+PREFERRED ssh:gpu-vm|shield-ssh::/w/remote-x -> pr:in-progress:ssh:gpu-vm|shield-ssh::/w/remote-x
+PREFERRED ssh:gpu-vm|shared::/w/same -> pr:in-progress:ssh:gpu-vm|shared::/w/same
+renderedKeys: 8
+placeholders: -
+selectionOrder: ssh:gpu-vm|shield-ssh::/w/remote-x ssh:gpu-vm|shared::/w/same |shield-ssh::/shield-ssh ssh:gpu-vm|folder:fw-remote
+cmd1-9 mounted: 1=shield-ssh::/w/remote-x@ssh:gpu-vm 2=shared::/w/same@ssh:gpu-vm 3=shield-ssh::/shield-ssh 4=folder:fw-remote@ssh:gpu-vm
+cmd1-9 unmounted: 1=shield-ssh::/w/remote-x@ssh:gpu-vm 2=shared::/w/same@ssh:gpu-vm 3=shield-ssh::/shield-ssh 4=folder:fw-remote@ssh:gpu-vm
+cmd ids unmounted: shield-ssh::/w/remote-x shared::/w/same shield-ssh::/shield-ssh folder:fw-remote

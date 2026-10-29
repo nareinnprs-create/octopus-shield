@@ -1,0 +1,127 @@
+---
+title: Shield CLI overview
+description: Use the Shield CLI to script Shield from a terminal, manage worktrees, control agent terminals, automate the built-in browser, and install agent skills.
+keywords:
+  - shield cli
+  - Shield CLI
+  - shield command line
+  - Shield skills
+  - npx skills add
+  - agent CLI
+---
+
+import { Callout } from '@/components/docs/prose'
+
+The Shield CLI is the `shield` command-line interface for scripting a running Shield editor from any shell. Use it to create and inspect worktrees, drive agent terminals, open files and diffs, automate the built-in browser, run scheduled automations, share HTML/Markdown artifacts, and control Shield-native tools from scripts or AI agents.
+
+It ships with the desktop app; register it under [Settings → General → Shield CLI](/docs/settings). On Linux the command is `shield-ide`, because GNOME Shield's screen reader already owns `/usr/bin/shield` — see [Install → Linux](/docs/install#linux).
+
+Agents can install the matching Shield CLI skill with:
+
+```bash
+npx skills add https://github.com/octopusshield/octopus-shield --skill shield-cli
+# headless / no Settings UI:
+shield skills install --skill shield-cli
+```
+
+See [Skills registry & MCP](/docs/cli/skills) for every installable Shield skill, including `shield skills install` / `shield skills update`.
+
+## Install & verify
+
+```
+command -v shield
+shield status --json
+```
+
+## Worktree commands
+
+```
+shield worktree ps --json
+shield worktree create --repo id:<repoId> --name my-task --issue 123 --json
+shield worktree create --repo id:<repoId> --name review-pr-123 --pr 123 --json
+shield worktree current --json
+shield worktree set --worktree active --comment "reproduced bug" --json
+shield worktree set --worktree active --gitlab-issue 42 --gitlab-mr 77 --json
+shield worktree set --worktree active --pr null --json
+shield worktree rm --worktree id:<id> --force --json
+```
+
+For selectors, setup flags, parent/child worktrees, and the broader command map, see [Shield CLI reference](/docs/cli/reference).
+
+## Terminal commands
+
+```
+shield terminal list --json
+shield terminal read --json
+shield terminal send --text "continue" --enter --json
+shield terminal wait --for tui-idle --timeout-ms 30000 --json
+shield terminal create --worktree path:/projects/app --command "npm test" --json
+shield terminal split --direction vertical --command "npm run dev" --json
+```
+
+For tracked multi-agent work, use [Orchestration](/docs/cli/orchestration) instead of plain terminal prompts.
+
+## File commands
+
+Open files and diffs as tabs in their Shield worktree from a shell. They open without changing what you are looking at; add `--focus` to be brought to the file:
+
+```
+shield file open src/App.tsx
+shield file diff src/App.tsx --staged
+shield file open-changed --mode both
+```
+
+Use `--worktree <selector>` when the shell's current directory is not inside the target worktree.
+
+## Browser profiles
+
+Browser profiles isolate tab session state, so a script or agent can test with different cookies, local storage, and logged-in identities. The CLI exposes profile commands under `shield tab profile`; start with `shield tab profile list --json`, then use `create`, `set`, `clone`, or `use-default` as needed.
+
+## Scheduled automations
+
+Use `shield automations` to create, inspect, run, and remove scheduled Shield tasks from a shell. Start with [Scheduled automations](/docs/cli/automations) when you want a recurring prompt to run against a repo or an existing worktree.
+
+## Artifacts
+
+Share HTML or Markdown as public view links through the signed-in Shield account (`shield artifacts share|update|list|delete`). Publishing is **opt-in** under Settings → Artifacts. Command details: [CLI reference → Artifacts](/docs/cli/reference#artifacts).
+
+## Browser automation
+
+The CLI also drives the built-in browser with a snapshot-interact-re-snapshot loop:
+
+```
+shield goto --url https://example.com --json
+shield snapshot --json     # returns refs like @e1, @e3
+shield click --element @e3 --json
+shield fill --element @e1 --value "user@example.com" --json
+shield screenshot --json
+```
+
+For responsive browser checks, switch the active tab to a named device profile:
+
+```
+shield set device --name "iPhone 12" --json
+shield screenshot --json
+```
+
+## Mobile emulator
+
+The CLI can also drive an iOS Simulator through Shield's mobile emulator bridge. It is scoped to the active worktree, so agents and scripts can attach a simulator from `shield emulator list`, tap normalized coordinates, type text, send gestures, rotate the device, and shut it down without leaving Shield.
+
+```
+shield emulator list --json
+shield emulator attach "<device-name-or-udid>" --json
+shield emulator tap 0.5 0.7 --json
+shield emulator type "hello" --json
+shield emulator gesture '[{"type":"begin","x":0.5,"y":0.8},{"type":"move","x":0.5,"y":0.4},{"type":"end","x":0.5,"y":0.2}]' --json
+shield emulator rotate landscape_left --json
+shield emulator kill --json
+```
+
+Use `--worktree <selector>`, `--device <udid-or-name>`, or `--emulator <id>` when a script needs an explicit target.
+
+<Callout>
+  For the full command surface including tabs, waits, cookies, and frames, see [Shield CLI
+  reference](/docs/cli/reference), then install the Shield CLI skill (see [Skills
+  registry](/docs/cli/skills)) and point your agent at it.
+</Callout>

@@ -1,0 +1,60 @@
+name: octopus-shield-nucleus
+
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: oshn-postgres
+    environment:
+      POSTGRES_DB: octopusshield
+      POSTGRES_USER: octopus
+      POSTGRES_PASSWORD_FILE: /run/secrets/pg_password
+    secrets:
+      - pg_password
+    ports:
+      # Loopback-only: the nucleus is a single-host fabric; publishing these on all
+      # interfaces exposed anonymous Redis/Postgres/NATS to the LAN (Sentinal-7 F-1/N-17).
+      - "127.0.0.1:5435:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U octopus -d octopusshield"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  nats:
+    image: nats:2.10-alpine
+    container_name: oshn-nats
+    command: ["-js", "-m", "8222", "--auth", "${NATS_TOKEN}"]
+    ports:
+      # Loopback-only (Sentinal-7 F-1): NATS runs auth-less, so LAN exposure = anyone can
+      # publish spoofed oshield.octopod.* events. Credential wiring is an owner decision
+      # (locked secret-store rule) — loopback bind closes the remote half of the hole now.
+      - "127.0.0.1:4222:4222"
+      - "127.0.0.1:8222:8222"
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "-", "http://localhost:8222/healthz"]
+      interval: 5s
+      timeout: 4s
+      retries: 20
+
+  redis:
+    image: redis:7-alpine
+    container_name: oshn-redis
+    ports:
+      - "127.0.0.1:6381:6379"
+    volumes:
+      - redisdata:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 4s
+      retries: 20
+
+volumes:
+  pgdata:
+  redisdata:
+
+secrets:
+  pg_password:
+    file: .pg_password

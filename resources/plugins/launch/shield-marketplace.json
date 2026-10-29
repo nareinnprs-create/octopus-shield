@@ -1,0 +1,36 @@
+{
+  "name": "Shield Official Plugins",
+  "owner": "octopusshield",
+  "plugins": [
+    {
+      "id": "octopusshield.shield-portuguese",
+      "source": {
+        "kind": "git",
+        "url": "https://github.com/octopusshield/octopus-shield-portuguese.git",
+        "ref": "v1.0.0"
+      },
+      "description": "Brazilian Portuguese translations for common Shield navigation.",
+      "categories": ["languages", "official"]
+    },
+    {
+      "id": "octopusshield.shield-multipass-recipes",
+      "source": {
+        "kind": "git",
+        "url": "https://github.com/octopusshield/octopus-shield-multipass-recipes.git",
+        "ref": "v1.0.0"
+      },
+      "description": "A reviewed starter lifecycle for disposable Multipass workspaces.",
+      "categories": ["vm-recipes", "official"]
+    },
+    {
+      "id": "octopusshield.shield-navigation-shortcuts",
+      "source": {
+        "kind": "git",
+        "url": "https://github.com/octopusshield/octopus-shield-navigation-shortcuts.git",
+        "ref": "v1.0.0"
+      },
+      "description": "Command aliases and optional shortcuts for frequent Shield views.",
+      "categories": ["keybindings", "official"]
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "extraKnownMarketplaces": {
+    "shield-agent-plugins": {
+      "source": { "source": "directory", "path": "./config/agent-plugins" }
+    }
+  },
+  "enabledPlugins": {
+    "shield-typescript@shield-agent-plugins": true,
+    "typescript-lsp@claude-plugins-official": false
+  }
+}

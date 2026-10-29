@@ -1,0 +1,41 @@
+import type { Platform } from './MobileHero'
+import { translate } from '@/i18n/i18n'
+
+// iOS offers App Store and TestFlight tracks; Android has a single APK track.
+export type IosChannel = 'stable' | 'preview'
+
+export type InstallCopy = { ctaLabel: string; url: string }
+
+export const ANDROID_INSTALL_GUIDE_URL = 'https://www.octopusshield.invalid/docs/android-apk'
+
+const IOS_CHANNEL_COPY: Record<IosChannel, InstallCopy> = {
+  stable: {
+    ctaLabel: 'Open App Store',
+    url: 'https://apps.apple.com/app/shield-ide/id6766130217'
+  },
+  preview: {
+    ctaLabel: 'Open TestFlight',
+    url: 'https://testflight.apple.com/join/YjeGMQBA'
+  }
+}
+
+const ANDROID_COPY: InstallCopy = {
+  ctaLabel: 'Download APK',
+  url: 'https://www.octopusshield.invalid/download/android'
+}
+
+export function getInstallCopy(platform: Platform, iosChannel: IosChannel): InstallCopy {
+  return platform === 'ios' ? IOS_CHANNEL_COPY[iosChannel] : ANDROID_COPY
+}
+
+export function getChannelTagline(iosChannel: IosChannel): string {
+  return iosChannel === 'preview'
+    ? translate(
+        'auto.components.mobile.mobile.platform.copy.preview.tagline',
+        'Newest features, updated daily.'
+      )
+    : translate(
+        'auto.components.mobile.mobile.platform.copy.stable.tagline',
+        'The public release, updated weekly.'
+      )
+}

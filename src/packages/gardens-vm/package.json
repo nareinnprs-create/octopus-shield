@@ -1,0 +1,72 @@
+{
+  "name": "@shield/gardens-vm",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Shield Gardens VM: scope-authorized isolated per-engagement VM lifecycle (QEMU, Hyper-V, macOS VZ backends)",
+  "files": [
+    "dist"
+  ],
+  "type": "commonjs",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "shield-source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./vm-backend": {
+      "shield-source": "./src/vm-backend.ts",
+      "types": "./dist/vm-backend.d.ts",
+      "default": "./dist/vm-backend.js"
+    },
+    "./vm-backend-qemu": {
+      "shield-source": "./src/vm-backend-qemu.ts",
+      "types": "./dist/vm-backend-qemu.d.ts",
+      "default": "./dist/vm-backend-qemu.js"
+    },
+    "./vm-backend-hyperv": {
+      "shield-source": "./src/vm-backend-hyperv.ts",
+      "types": "./dist/vm-backend-hyperv.d.ts",
+      "default": "./dist/vm-backend-hyperv.js"
+    },
+    "./vm-backend-vz": {
+      "shield-source": "./src/vm-backend-vz.ts",
+      "types": "./dist/vm-backend-vz.d.ts",
+      "default": "./dist/vm-backend-vz.js"
+    },
+    "./vm-images": {
+      "shield-source": "./src/vm-images.ts",
+      "types": "./dist/vm-images.d.ts",
+      "default": "./dist/vm-images.js"
+    },
+    "./gardens-vm": {
+      "shield-source": "./src/gardens-vm.ts",
+      "types": "./dist/gardens-vm.d.ts",
+      "default": "./dist/gardens-vm.js"
+    },
+    "./gardens-vm-cli": {
+      "shield-source": "./src/gardens-vm-cli.ts",
+      "types": "./dist/gardens-vm-cli.d.ts",
+      "default": "./dist/gardens-vm-cli.js"
+    }
+  },
+  "scripts": {
+    "build": "tsx --conditions=shield-source scripts/build-dist.mjs",
+    "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.test.json",
+    "test": "vitest run --config vitest.config.ts"
+  },
+  "dependencies": {
+    "@shield/process-host": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^18.19.130",
+    "proper-lockfile": "4.1.2",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vitest": "^3.2.7"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

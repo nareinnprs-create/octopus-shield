@@ -1,0 +1,67 @@
+{
+  "name": "@shield/suckers",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Shield Sucker runtime: RBAC-brokered plugin lifecycle (install/grant/invoke/revoke) with audit events per docs/sucker-contract.md",
+  "files": [
+    "dist"
+  ],
+  "type": "commonjs",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "shield-source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./sucker-manifest": {
+      "shield-source": "./src/sucker-manifest.ts",
+      "types": "./dist/sucker-manifest.d.ts",
+      "default": "./dist/sucker-manifest.js"
+    },
+    "./sucker-broker": {
+      "shield-source": "./src/sucker-broker.ts",
+      "types": "./dist/sucker-broker.d.ts",
+      "default": "./dist/sucker-broker.js"
+    },
+    "./sucker-grants": {
+      "shield-source": "./src/sucker-grants.ts",
+      "types": "./dist/sucker-grants.d.ts",
+      "default": "./dist/sucker-grants.js"
+    },
+    "./sucker-process": {
+      "shield-source": "./src/sucker-process.ts",
+      "types": "./dist/sucker-process.d.ts",
+      "default": "./dist/sucker-process.js"
+    },
+    "./sucker-audit": {
+      "shield-source": "./src/sucker-audit.ts",
+      "types": "./dist/sucker-audit.d.ts",
+      "default": "./dist/sucker-audit.js"
+    },
+    "./suckers-cli": {
+      "shield-source": "./src/suckers-cli.ts",
+      "types": "./dist/suckers-cli.d.ts",
+      "default": "./dist/suckers-cli.js"
+    }
+  },
+  "scripts": {
+    "build": "tsx --conditions=shield-source scripts/build-dist.mjs",
+    "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.test.json",
+    "test": "vitest run --config vitest.config.ts"
+  },
+  "dependencies": {
+    "@shield/access": "workspace:*",
+    "@shield/process-host": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^18.19.130",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vitest": "^3.2.7"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

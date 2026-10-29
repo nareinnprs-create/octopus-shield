@@ -1,0 +1,410 @@
+=== groupBy=none pinnedInGroups=false ===
+visible: shield::/w/feat-a shield::/w/feat-b lab::/w/gitlab-mr shield::/shield shield::/w/Zeta shield::/w/feat-c lab::/lab
+PENDING key=pending:creation-1 creation=creation-1 repo=api
+HEADER key=pinned label="Pinned" count=4 tone="text-foreground" icon=Pin hostCounts={local:4} hostIds={local:[shield::/w/feat-a,shield::/w/feat-b,lab::/w/gitlab-mr,shield::/w/feat-c]} ids=[shield::/w/feat-a,shield::/w/feat-b,lab::/w/gitlab-mr,shield::/w/feat-c]
+ITEM rowKey=pinned:|shield::/w/feat-a depth=0 groupDepth=0 lastChild=true children=2 lineageKey=lineage:shield::/w/feat-a placement=pinned owning=project:p-shield
+ITEM rowKey=pinned:|shield::/w/feat-b depth=1 groupDepth=0 children=1 lineageKey=lineage:shield::/w/feat-b placement=pinned owning=project:p-shield parent=pinned:|shield::/w/feat-a
+ITEM rowKey=pinned:|shield::/w/feat-c depth=2 groupDepth=0 lastChild=true children=0 placement=pinned owning=project:p-shield parent=pinned:|shield::/w/feat-b
+ITEM rowKey=pinned:|lab::/w/gitlab-mr depth=1 groupDepth=0 lastChild=true children=0 showProject=true placement=pinned owning=project:repo:lab parent=pinned:|shield::/w/feat-a
+HEADER key=all label="All" count=6 tone="text-foreground" icon=List hostCounts={local:5 ssh:gpu-vm:1} hostIds={local:[shield::/shield,shield::/w/Zeta,lab::/lab] ssh:gpu-vm:[]} ids=[shield::/shield,shield::/w/Zeta,lab::/lab]
+ITEM rowKey=all:|shield::/shield depth=0 groupDepth=0 children=0 placement=natural owning=project:p-shield
+ITEM rowKey=all:|shield::/w/Zeta depth=0 groupDepth=0 children=0 placement=natural owning=project:p-shield
+ITEM rowKey=all:|lab::/lab depth=0 groupDepth=0 lastChild=true children=0 placement=natural owning=project:repo:lab
+FOLDER key=folder-workspace:local|folder:fw-review projectGroup=pg-folders depth=0 groupDepth=0
+FOLDER key=folder-workspace:local|folder:fw-notes projectGroup=pg-folders depth=0 groupDepth=0
+FOLDER key=folder-workspace:ssh:gpu-vm|folder:fw-remote projectGroup=pg-remote-folders depth=0 groupDepth=0
+renderedKeys: 16
+placeholders: -
+selectionOrder: |shield::/w/feat-a |shield::/w/feat-b |shield::/w/feat-c |lab::/w/gitlab-mr |shield::/shield |shield::/w/Zeta |lab::/lab local|folder:fw-review local|folder:fw-notes ssh:gpu-vm|folder:fw-remote
+cmd1-9 mounted: 1=shield::/w/feat-a#lineage:shield::/w/feat-a 2=shield::/w/feat-b#lineage:shield::/w/feat-b 3=shield::/w/feat-c 4=lab::/w/gitlab-mr 5=shield::/shield 6=shield::/w/Zeta 7=lab::/lab 8=folder:fw-review@local 9=folder:fw-notes@local
+cmd1-9 unmounted: 1=shield::/w/feat-a 2=shield::/w/feat-b 3=shield::/w/feat-c 4=lab::/w/gitlab-mr 5=shield::/shield 6=shield::/w/Zeta 7=lab::/lab 8=folder:fw-review@local 9=folder:fw-notes@local
+cmd ids unmounted: shield::/w/feat-a shield::/w/feat-b shield::/w/feat-c lab::/w/gitlab-mr shield::/shield shield::/w/Zeta lab::/lab folder:fw-review folder:fw-notes folder:fw-remote
+-- collapsed: pinned lineage:shield::/w/feat-a --
+visible: shield::/w/feat-a shield::/w/feat-b lab::/w/gitlab-mr shield::/shield shield::/w/Zeta shield::/w/feat-c lab::/lab
+PENDING key=pending:creation-1 creation=creation-1 repo=api
+HEADER key=pinned label="Pinned" count=4 tone="text-foreground" icon=Pin hostCounts={local:4} hostIds={local:[shield::/w/feat-a,shield::/w/feat-b,lab::/w/gitlab-mr,shield::/w/feat-c]} ids=[shield::/w/feat-a,shield::/w/feat-b,lab::/w/gitlab-mr,shield::/w/feat-c]
+HEADER key=all label="All" count=6 tone="text-foreground" icon=List hostCounts={local:5 ssh:gpu-vm:1} hostIds={local:[shield::/shield,shield::/w/Zeta,lab::/lab] ssh:gpu-vm:[]} ids=[shield::/shield,shield::/w/Zeta,lab::/lab]
+ITEM rowKey=all:|shield::/shield depth=0 groupDepth=0 children=0 placement=natural owning=project:p-shield
+ITEM rowKey=all:|shield::/w/Zeta depth=0 groupDepth=0 children=0 placement=natural owning=project:p-shield
+ITEM rowKey=all:|lab::/lab depth=0 groupDepth=0 lastChild=true children=0 placement=natural owning=project:repo:lab
+FOLDER key=folder-workspace:local|folder:fw-review projectGroup=pg-folders depth=0 groupDepth=0
+FOLDER key=folder-workspace:local|folder:fw-notes projectGroup=pg-folders depth=0 groupDepth=0
+FOLDER key=folder-workspace:ssh:gpu-vm|folder:fw-remote projectGroup=pg-remote-folders depth=0 groupDepth=0
+SECTION pinned: pinned:|shield::/w/feat-a pinned:|shield::/w/feat-b pinned:|shield::/w/feat-c pinned:|lab::/w/gitlab-mr
+renderedKeys: 12
+placeholders: -
+selectionOrder: |shield::/shield |shield::/w/Zeta |lab::/lab local|folder:fw-review local|folder:fw-notes ssh:gpu-vm|folder:fw-remote
+cmd1-9 mounted: 1=shield::/shield 2=shield::/w/Zeta 3=lab::/lab 4=folder:fw-review@local 5=folder:fw-notes@local 6=folder:fw-remote@ssh:gpu-vm
+cmd1-9 unmounted: 1=shield::/shield 2=shield::/w/Zeta 3=lab::/lab 4=folder:fw-review@local 5=folder:fw-notes@local 6=folder:fw-remote@ssh:gpu-vm
+cmd ids unmounted: shield::/shield shield::/w/Zeta lab::/lab folder:fw-review folder:fw-notes folder:fw-remote
+=== groupBy=none pinnedInGroups=true ===
+visible: shield::/w/feat-a shield::/w/feat-b lab::/w/gitlab-mr shield::/shield shield::/w/Zeta shield::/w/feat-c lab::/lab
+PENDING key=pending:creation-1 creation=creation-1 repo=api
+HEADER key=pinned label="Pinned" count=4 tone="text-foreground" icon=Pin hostCounts={local:4} hostIds={local:[shield::/w/feat-a,shield::/w/feat-b,lab::/w/gitlab-mr,shield::/w/feat-c]} ids=[shield::/w/feat-a,shield::/w/feat-b,lab::/w/gitlab-mr,shield::/w/feat-c]
+ITEM rowKey=pinned:|shield::/w/feat-a depth=0 groupDepth=0 lastChild=true children=2 lineageKey=lineage:shield::/w/feat-a placement=pinned owning=project:p-shield
+ITEM rowKey=pinned:|shield::/w/feat-b depth=1 groupDepth=0 children=1 lineageKey=lineage:shield::/w/feat-b placement=pinned owning=project:p-shield parent=pinned:|shield::/w/feat-a
+ITEM rowKey=pinned:|shield::/w/feat-c depth=2 groupDepth=0 lastChild=true children=0 placement=pinned owning=project:p-shield parent=pinned:|shield::/w/feat-b
+ITEM rowKey=pinned:|lab::/w/gitlab-mr depth=1 groupDepth=0 lastChild=true children=0 showProject=true placement=pinned owning=project:repo:lab parent=pinned:|shield::/w/feat-a
+HEADER key=all label="All" count=10 tone="text-foreground" icon=List hostCounts={local:9 ssh:gpu-vm:1} hostIds={local:[shield::/w/feat-a,shield::/w/feat-b,lab::/w/gitlab-mr,shield::/shield,shield::/w/Zeta,shield::/w/feat-c,lab::/lab] ssh:gpu-vm:[]} ids=[shield::/w/feat-a,shield::/w/feat-b,lab::/w/gitlab-mr,shield::/shield,shield::/w/Zeta,shield::/w/feat-c,lab::/lab]
+ITEM rowKey=all:|shield::/w/feat-a depth=0 groupDepth=0 children=2 lineageKey=lineage:shield::/w/feat-a placement=natural owning=project:p-shield
+ITEM rowKey=all:|shield::/w/feat-b depth=1 groupDepth=0 children=1 lineageKey=lineage:shield::/w/feat-b placement=natural owning=project:p-shield parent=all:|shield::/w/feat-a
+ITEM rowKey=all:|shield::/w/feat-c depth=2 groupDepth=0 lastChild=true children=0 placement=natural owning=project:p-shield parent=all:|shield::/w/feat-b
+ITEM rowKey=all:|lab::/w/gitlab-mr depth=1 groupDepth=0 lastChild=true children=0 showProject=true placement=natural owning=project:repo:lab parent=all:|shield::/w/feat-a
+ITEM rowKey=all:|shield::/shield depth=0 groupDepth=0 children=0 placement=natural owning=project:p-shield
+ITEM rowKey=all:|shield::/w/Zeta depth=0 groupDepth=0 children=0 placement=natural owning=project:p-shield
+ITEM rowKey=all:|lab::/lab depth=0 groupDepth=0 lastChild=true children=0 placement=natural owning=project:repo:lab
+FOLDER key=folder-workspace:local|folder:fw-review projectGroup=pg-folders depth=0 groupDepth=0
+FOLDER key=folder-workspace:local|folder:fw-notes projectGroup=pg-folders depth=0 groupDepth=0
+FOLDER key=folder-workspace:ssh:gpu-vm|folder:fw-remote projectGroup=pg-remote-folders depth=0 groupDepth=0
+PREFERRED |shield::/w/feat-a -> all:|shield::/w/feat-a
+PREFERRED |shield::/w/feat-b -> all:|shield::/w/feat-b
+PREFERRED |shield::/w/feat-c -> all:|shield::/w/feat-c
+PREFERRED |lab::/w/gitlab-mr -> all:|lab::/w/gitlab-mr
+renderedKeys: 20
+placeholders: -
+selectionOrder: |shield::/w/feat-a |shield::/w/feat-b |shield::/w/feat-c |lab::/w/gitlab-mr |shield::/shield |shield::/w/Zeta |lab::/lab local|folder:fw-review local|folder:fw-notes ssh:gpu-vm|folder:fw-remote
+cmd1-9 mounted: 1=shield::/w/feat-a#lineage:shield::/w/feat-a 2=shield::/w/feat-b#lineage:shield::/w/feat-b 3=shield::/w/feat-c 4=lab::/w/gitlab-mr 5=shield::/shield 6=shield::/w/Zeta 7=lab::/lab 8=folder:fw-review@local 9=folder:fw-notes@local
+cmd1-9 unmounted: 1=shield::/w/feat-a 2=shield::/w/feat-b 3=shield::/w/feat-c 4=lab::/w/gitlab-mr 5=shield::/shield 6=shield::/w/Zeta 7=lab::/lab 8=folder:fw-review@local 9=folder:fw-notes@local
+cmd ids unmounted: shield::/w/feat-a shield::/w/feat-b shield::/w/feat-c lab::/w/gitlab-mr shield::/shield shield::/w/Zeta lab::/lab folder:fw-review folder:fw-notes folder:fw-remote
+-- collapsed: pinned lineage:shield::/w/feat-a --
+visible: shield::/w/feat-a shield::/w/feat-b lab::/w/gitlab-mr shield::/shield shield::/w/Zeta shield::/w/feat-c lab::/lab
+PENDING key=pending:creation-1 creation=creation-1 repo=api
+HEADER key=pinned label="Pinned" count=4 tone="text-foreground" icon=Pin hostCounts={local:4} hostIds={local:[shield::/w/feat-a,shield::/w/feat-b,lab::/w/gitlab-mr,shield::/w/feat-c]} ids=[shield::/w/feat-a,shield::/w/feat-b,lab::/w/gitlab-mr,shield::/w/feat-c]
+HEADER key=all label="All" count=10 tone="text-foreground" icon=List hostCounts={local:9 ssh:gpu-vm:1} hostIds={local:[shield::/w/feat-a,shield::/w/feat-b,lab::/w/gitlab-mr,shield::/shield,shield::/w/Zeta,shield::/w/feat-c,lab::/lab] ssh:gpu-vm:[]} ids=[shield::/w/feat-a,shield::/w/feat-b,lab::/w/gitlab-mr,shield::/shield,shield::/w/Zeta,shield::/w/feat-c,lab::/lab]
+ITEM rowKey=all:|shield::/w/feat-a depth=0 groupDepth=0 children=2 lineageKey=lineage:shield::/w/feat-a lineageCollapsed=true placement=natural owning=project:p-shield
+ITEM rowKey=all:|shield::/shield depth=0 groupDepth=0 children=0 placement=natural owning=project:p-shield
+ITEM rowKey=all:|shield::/w/Zeta depth=0 groupDepth=0 children=0 placement=natural owning=project:p-shield
+ITEM rowKey=all:|lab::/lab depth=0 groupDepth=0 lastChild=true children=0 placement=natural owning=project:repo:lab
+FOLDER key=folder-workspace:local|folder:fw-review projectGroup=pg-folders depth=0 groupDepth=0
+FOLDER key=folder-workspace:local|folder:fw-notes projectGroup=pg-folders depth=0 groupDepth=0
+FOLDER key=folder-workspace:ssh:gpu-vm|folder:fw-remote projectGroup=pg-remote-folders depth=0 groupDepth=0
+SECTION pinned: pinned:|shield::/w/feat-a pinned:|shield::/w/feat-b pinned:|shield::/w/feat-c pinned:|lab::/w/gitlab-mr
+SECTION all: all:|shield::/w/feat-a all:|shield::/w/feat-b all:|shield::/w/feat-c all:|lab::/w/gitlab-mr all:|shield::/shield all:|shield::/w/Zeta all:|lab::/lab
+PREFERRED |shield::/w/feat-a -> all:|shield::/w/feat-a
+PREFERRED |shield::/w/feat-b -> all:|shield::/w/feat-b
+PREFERRED |shield::/w/feat-c -> all:|shield::/w/feat-c
+PREFERRED |lab::/w/gitlab-mr -> all:|lab::/w/gitlab-mr
+renderedKeys: 13
+placeholders: -
+selectionOrder: |shield::/w/feat-a |shield::/shield |shield::/w/Zeta |lab::/lab local|folder:fw-review local|folder:fw-notes ssh:gpu-vm|folder:fw-remote
+cmd1-9 mounted: 1=shield::/w/feat-a#lineage:shield::/w/feat-a 2=shield::/shield 3=shield::/w/Zeta 4=lab::/lab 5=folder:fw-review@local 6=folder:fw-notes@local 7=folder:fw-remote@ssh:gpu-vm
+cmd1-9 unmounted: 1=shield::/w/feat-a 2=shield::/shield 3=shield::/w/Zeta 4=lab::/lab 5=folder:fw-review@local 6=folder:fw-notes@local 7=folder:fw-remote@ssh:gpu-vm
+cmd ids unmounted: shield::/w/feat-a shield::/shield shield::/w/Zeta lab::/lab folder:fw-review folder:fw-notes folder:fw-remote
+=== groupBy=repo pinnedInGroups=false ===
+visible: shield::/w/feat-a shield::/w/feat-b lab::/w/gitlab-mr shield::/shield shield::/w/Zeta shield::/w/feat-c lab::/lab
+HEADER key=pinned label="Pinned" count=4 tone="text-foreground" icon=Pin hostCounts={local:4} hostIds={local:[shield::/w/feat-a,shield::/w/feat-b,lab::/w/gitlab-mr,shield::/w/feat-c]} ids=[shield::/w/feat-a,shield::/w/feat-b,lab::/w/gitlab-mr,shield::/w/feat-c]
+ITEM rowKey=pinned:|shield::/w/feat-a depth=0 groupDepth=0 lastChild=true children=2 lineageKey=lineage:shield::/w/feat-a placement=pinned owning=project:p-shield
+ITEM rowKey=pinned:|shield::/w/feat-b depth=1 groupDepth=0 children=1 lineageKey=lineage:shield::/w/feat-b placement=pinned owning=project:p-shield parent=pinned:|shield::/w/feat-a
+ITEM rowKey=pinned:|shield::/w/feat-c depth=2 groupDepth=0 lastChild=true children=0 placement=pinned owning=project:p-shield parent=pinned:|shield::/w/feat-b
+ITEM rowKey=pinned:|lab::/w/gitlab-mr depth=1 groupDepth=0 lastChild=true children=0 showProject=true placement=pinned owning=project:repo:lab parent=pinned:|shield::/w/feat-a
+HEADER key=project-group:pg-work label="Work" count=2 tone="text-foreground" icon=FolderTree projectGroup=pg-work projectGroupDepth=0
+HEADER key=project:p-shield label="shield" count=2 tone="text-foreground" icon=FolderTree repo=shield projectGroupDepth=1
+ITEM rowKey=project:p-shield:|shield::/shield depth=0 groupDepth=1 children=0 placement=natural owning=project:p-shield path=project-group:pg-work>project:p-shield
+ITEM rowKey=project:p-shield:|shield::/w/Zeta depth=0 groupDepth=1 lastChild=true children=0 placement=natural owning=project:p-shield path=project-group:pg-work>project:p-shield
+HEADER key=project-group:pg-nested label="Nested" count=1 tone="text-foreground" icon=FolderTree projectGroup=pg-nested projectGroupDepth=1
+HEADER key=project:repo:lab label="lab" count=1 tone="text-foreground" icon=FolderTree repo=lab projectGroupDepth=2
+ITEM rowKey=project:repo:lab:|lab::/lab depth=0 groupDepth=2 lastChild=true children=0 placement=natural owning=project:repo:lab path=project-group:pg-work>project-group:pg-nested>project:repo:lab
+HEADER key=project-group:pg-folders label="Folders" count=2 tone="text-foreground" icon=FolderTree projectGroup=pg-folders projectGroupDepth=0
+FOLDER key=folder-workspace:local|folder:fw-review projectGroup=pg-folders depth=0 groupDepth=1
+FOLDER key=folder-workspace:local|folder:fw-notes projectGroup=pg-folders depth=0 groupDepth=1
+HEADER key=project-group:pg-remote-folders label="Remote folders" count=1 tone="text-foreground" icon=FolderTree projectGroup=pg-remote-folders projectGroupDepth=0
+FOLDER key=folder-workspace:ssh:gpu-vm|folder:fw-remote projectGroup=pg-remote-folders depth=0 groupDepth=1
+HEADER key=project:repo:api label="api" count=0 tone="text-foreground" icon=FolderTree repo=api projectGroupDepth=0
+PENDING key=pending:creation-1 creation=creation-1 repo=api
+SECTION project:repo:api: -
+renderedKeys: 22
+placeholders: -
+selectionOrder: |shield::/w/feat-a |shield::/w/feat-b |shield::/w/feat-c |lab::/w/gitlab-mr |shield::/shield |shield::/w/Zeta |lab::/lab local|folder:fw-review local|folder:fw-notes ssh:gpu-vm|folder:fw-remote
+cmd1-9 mounted: 1=shield::/w/feat-a#lineage:shield::/w/feat-a 2=shield::/w/feat-b#lineage:shield::/w/feat-b 3=shield::/w/feat-c 4=lab::/w/gitlab-mr 5=shield::/shield 6=shield::/w/Zeta 7=lab::/lab 8=folder:fw-review@local 9=folder:fw-notes@local
+cmd1-9 unmounted: 1=shield::/w/feat-a 2=shield::/w/feat-b 3=shield::/w/feat-c 4=lab::/w/gitlab-mr 5=shield::/shield 6=shield::/w/Zeta 7=lab::/lab 8=folder:fw-review@local 9=folder:fw-notes@local
+cmd ids unmounted: shield::/w/feat-a shield::/w/feat-b shield::/w/feat-c lab::/w/gitlab-mr shield::/shield shield::/w/Zeta lab::/lab folder:fw-review folder:fw-notes folder:fw-remote
+-- collapsed: pinned project:p-shield project:repo:lab project-group:pg-remote-folders lineage:shield::/w/feat-a --
+visible: shield::/w/feat-a shield::/w/feat-b lab::/w/gitlab-mr shield::/shield shield::/w/Zeta shield::/w/feat-c lab::/lab
+HEADER key=pinned label="Pinned" count=4 tone="text-foreground" icon=Pin hostCounts={local:4} hostIds={local:[shield::/w/feat-a,shield::/w/feat-b,lab::/w/gitlab-mr,shield::/w/feat-c]} ids=[shield::/w/feat-a,shield::/w/feat-b,lab::/w/gitlab-mr,shield::/w/feat-c]
+HEADER key=project-group:pg-work label="Work" count=2 tone="text-foreground" icon=FolderTree projectGroup=pg-work projectGroupDepth=0
+HEADER key=project:p-shield label="shield" count=2 tone="text-foreground" icon=FolderTree repo=shield projectGroupDepth=1
+HEADER key=project-group:pg-nested label="Nested" count=1 tone="text-foreground" icon=FolderTree projectGroup=pg-nested projectGroupDepth=1
+HEADER key=project:repo:lab label="lab" count=1 tone="text-foreground" icon=FolderTree repo=lab projectGroupDepth=2
+HEADER key=project-group:pg-folders label="Folders" count=2 tone="text-foreground" icon=FolderTree projectGroup=pg-folders projectGroupDepth=0
+FOLDER key=folder-workspace:local|folder:fw-review projectGroup=pg-folders depth=0 groupDepth=1
+FOLDER key=folder-workspace:local|folder:fw-notes projectGroup=pg-folders depth=0 groupDepth=1
+HEADER key=project-group:pg-remote-folders label="Remote folders" count=1 tone="text-foreground" icon=FolderTree projectGroup=pg-remote-folders projectGroupDepth=0
+HEADER key=project:repo:api label="api" count=0 tone="text-foreground" icon=FolderTree repo=api projectGroupDepth=0
+PENDING key=pending:creation-1 creation=creation-1 repo=api
+SECTION pinned: pinned:|shield::/w/feat-a pinned:|shield::/w/feat-b pinned:|shield::/w/feat-c pinned:|lab::/w/gitlab-mr
+SECTION project:p-shield: project:p-shield:|shield::/shield project:p-shield:|shield::/w/Zeta
+SECTION project:repo:api: -
+SECTION project:repo:lab: project:repo:lab:|lab::/lab
+renderedKeys: 13
+placeholders: -
+selectionOrder: local|folder:fw-review local|folder:fw-notes
+cmd1-9 mounted: 1=folder:fw-review@local 2=folder:fw-notes@local
+cmd1-9 unmounted: 1=folder:fw-review@local 2=folder:fw-notes@local
+cmd ids unmounted: folder:fw-review folder:fw-notes
+=== groupBy=repo pinnedInGroups=true ===
+visible: shield::/w/feat-a shield::/w/feat-b lab::/w/gitlab-mr shield::/shield shield::/w/Zeta shield::/w/feat-c lab::/lab
+HEADER key=pinned label="Pinned" count=4 tone="text-foreground" icon=Pin hostCounts={local:4} hostIds={local:[shield::/w/feat-a,shield::/w/feat-b,lab::/w/gitlab-mr,shield::/w/feat-c]} ids=[shield::/w/feat-a,shield::/w/feat-b,lab::/w/gitlab-mr,shield::/w/feat-c]
+ITEM rowKey=pinned:|shield::/w/feat-a depth=0 groupDepth=0 lastChild=true children=2 lineageKey=lineage:shield::/w/feat-a placement=pinned owning=project:p-shield
+ITEM rowKey=pinned:|shield::/w/feat-b depth=1 groupDepth=0 children=1 lineageKey=lineage:shield::/w/feat-b placement=pinned owning=project:p-shield parent=pinned:|shield::/w/feat-a
+ITEM rowKey=pinned:|shield::/w/feat-c depth=2 groupDepth=0 lastChild=true children=0 placement=pinned owning=project:p-shield parent=pinned:|shield::/w/feat-b
+ITEM rowKey=pinned:|lab::/w/gitlab-mr depth=1 groupDepth=0 lastChild=true children=0 showProject=true placement=pinned owning=project:repo:lab parent=pinned:|shield::/w/feat-a
+HEADER key=project-group:pg-work label="Work" count=2 tone="text-foreground" icon=FolderTree projectGroup=pg-work projectGroupDepth=0
+HEADER key=project:p-shield label="shield" count=6 tone="text-foreground" icon=FolderTree repo=shield projectGroupDepth=1
+ITEM rowKey=project:p-shield:|shield::/shield depth=0 groupDepth=1 children=0 placement=natural owning=project:p-shield path=project-group:pg-work>project:p-shield
+ITEM rowKey=project:p-shield:|shield::/w/feat-a depth=0 groupDepth=1 children=2 lineageKey=lineage:shield::/w/feat-a placement=natural owning=project:p-shield path=project-group:pg-work>project:p-shield
+ITEM rowKey=project:p-shield:|shield::/w/feat-b depth=1 groupDepth=1 children=1 lineageKey=lineage:shield::/w/feat-b placement=natural owning=project:p-shield path=project-group:pg-work>project:p-shield parent=project:p-shield:|shield::/w/feat-a
+ITEM rowKey=project:p-shield:|shield::/w/feat-c depth=2 groupDepth=1 lastChild=true children=0 placement=natural owning=project:p-shield path=project-group:pg-work>project:p-shield parent=project:p-shield:|shield::/w/feat-b
+ITEM rowKey=project:p-shield:|lab::/w/gitlab-mr depth=1 groupDepth=1 lastChild=true children=0 showProject=true placement=natural owning=project:repo:lab path=project-group:pg-work>project:p-shield parent=project:p-shield:|shield::/w/feat-a
+ITEM rowKey=project:p-shield:|shield::/w/Zeta depth=0 groupDepth=1 lastChild=true children=0 placement=natural owning=project:p-shield path=project-group:pg-work>project:p-shield
+HEADER key=project-group:pg-nested label="Nested" count=1 tone="text-foreground" icon=FolderTree projectGroup=pg-nested projectGroupDepth=1
+HEADER key=project:repo:lab label="lab" count=1 tone="text-foreground" icon=FolderTree repo=lab projectGroupDepth=2
+ITEM rowKey=project:repo:lab:|lab::/lab depth=0 groupDepth=2 lastChild=true children=0 placement=natural owning=project:repo:lab path=project-group:pg-work>project-group:pg-nested>project:repo:lab
+HEADER key=project-group:pg-folders label="Folders" count=2 tone="text-foreground" icon=FolderTree projectGroup=pg-folders projectGroupDepth=0
+FOLDER key=folder-workspace:local|folder:fw-review projectGroup=pg-folders depth=0 groupDepth=1
+FOLDER key=folder-workspace:local|folder:fw-notes projectGroup=pg-folders depth=0 groupDepth=1
+HEADER key=project-group:pg-remote-folders label="Remote folders" count=1 tone="text-foreground" icon=FolderTree projectGroup=pg-remote-folders projectGroupDepth=0
+FOLDER key=folder-workspace:ssh:gpu-vm|folder:fw-remote projectGroup=pg-remote-folders depth=0 groupDepth=1
+HEADER key=project:repo:api label="api" count=0 tone="text-foreground" icon=FolderTree repo=api projectGroupDepth=0
+PENDING key=pending:creation-1 creation=creation-1 repo=api
+SECTION project:repo:api: -
+PREFERRED |shield::/w/feat-a -> project:p-shield:|shield::/w/feat-a
+PREFERRED |shield::/w/feat-b -> project:p-shield:|shield::/w/feat-b
+PREFERRED |shield::/w/feat-c -> project:p-shield:|shield::/w/feat-c
+PREFERRED |lab::/w/gitlab-mr -> project:p-shield:|lab::/w/gitlab-mr
+renderedKeys: 26
+placeholders: -
+selectionOrder: |shield::/shield |shield::/w/feat-a |shield::/w/feat-b |shield::/w/feat-c |lab::/w/gitlab-mr |shield::/w/Zeta |lab::/lab local|folder:fw-review local|folder:fw-notes ssh:gpu-vm|folder:fw-remote
+cmd1-9 mounted: 1=shield::/shield 2=shield::/w/feat-a#lineage:shield::/w/feat-a 3=shield::/w/feat-b#lineage:shield::/w/feat-b 4=shield::/w/feat-c 5=lab::/w/gitlab-mr 6=shield::/w/Zeta 7=lab::/lab 8=folder:fw-review@local 9=folder:fw-notes@local
+cmd1-9 unmounted: 1=shield::/shield 2=shield::/w/feat-a 3=shield::/w/feat-b 4=shield::/w/feat-c 5=lab::/w/gitlab-mr 6=shield::/w/Zeta 7=lab::/lab 8=folder:fw-review@local 9=folder:fw-notes@local
+cmd ids unmounted: shield::/shield shield::/w/feat-a shield::/w/feat-b shield::/w/feat-c lab::/w/gitlab-mr shield::/w/Zeta lab::/lab folder:fw-review folder:fw-notes folder:fw-remote
+-- collapsed: pinned project:p-shield project:repo:lab project-group:pg-remote-folders lineage:shield::/w/feat-a --
+visible: shield::/w/feat-a shield::/w/feat-b lab::/w/gitlab-mr shield::/shield shield::/w/Zeta shield::/w/feat-c lab::/lab
+HEADER key=pinned label="Pinned" count=4 tone="text-foreground" icon=Pin hostCounts={local:4} hostIds={local:[shield::/w/feat-a,shield::/w/feat-b,lab::/w/gitlab-mr,shield::/w/feat-c]} ids=[shield::/w/feat-a,shield::/w/feat-b,lab::/w/gitlab-mr,shield::/w/feat-c]
+HEADER key=project-group:pg-work label="Work" count=2 tone="text-foreground" icon=FolderTree projectGroup=pg-work projectGroupDepth=0
+HEADER key=project:p-shield label="shield" count=6 tone="text-foreground" icon=FolderTree repo=shield projectGroupDepth=1
+HEADER key=project-group:pg-nested label="Nested" count=1 tone="text-foreground" icon=FolderTree projectGroup=pg-nested projectGroupDepth=1
+HEADER key=project:repo:lab label="lab" count=1 tone="text-foreground" icon=FolderTree repo=lab projectGroupDepth=2
+HEADER key=project-group:pg-folders label="Folders" count=2 tone="text-foreground" icon=FolderTree projectGroup=pg-folders projectGroupDepth=0
+FOLDER key=folder-workspace:local|folder:fw-review projectGroup=pg-folders depth=0 groupDepth=1
+FOLDER key=folder-workspace:local|folder:fw-notes projectGroup=pg-folders depth=0 groupDepth=1
+HEADER key=project-group:pg-remote-folders label="Remote folders" count=1 tone="text-foreground" icon=FolderTree projectGroup=pg-remote-folders projectGroupDepth=0
+HEADER key=project:repo:api label="api" count=0 tone="text-foreground" icon=FolderTree repo=api projectGroupDepth=0
+PENDING key=pending:creation-1 creation=creation-1 repo=api
+SECTION pinned: pinned:|shield::/w/feat-a pinned:|shield::/w/feat-b pinned:|shield::/w/feat-c pinned:|lab::/w/gitlab-mr
+SECTION project:p-shield: project:p-shield:|shield::/shield project:p-shield:|shield::/w/feat-a project:p-shield:|shield::/w/feat-b project:p-shield:|shield::/w/feat-c project:p-shield:|lab::/w/gitlab-mr project:p-shield:|shield::/w/Zeta
+SECTION project:repo:api: -
+SECTION project:repo:lab: project:repo:lab:|lab::/lab
+PREFERRED |shield::/w/feat-a -> project:p-shield:|shield::/w/feat-a
+PREFERRED |shield::/w/feat-b -> project:p-shield:|shield::/w/feat-b
+PREFERRED |shield::/w/feat-c -> project:p-shield:|shield::/w/feat-c
+PREFERRED |lab::/w/gitlab-mr -> project:p-shield:|lab::/w/gitlab-mr
+renderedKeys: 13
+placeholders: -
+selectionOrder: local|folder:fw-review local|folder:fw-notes
+cmd1-9 mounted: 1=folder:fw-review@local 2=folder:fw-notes@local
+cmd1-9 unmounted: 1=folder:fw-review@local 2=folder:fw-notes@local
+cmd ids unmounted: folder:fw-review folder:fw-notes
+=== groupBy=workspace-status pinnedInGroups=false ===
+visible: shield::/w/feat-a shield::/w/feat-b lab::/w/gitlab-mr shield::/shield shield::/w/Zeta shield::/w/feat-c lab::/lab
+PENDING key=pending:creation-1 creation=creation-1 repo=api
+HEADER key=pinned label="Pinned" count=4 tone="text-foreground" icon=Pin hostCounts={local:4} hostIds={local:[shield::/w/feat-a,shield::/w/feat-b,lab::/w/gitlab-mr,shield::/w/feat-c]} ids=[shield::/w/feat-a,shield::/w/feat-b,lab::/w/gitlab-mr,shield::/w/feat-c]
+ITEM rowKey=pinned:|shield::/w/feat-a depth=0 groupDepth=0 lastChild=true children=2 lineageKey=lineage:shield::/w/feat-a placement=pinned owning=project:p-shield
+ITEM rowKey=pinned:|shield::/w/feat-b depth=1 groupDepth=0 children=1 lineageKey=lineage:shield::/w/feat-b placement=pinned owning=project:p-shield parent=pinned:|shield::/w/feat-a
+ITEM rowKey=pinned:|shield::/w/feat-c depth=2 groupDepth=0 lastChild=true children=0 placement=pinned owning=project:p-shield parent=pinned:|shield::/w/feat-b
+ITEM rowKey=pinned:|lab::/w/gitlab-mr depth=1 groupDepth=0 lastChild=true children=0 showProject=true placement=pinned owning=project:repo:lab parent=pinned:|shield::/w/feat-a
+HEADER key=workspace-status:in-progress label="In progress" count=4 tone="text-[#d4a300]" icon=ConductorProgressIcon hostCounts={local:3 ssh:gpu-vm:1} hostIds={local:[shield::/shield,lab::/lab] ssh:gpu-vm:[]} ids=[shield::/shield,lab::/lab]
+ITEM rowKey=workspace-status:in-progress:|shield::/shield depth=0 groupDepth=0 children=0 placement=natural owning=project:p-shield
+ITEM rowKey=workspace-status:in-progress:|lab::/lab depth=0 groupDepth=0 lastChild=true children=0 placement=natural owning=project:repo:lab
+FOLDER key=folder-workspace:local|folder:fw-notes projectGroup=pg-folders depth=0 groupDepth=0
+FOLDER key=folder-workspace:ssh:gpu-vm|folder:fw-remote projectGroup=pg-remote-folders depth=0 groupDepth=0
+HEADER key=workspace-status:in-review label="In review" count=1 tone="text-[#16a34a]" icon=ConductorReviewIcon hostCounts={local:1} hostIds={local:[]} ids=[]
+FOLDER key=folder-workspace:local|folder:fw-review projectGroup=pg-folders depth=0 groupDepth=0
+HEADER key=workspace-status:completed label="Done" count=1 tone="text-[#c7a594]" icon=ConductorDoneIcon hostCounts={local:1} hostIds={local:[shield::/w/Zeta]} ids=[shield::/w/Zeta]
+ITEM rowKey=workspace-status:completed:|shield::/w/Zeta depth=0 groupDepth=0 lastChild=true children=0 placement=natural owning=project:p-shield
+SECTION workspace-status:in-review: -
+renderedKeys: 18
+placeholders: -
+selectionOrder: |shield::/w/feat-a |shield::/w/feat-b |shield::/w/feat-c |lab::/w/gitlab-mr |shield::/shield |lab::/lab local|folder:fw-notes ssh:gpu-vm|folder:fw-remote local|folder:fw-review |shield::/w/Zeta
+cmd1-9 mounted: 1=shield::/w/feat-a#lineage:shield::/w/feat-a 2=shield::/w/feat-b#lineage:shield::/w/feat-b 3=shield::/w/feat-c 4=lab::/w/gitlab-mr 5=shield::/shield 6=lab::/lab 7=folder:fw-notes@local 8=folder:fw-remote@ssh:gpu-vm 9=folder:fw-review@local
+cmd1-9 unmounted: 1=shield::/w/feat-a 2=shield::/w/feat-b 3=shield::/w/feat-c 4=lab::/w/gitlab-mr 5=shield::/shield 6=lab::/lab 7=folder:fw-notes@local 8=folder:fw-remote@ssh:gpu-vm 9=folder:fw-review@local
+cmd ids unmounted: shield::/w/feat-a shield::/w/feat-b shield::/w/feat-c lab::/w/gitlab-mr shield::/shield lab::/lab folder:fw-notes folder:fw-remote folder:fw-review shield::/w/Zeta
+-- collapsed: pinned workspace-status:in-review lineage:shield::/w/feat-a --
+visible: shield::/w/feat-a shield::/w/feat-b lab::/w/gitlab-mr shield::/shield shield::/w/Zeta shield::/w/feat-c lab::/lab
+PENDING key=pending:creation-1 creation=creation-1 repo=api
+HEADER key=pinned label="Pinned" count=4 tone="text-foreground" icon=Pin hostCounts={local:4} hostIds={local:[shield::/w/feat-a,shield::/w/feat-b,lab::/w/gitlab-mr,shield::/w/feat-c]} ids=[shield::/w/feat-a,shield::/w/feat-b,lab::/w/gitlab-mr,shield::/w/feat-c]
+HEADER key=workspace-status:in-progress label="In progress" count=4 tone="text-[#d4a300]" icon=ConductorProgressIcon hostCounts={local:3 ssh:gpu-vm:1} hostIds={local:[shield::/shield,lab::/lab] ssh:gpu-vm:[]} ids=[shield::/shield,lab::/lab]
+ITEM rowKey=workspace-status:in-progress:|shield::/shield depth=0 groupDepth=0 children=0 placement=natural owning=project:p-shield
+ITEM rowKey=workspace-status:in-progress:|lab::/lab depth=0 groupDepth=0 lastChild=true children=0 placement=natural owning=project:repo:lab
+FOLDER key=folder-workspace:local|folder:fw-notes projectGroup=pg-folders depth=0 groupDepth=0
+FOLDER key=folder-workspace:ssh:gpu-vm|folder:fw-remote projectGroup=pg-remote-folders depth=0 groupDepth=0
+HEADER key=workspace-status:in-review label="In review" count=1 tone="text-[#16a34a]" icon=ConductorReviewIcon hostCounts={local:1} hostIds={local:[]} ids=[]
+HEADER key=workspace-status:completed label="Done" count=1 tone="text-[#c7a594]" icon=ConductorDoneIcon hostCounts={local:1} hostIds={local:[shield::/w/Zeta]} ids=[shield::/w/Zeta]
+ITEM rowKey=workspace-status:completed:|shield::/w/Zeta depth=0 groupDepth=0 lastChild=true children=0 placement=natural owning=project:p-shield
+SECTION pinned: pinned:|shield::/w/feat-a pinned:|shield::/w/feat-b pinned:|shield::/w/feat-c pinned:|lab::/w/gitlab-mr
+SECTION workspace-status:in-review: -
+renderedKeys: 12
+placeholders: -
+selectionOrder: |shield::/shield |lab::/lab local|folder:fw-notes ssh:gpu-vm|folder:fw-remote |shield::/w/Zeta
+cmd1-9 mounted: 1=shield::/shield 2=lab::/lab 3=folder:fw-notes@local 4=folder:fw-remote@ssh:gpu-vm 5=shield::/w/Zeta
+cmd1-9 unmounted: 1=shield::/shield 2=lab::/lab 3=folder:fw-notes@local 4=folder:fw-remote@ssh:gpu-vm 5=shield::/w/Zeta
+cmd ids unmounted: shield::/shield lab::/lab folder:fw-notes folder:fw-remote shield::/w/Zeta
+=== groupBy=workspace-status pinnedInGroups=true ===
+visible: shield::/w/feat-a shield::/w/feat-b lab::/w/gitlab-mr shield::/shield shield::/w/Zeta shield::/w/feat-c lab::/lab
+PENDING key=pending:creation-1 creation=creation-1 repo=api
+HEADER key=pinned label="Pinned" count=4 tone="text-foreground" icon=Pin hostCounts={local:4} hostIds={local:[shield::/w/feat-a,shield::/w/feat-b,lab::/w/gitlab-mr,shield::/w/feat-c]} ids=[shield::/w/feat-a,shield::/w/feat-b,lab::/w/gitlab-mr,shield::/w/feat-c]
+ITEM rowKey=pinned:|shield::/w/feat-a depth=0 groupDepth=0 lastChild=true children=2 lineageKey=lineage:shield::/w/feat-a placement=pinned owning=project:p-shield
+ITEM rowKey=pinned:|shield::/w/feat-b depth=1 groupDepth=0 children=1 lineageKey=lineage:shield::/w/feat-b placement=pinned owning=project:p-shield parent=pinned:|shield::/w/feat-a
+ITEM rowKey=pinned:|shield::/w/feat-c depth=2 groupDepth=0 lastChild=true children=0 placement=pinned owning=project:p-shield parent=pinned:|shield::/w/feat-b
+ITEM rowKey=pinned:|lab::/w/gitlab-mr depth=1 groupDepth=0 lastChild=true children=0 showProject=true placement=pinned owning=project:repo:lab parent=pinned:|shield::/w/feat-a
+HEADER key=workspace-status:in-progress label="In progress" count=7 tone="text-[#d4a300]" icon=ConductorProgressIcon hostCounts={local:6 ssh:gpu-vm:1} hostIds={local:[shield::/w/feat-a,lab::/w/gitlab-mr,shield::/shield,shield::/w/feat-c,lab::/lab] ssh:gpu-vm:[]} ids=[shield::/w/feat-a,lab::/w/gitlab-mr,shield::/shield,shield::/w/feat-c,lab::/lab]
+ITEM rowKey=workspace-status:in-progress:|shield::/w/feat-a depth=0 groupDepth=0 children=1 lineageKey=lineage:shield::/w/feat-a placement=natural owning=project:p-shield
+ITEM rowKey=workspace-status:in-progress:|lab::/w/gitlab-mr depth=1 groupDepth=0 lastChild=true children=0 showProject=true placement=natural owning=project:repo:lab parent=workspace-status:in-progress:|shield::/w/feat-a
+ITEM rowKey=workspace-status:in-progress:|shield::/shield depth=0 groupDepth=0 children=0 placement=natural owning=project:p-shield
+ITEM rowKey=workspace-status:in-progress:|shield::/w/feat-c depth=0 groupDepth=0 children=0 placement=natural owning=project:p-shield
+ITEM rowKey=workspace-status:in-progress:|lab::/lab depth=0 groupDepth=0 lastChild=true children=0 placement=natural owning=project:repo:lab
+FOLDER key=folder-workspace:local|folder:fw-notes projectGroup=pg-folders depth=0 groupDepth=0
+FOLDER key=folder-workspace:ssh:gpu-vm|folder:fw-remote projectGroup=pg-remote-folders depth=0 groupDepth=0
+HEADER key=workspace-status:in-review label="In review" count=2 tone="text-[#16a34a]" icon=ConductorReviewIcon hostCounts={local:2} hostIds={local:[shield::/w/feat-b]} ids=[shield::/w/feat-b]
+ITEM rowKey=workspace-status:in-review:|shield::/w/feat-b depth=0 groupDepth=0 lastChild=true children=0 placement=natural owning=project:p-shield
+FOLDER key=folder-workspace:local|folder:fw-review projectGroup=pg-folders depth=0 groupDepth=0
+HEADER key=workspace-status:completed label="Done" count=1 tone="text-[#c7a594]" icon=ConductorDoneIcon hostCounts={local:1} hostIds={local:[shield::/w/Zeta]} ids=[shield::/w/Zeta]
+ITEM rowKey=workspace-status:completed:|shield::/w/Zeta depth=0 groupDepth=0 lastChild=true children=0 placement=natural owning=project:p-shield
+PREFERRED |shield::/w/feat-a -> workspace-status:in-progress:|shield::/w/feat-a
+PREFERRED |shield::/w/feat-b -> workspace-status:in-review:|shield::/w/feat-b
+PREFERRED |shield::/w/feat-c -> workspace-status:in-progress:|shield::/w/feat-c
+PREFERRED |lab::/w/gitlab-mr -> workspace-status:in-progress:|lab::/w/gitlab-mr
+renderedKeys: 22
+placeholders: -
+selectionOrder: |shield::/w/feat-a |lab::/w/gitlab-mr |shield::/shield |shield::/w/feat-c |lab::/lab local|folder:fw-notes ssh:gpu-vm|folder:fw-remote |shield::/w/feat-b local|folder:fw-review |shield::/w/Zeta
+cmd1-9 mounted: 1=shield::/w/feat-a#lineage:shield::/w/feat-a 2=lab::/w/gitlab-mr 3=shield::/shield 4=shield::/w/feat-c 5=lab::/lab 6=folder:fw-notes@local 7=folder:fw-remote@ssh:gpu-vm 8=shield::/w/feat-b#lineage:shield::/w/feat-b 9=folder:fw-review@local
+cmd1-9 unmounted: 1=shield::/w/feat-a 2=lab::/w/gitlab-mr 3=shield::/shield 4=shield::/w/feat-c 5=lab::/lab 6=folder:fw-notes@local 7=folder:fw-remote@ssh:gpu-vm 8=shield::/w/feat-b 9=folder:fw-review@local
+cmd ids unmounted: shield::/w/feat-a lab::/w/gitlab-mr shield::/shield shield::/w/feat-c lab::/lab folder:fw-notes folder:fw-remote shield::/w/feat-b folder:fw-review shield::/w/Zeta
+-- collapsed: pinned workspace-status:in-review lineage:shield::/w/feat-a --
+visible: shield::/w/feat-a shield::/w/feat-b lab::/w/gitlab-mr shield::/shield shield::/w/Zeta shield::/w/feat-c lab::/lab
+PENDING key=pending:creation-1 creation=creation-1 repo=api
+HEADER key=pinned label="Pinned" count=4 tone="text-foreground" icon=Pin hostCounts={local:4} hostIds={local:[shield::/w/feat-a,shield::/w/feat-b,lab::/w/gitlab-mr,shield::/w/feat-c]} ids=[shield::/w/feat-a,shield::/w/feat-b,lab::/w/gitlab-mr,shield::/w/feat-c]
+HEADER key=workspace-status:in-progress label="In progress" count=7 tone="text-[#d4a300]" icon=ConductorProgressIcon hostCounts={local:6 ssh:gpu-vm:1} hostIds={local:[shield::/w/feat-a,lab::/w/gitlab-mr,shield::/shield,shield::/w/feat-c,lab::/lab] ssh:gpu-vm:[]} ids=[shield::/w/feat-a,lab::/w/gitlab-mr,shield::/shield,shield::/w/feat-c,lab::/lab]
+ITEM rowKey=workspace-status:in-progress:|shield::/w/feat-a depth=0 groupDepth=0 children=1 lineageKey=lineage:shield::/w/feat-a lineageCollapsed=true placement=natural owning=project:p-shield
+ITEM rowKey=workspace-status:in-progress:|shield::/shield depth=0 groupDepth=0 children=0 placement=natural owning=project:p-shield
+ITEM rowKey=workspace-status:in-progress:|shield::/w/feat-c depth=0 groupDepth=0 children=0 placement=natural owning=project:p-shield
+ITEM rowKey=workspace-status:in-progress:|lab::/lab depth=0 groupDepth=0 lastChild=true children=0 placement=natural owning=project:repo:lab
+FOLDER key=folder-workspace:local|folder:fw-notes projectGroup=pg-folders depth=0 groupDepth=0
+FOLDER key=folder-workspace:ssh:gpu-vm|folder:fw-remote projectGroup=pg-remote-folders depth=0 groupDepth=0
+HEADER key=workspace-status:in-review label="In review" count=2 tone="text-[#16a34a]" icon=ConductorReviewIcon hostCounts={local:2} hostIds={local:[shield::/w/feat-b]} ids=[shield::/w/feat-b]
+HEADER key=workspace-status:completed label="Done" count=1 tone="text-[#c7a594]" icon=ConductorDoneIcon hostCounts={local:1} hostIds={local:[shield::/w/Zeta]} ids=[shield::/w/Zeta]
+ITEM rowKey=workspace-status:completed:|shield::/w/Zeta depth=0 groupDepth=0 lastChild=true children=0 placement=natural owning=project:p-shield
+SECTION pinned: pinned:|shield::/w/feat-a pinned:|shield::/w/feat-b pinned:|shield::/w/feat-c pinned:|lab::/w/gitlab-mr
+SECTION workspace-status:in-progress: workspace-status:in-progress:|shield::/w/feat-a workspace-status:in-progress:|lab::/w/gitlab-mr workspace-status:in-progress:|shield::/shield workspace-status:in-progress:|shield::/w/feat-c workspace-status:in-progress:|lab::/lab
+SECTION workspace-status:in-review: workspace-status:in-review:|shield::/w/feat-b
+PREFERRED |shield::/w/feat-a -> workspace-status:in-progress:|shield::/w/feat-a
+PREFERRED |shield::/w/feat-b -> workspace-status:in-review:|shield::/w/feat-b
+PREFERRED |shield::/w/feat-c -> workspace-status:in-progress:|shield::/w/feat-c
+PREFERRED |lab::/w/gitlab-mr -> workspace-status:in-progress:|lab::/w/gitlab-mr
+renderedKeys: 14
+placeholders: -
+selectionOrder: |shield::/w/feat-a |shield::/shield |shield::/w/feat-c |lab::/lab local|folder:fw-notes ssh:gpu-vm|folder:fw-remote |shield::/w/Zeta
+cmd1-9 mounted: 1=shield::/w/feat-a#lineage:shield::/w/feat-a 2=shield::/shield 3=shield::/w/feat-c 4=lab::/lab 5=folder:fw-notes@local 6=folder:fw-remote@ssh:gpu-vm 7=shield::/w/Zeta
+cmd1-9 unmounted: 1=shield::/w/feat-a 2=shield::/shield 3=shield::/w/feat-c 4=lab::/lab 5=folder:fw-notes@local 6=folder:fw-remote@ssh:gpu-vm 7=shield::/w/Zeta
+cmd ids unmounted: shield::/w/feat-a shield::/shield shield::/w/feat-c lab::/lab folder:fw-notes folder:fw-remote shield::/w/Zeta
+=== groupBy=pr-status pinnedInGroups=false ===
+visible: shield::/w/feat-a shield::/w/feat-b lab::/w/gitlab-mr shield::/shield shield::/w/Zeta shield::/w/feat-c lab::/lab
+PENDING key=pending:creation-1 creation=creation-1 repo=api
+HEADER key=pinned label="Pinned" count=4 tone="text-foreground" icon=Pin hostCounts={local:4} hostIds={local:[shield::/w/feat-a,shield::/w/feat-b,lab::/w/gitlab-mr,shield::/w/feat-c]} ids=[shield::/w/feat-a,shield::/w/feat-b,lab::/w/gitlab-mr,shield::/w/feat-c]
+ITEM rowKey=pinned:|shield::/w/feat-a depth=0 groupDepth=0 lastChild=true children=2 lineageKey=lineage:shield::/w/feat-a placement=pinned owning=project:p-shield
+ITEM rowKey=pinned:|shield::/w/feat-b depth=1 groupDepth=0 children=1 lineageKey=lineage:shield::/w/feat-b placement=pinned owning=project:p-shield parent=pinned:|shield::/w/feat-a
+ITEM rowKey=pinned:|shield::/w/feat-c depth=2 groupDepth=0 lastChild=true children=0 placement=pinned owning=project:p-shield parent=pinned:|shield::/w/feat-b
+ITEM rowKey=pinned:|lab::/w/gitlab-mr depth=1 groupDepth=0 lastChild=true children=0 showProject=true placement=pinned owning=project:repo:lab parent=pinned:|shield::/w/feat-a
+HEADER key=pr:in-progress label="In progress" count=5 tone="text-workspace-status-progress" icon=ConductorProgressIcon hostCounts={local:4 ssh:gpu-vm:1} hostIds={local:[shield::/shield,lab::/lab] ssh:gpu-vm:[]} ids=[shield::/shield,lab::/lab]
+ITEM rowKey=pr:in-progress:|shield::/shield depth=0 groupDepth=0 children=0 placement=natural owning=project:p-shield
+ITEM rowKey=pr:in-progress:|lab::/lab depth=0 groupDepth=0 lastChild=true children=0 placement=natural owning=project:repo:lab
+FOLDER key=folder-workspace:local|folder:fw-review projectGroup=pg-folders depth=0 groupDepth=0
+FOLDER key=folder-workspace:local|folder:fw-notes projectGroup=pg-folders depth=0 groupDepth=0
+FOLDER key=folder-workspace:ssh:gpu-vm|folder:fw-remote projectGroup=pg-remote-folders depth=0 groupDepth=0
+HEADER key=pr:closed label="Closed" count=1 tone="text-zinc-600 dark:text-zinc-300" icon=CircleX hostCounts={local:1} hostIds={local:[shield::/w/Zeta]} ids=[shield::/w/Zeta]
+ITEM rowKey=pr:closed:|shield::/w/Zeta depth=0 groupDepth=0 lastChild=true children=0 placement=natural owning=project:p-shield
+renderedKeys: 17
+placeholders: -
+selectionOrder: |shield::/w/feat-a |shield::/w/feat-b |shield::/w/feat-c |lab::/w/gitlab-mr |shield::/shield |lab::/lab local|folder:fw-review local|folder:fw-notes ssh:gpu-vm|folder:fw-remote |shield::/w/Zeta
+cmd1-9 mounted: 1=shield::/w/feat-a#lineage:shield::/w/feat-a 2=shield::/w/feat-b#lineage:shield::/w/feat-b 3=shield::/w/feat-c 4=lab::/w/gitlab-mr 5=shield::/shield 6=lab::/lab 7=folder:fw-review@local 8=folder:fw-notes@local 9=folder:fw-remote@ssh:gpu-vm
+cmd1-9 unmounted: 1=shield::/w/feat-a 2=shield::/w/feat-b 3=shield::/w/feat-c 4=lab::/w/gitlab-mr 5=shield::/shield 6=lab::/lab 7=folder:fw-review@local 8=folder:fw-notes@local 9=folder:fw-remote@ssh:gpu-vm
+cmd ids unmounted: shield::/w/feat-a shield::/w/feat-b shield::/w/feat-c lab::/w/gitlab-mr shield::/shield lab::/lab folder:fw-review folder:fw-notes folder:fw-remote shield::/w/Zeta
+-- collapsed: pinned pr:closed lineage:shield::/w/feat-a --
+visible: shield::/w/feat-a shield::/w/feat-b lab::/w/gitlab-mr shield::/shield shield::/w/Zeta shield::/w/feat-c lab::/lab
+PENDING key=pending:creation-1 creation=creation-1 repo=api
+HEADER key=pinned label="Pinned" count=4 tone="text-foreground" icon=Pin hostCounts={local:4} hostIds={local:[shield::/w/feat-a,shield::/w/feat-b,lab::/w/gitlab-mr,shield::/w/feat-c]} ids=[shield::/w/feat-a,shield::/w/feat-b,lab::/w/gitlab-mr,shield::/w/feat-c]
+HEADER key=pr:in-progress label="In progress" count=5 tone="text-workspace-status-progress" icon=ConductorProgressIcon hostCounts={local:4 ssh:gpu-vm:1} hostIds={local:[shield::/shield,lab::/lab] ssh:gpu-vm:[]} ids=[shield::/shield,lab::/lab]
+ITEM rowKey=pr:in-progress:|shield::/shield depth=0 groupDepth=0 children=0 placement=natural owning=project:p-shield
+ITEM rowKey=pr:in-progress:|lab::/lab depth=0 groupDepth=0 lastChild=true children=0 placement=natural owning=project:repo:lab
+FOLDER key=folder-workspace:local|folder:fw-review projectGroup=pg-folders depth=0 groupDepth=0
+FOLDER key=folder-workspace:local|folder:fw-notes projectGroup=pg-folders depth=0 groupDepth=0
+FOLDER key=folder-workspace:ssh:gpu-vm|folder:fw-remote projectGroup=pg-remote-folders depth=0 groupDepth=0
+HEADER key=pr:closed label="Closed" count=1 tone="text-zinc-600 dark:text-zinc-300" icon=CircleX hostCounts={local:1} hostIds={local:[shield::/w/Zeta]} ids=[shield::/w/Zeta]
+SECTION pinned: pinned:|shield::/w/feat-a pinned:|shield::/w/feat-b pinned:|shield::/w/feat-c pinned:|lab::/w/gitlab-mr
+SECTION pr:closed: pr:closed:|shield::/w/Zeta
+renderedKeys: 12
+placeholders: -
+selectionOrder: |shield::/shield |lab::/lab local|folder:fw-review local|folder:fw-notes ssh:gpu-vm|folder:fw-remote
+cmd1-9 mounted: 1=shield::/shield 2=lab::/lab 3=folder:fw-review@local 4=folder:fw-notes@local 5=folder:fw-remote@ssh:gpu-vm
+cmd1-9 unmounted: 1=shield::/shield 2=lab::/lab 3=folder:fw-review@local 4=folder:fw-notes@local 5=folder:fw-remote@ssh:gpu-vm
+cmd ids unmounted: shield::/shield lab::/lab folder:fw-review folder:fw-notes folder:fw-remote
+=== groupBy=pr-status pinnedInGroups=true ===
+visible: shield::/w/feat-a shield::/w/feat-b lab::/w/gitlab-mr shield::/shield shield::/w/Zeta shield::/w/feat-c lab::/lab
+PENDING key=pending:creation-1 creation=creation-1 repo=api
+HEADER key=pinned label="Pinned" count=4 tone="text-foreground" icon=Pin hostCounts={local:4} hostIds={local:[shield::/w/feat-a,shield::/w/feat-b,lab::/w/gitlab-mr,shield::/w/feat-c]} ids=[shield::/w/feat-a,shield::/w/feat-b,lab::/w/gitlab-mr,shield::/w/feat-c]
+ITEM rowKey=pinned:|shield::/w/feat-a depth=0 groupDepth=0 lastChild=true children=2 lineageKey=lineage:shield::/w/feat-a placement=pinned owning=project:p-shield
+ITEM rowKey=pinned:|shield::/w/feat-b depth=1 groupDepth=0 children=1 lineageKey=lineage:shield::/w/feat-b placement=pinned owning=project:p-shield parent=pinned:|shield::/w/feat-a
+ITEM rowKey=pinned:|shield::/w/feat-c depth=2 groupDepth=0 lastChild=true children=0 placement=pinned owning=project:p-shield parent=pinned:|shield::/w/feat-b
+ITEM rowKey=pinned:|lab::/w/gitlab-mr depth=1 groupDepth=0 lastChild=true children=0 showProject=true placement=pinned owning=project:repo:lab parent=pinned:|shield::/w/feat-a
+HEADER key=pr:done label="Done" count=1 tone="text-workspace-status-done" icon=ConductorDoneIcon hostCounts={local:1} hostIds={local:[shield::/w/feat-b]} ids=[shield::/w/feat-b]
+ITEM rowKey=pr:done:|shield::/w/feat-b depth=0 groupDepth=0 lastChild=true children=0 placement=natural owning=project:p-shield
+HEADER key=pr:in-review label="In review" count=1 tone="text-workspace-status-review" icon=ConductorReviewIcon hostCounts={local:1} hostIds={local:[shield::/w/feat-a]} ids=[shield::/w/feat-a]
+ITEM rowKey=pr:in-review:|shield::/w/feat-a depth=0 groupDepth=0 lastChild=true children=0 placement=natural owning=project:p-shield
+HEADER key=pr:in-progress label="In progress" count=7 tone="text-workspace-status-progress" icon=ConductorProgressIcon hostCounts={local:6 ssh:gpu-vm:1} hostIds={local:[lab::/w/gitlab-mr,shield::/shield,shield::/w/feat-c,lab::/lab] ssh:gpu-vm:[]} ids=[lab::/w/gitlab-mr,shield::/shield,shield::/w/feat-c,lab::/lab]
+ITEM rowKey=pr:in-progress:|lab::/w/gitlab-mr depth=0 groupDepth=0 children=0 placement=natural owning=project:repo:lab
+ITEM rowKey=pr:in-progress:|shield::/shield depth=0 groupDepth=0 children=0 placement=natural owning=project:p-shield
+ITEM rowKey=pr:in-progress:|shield::/w/feat-c depth=0 groupDepth=0 children=0 placement=natural owning=project:p-shield
+ITEM rowKey=pr:in-progress:|lab::/lab depth=0 groupDepth=0 lastChild=true children=0 placement=natural owning=project:repo:lab
+FOLDER key=folder-workspace:local|folder:fw-review projectGroup=pg-folders depth=0 groupDepth=0
+FOLDER key=folder-workspace:local|folder:fw-notes projectGroup=pg-folders depth=0 groupDepth=0
+FOLDER key=folder-workspace:ssh:gpu-vm|folder:fw-remote projectGroup=pg-remote-folders depth=0 groupDepth=0
+HEADER key=pr:closed label="Closed" count=1 tone="text-zinc-600 dark:text-zinc-300" icon=CircleX hostCounts={local:1} hostIds={local:[shield::/w/Zeta]} ids=[shield::/w/Zeta]
+ITEM rowKey=pr:closed:|shield::/w/Zeta depth=0 groupDepth=0 lastChild=true children=0 placement=natural owning=project:p-shield
+PREFERRED |shield::/w/feat-a -> pr:in-review:|shield::/w/feat-a
+PREFERRED |shield::/w/feat-b -> pr:done:|shield::/w/feat-b
+PREFERRED |shield::/w/feat-c -> pr:in-progress:|shield::/w/feat-c
+PREFERRED |lab::/w/gitlab-mr -> pr:in-progress:|lab::/w/gitlab-mr
+renderedKeys: 23
+placeholders: -
+selectionOrder: |shield::/w/feat-b |shield::/w/feat-a |lab::/w/gitlab-mr |shield::/shield |shield::/w/feat-c |lab::/lab local|folder:fw-review local|folder:fw-notes ssh:gpu-vm|folder:fw-remote |shield::/w/Zeta
+cmd1-9 mounted: 1=shield::/w/feat-b#lineage:shield::/w/feat-b 2=shield::/w/feat-a#lineage:shield::/w/feat-a 3=lab::/w/gitlab-mr 4=shield::/shield 5=shield::/w/feat-c 6=lab::/lab 7=folder:fw-review@local 8=folder:fw-notes@local 9=folder:fw-remote@ssh:gpu-vm
+cmd1-9 unmounted: 1=shield::/w/feat-b 2=shield::/w/feat-a 3=lab::/w/gitlab-mr 4=shield::/shield 5=shield::/w/feat-c 6=lab::/lab 7=folder:fw-review@local 8=folder:fw-notes@local 9=folder:fw-remote@ssh:gpu-vm
+cmd ids unmounted: shield::/w/feat-b shield::/w/feat-a lab::/w/gitlab-mr shield::/shield shield::/w/feat-c lab::/lab folder:fw-review folder:fw-notes folder:fw-remote shield::/w/Zeta
+-- collapsed: pinned pr:in-review pr:closed lineage:shield::/w/feat-a --
+visible: shield::/w/feat-a shield::/w/feat-b lab::/w/gitlab-mr shield::/shield shield::/w/Zeta shield::/w/feat-c lab::/lab
+PENDING key=pending:creation-1 creation=creation-1 repo=api
+HEADER key=pinned label="Pinned" count=4 tone="text-foreground" icon=Pin hostCounts={local:4} hostIds={local:[shield::/w/feat-a,shield::/w/feat-b,lab::/w/gitlab-mr,shield::/w/feat-c]} ids=[shield::/w/feat-a,shield::/w/feat-b,lab::/w/gitlab-mr,shield::/w/feat-c]
+HEADER key=pr:done label="Done" count=1 tone="text-workspace-status-done" icon=ConductorDoneIcon hostCounts={local:1} hostIds={local:[shield::/w/feat-b]} ids=[shield::/w/feat-b]
+ITEM rowKey=pr:done:|shield::/w/feat-b depth=0 groupDepth=0 lastChild=true children=0 placement=natural owning=project:p-shield
+HEADER key=pr:in-review label="In review" count=1 tone="text-workspace-status-review" icon=ConductorReviewIcon hostCounts={local:1} hostIds={local:[shield::/w/feat-a]} ids=[shield::/w/feat-a]
+HEADER key=pr:in-progress label="In progress" count=7 tone="text-workspace-status-progress" icon=ConductorProgressIcon hostCounts={local:6 ssh:gpu-vm:1} hostIds={local:[lab::/w/gitlab-mr,shield::/shield,shield::/w/feat-c,lab::/lab] ssh:gpu-vm:[]} ids=[lab::/w/gitlab-mr,shield::/shield,shield::/w/feat-c,lab::/lab]
+ITEM rowKey=pr:in-progress:|lab::/w/gitlab-mr depth=0 groupDepth=0 children=0 placement=natural owning=project:repo:lab
+ITEM rowKey=pr:in-progress:|shield::/shield depth=0 groupDepth=0 children=0 placement=natural owning=project:p-shield
+ITEM rowKey=pr:in-progress:|shield::/w/feat-c depth=0 groupDepth=0 children=0 placement=natural owning=project:p-shield
+ITEM rowKey=pr:in-progress:|lab::/lab depth=0 groupDepth=0 lastChild=true children=0 placement=natural owning=project:repo:lab
+FOLDER key=folder-workspace:local|folder:fw-review projectGroup=pg-folders depth=0 groupDepth=0
+FOLDER key=folder-workspace:local|folder:fw-notes projectGroup=pg-folders depth=0 groupDepth=0
+FOLDER key=folder-workspace:ssh:gpu-vm|folder:fw-remote projectGroup=pg-remote-folders depth=0 groupDepth=0
+HEADER key=pr:closed label="Closed" count=1 tone="text-zinc-600 dark:text-zinc-300" icon=CircleX hostCounts={local:1} hostIds={local:[shield::/w/Zeta]} ids=[shield::/w/Zeta]
+SECTION pinned: pinned:|shield::/w/feat-a pinned:|shield::/w/feat-b pinned:|shield::/w/feat-c pinned:|lab::/w/gitlab-mr
+SECTION pr:in-review: pr:in-review:|shield::/w/feat-a
+SECTION pr:closed: pr:closed:|shield::/w/Zeta
+PREFERRED |shield::/w/feat-a -> pr:in-review:|shield::/w/feat-a
+PREFERRED |shield::/w/feat-b -> pr:done:|shield::/w/feat-b
+PREFERRED |shield::/w/feat-c -> pr:in-progress:|shield::/w/feat-c
+PREFERRED |lab::/w/gitlab-mr -> pr:in-progress:|lab::/w/gitlab-mr
+renderedKeys: 17
+placeholders: -
+selectionOrder: |shield::/w/feat-b |lab::/w/gitlab-mr |shield::/shield |shield::/w/feat-c |lab::/lab local|folder:fw-review local|folder:fw-notes ssh:gpu-vm|folder:fw-remote
+cmd1-9 mounted: 1=shield::/w/feat-b 2=lab::/w/gitlab-mr 3=shield::/shield 4=shield::/w/feat-c 5=lab::/lab 6=folder:fw-review@local 7=folder:fw-notes@local 8=folder:fw-remote@ssh:gpu-vm
+cmd1-9 unmounted: 1=shield::/w/feat-b 2=lab::/w/gitlab-mr 3=shield::/shield 4=shield::/w/feat-c 5=lab::/lab 6=folder:fw-review@local 7=folder:fw-notes@local 8=folder:fw-remote@ssh:gpu-vm
+cmd ids unmounted: shield::/w/feat-b lab::/w/gitlab-mr shield::/shield shield::/w/feat-c lab::/lab folder:fw-review folder:fw-notes folder:fw-remote

@@ -1,0 +1,12 @@
+{
+  "title": "The Shield Model",
+  "defaultOpen": true,
+  "pages": [
+    "worktrees",
+    "shield-yaml",
+    "tabs-panes-splits",
+    "agents-sessions",
+    "session-restore",
+    "quick-open"
+  ]
+}

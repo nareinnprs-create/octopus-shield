@@ -1,0 +1,55 @@
+function __shield_shell_ready_marker --on-event fish_prompt
+  builtin printf "\033]777;shield-shell-ready\007"
+  functions -e __shield_shell_ready_marker
+end
+# Why captured: an unquoted (type -t codex) expands to zero words when codex is
+# absent, leaving "test = file" — fish then errors instead of failing closed.
+# Quoting in place is not the fix; fish never substitutes inside double quotes.
+set -l __shield_codex_type (type -t codex 2>/dev/null)
+if test "$__shield_codex_type" = file
+  function codex
+    if test -x "$OSHIELD_CODEX_LAUNCH_PREFLIGHT"
+      command "$OSHIELD_CODEX_LAUNCH_PREFLIGHT" agent hooks prepare-codex >/dev/null 2>&1; or true
+    end
+    if test "$OSHIELD_CODEX_ISOLATE" != 0; and not string match -qr -- '^(agents|queue|--remote|--remote=.*)$' $argv
+      test -n "$OSHIELD_TERMINAL_HANDLE"; and not string match -q -- "*'*" "$OSHIELD_TERMINAL_HANDLE"; and set argv -c "shell_environment_policy.set.OSHIELD_TERMINAL_HANDLE='$OSHIELD_TERMINAL_HANDLE'" $argv
+      test -n "$OSHIELD_PANE_KEY"; and not string match -q -- "*'*" "$OSHIELD_PANE_KEY"; and set argv -c "shell_environment_policy.set.OSHIELD_PANE_KEY='$OSHIELD_PANE_KEY'" $argv
+      test -n "$OSHIELD_WORKTREE_ID"; and not string match -q -- "*'*" "$OSHIELD_WORKTREE_ID"; and set argv -c "shell_environment_policy.set.OSHIELD_WORKTREE_ID='$OSHIELD_WORKTREE_ID'" $argv
+      test -n "$OSHIELD_WORKSPACE_ID"; and not string match -q -- "*'*" "$OSHIELD_WORKSPACE_ID"; and set argv -c "shell_environment_policy.set.OSHIELD_WORKSPACE_ID='$OSHIELD_WORKSPACE_ID'" $argv
+      test -n "$OSHIELD_USER_DATA_PATH"; and not string match -q -- "*'*" "$OSHIELD_USER_DATA_PATH"; and set argv -c "shell_environment_policy.set.OSHIELD_USER_DATA_PATH='$OSHIELD_USER_DATA_PATH'" $argv
+    end
+    if test "$OSHIELD_CODEX_ISOLATE" != 0; and not string match -qr -- '^(agents|queue|--remote|--no-daemon|--remote=.*)$' $argv; and command codex --help 2>/dev/null </dev/null | string match -q -- '*--no-daemon*'
+      set argv --no-daemon $argv
+    end
+    command codex $argv
+  end
+end
+set -e __shield_codex_type
+set -l __shield_claude_type (type -t claude 2>/dev/null)
+if test -n "$OSHIELD_CLAUDE_PROFILE_POINTER"; and test "$__shield_claude_type" = file
+  function claude
+    # Why: a WSL pane's pointer is relative to the guest home, which the host cannot know at spawn.
+    set -l pointer (string replace -r '^~/' "$HOME/" -- "$OSHIELD_CLAUDE_PROFILE_POINTER")
+    set -l profile (cat "$pointer" 2>/dev/null)
+    set -l own (string trim -r -c / -- "$OSHIELD_CLAUDE_USER_CONFIG_DIR")
+    set -l current (string trim -r -c / -- "$CLAUDE_CONFIG_DIR")
+    if test -n "$CLAUDE_CONFIG_DIR"; and test "$CLAUDE_CONFIG_DIR" != "$OSHIELD_CLAUDE_INJECTED_CONFIG_DIR"; and begin; test -z "$own"; or test "$current" != "$own"; end
+      command claude $argv
+      return $status
+    end
+    if test -z "$profile"; and test -n "$CLAUDE_CONFIG_DIR"; and test -n "$OSHIELD_CLAUDE_USER_CONFIG_DIR"
+      env -u OSHIELD_CLAUDE_INJECTED_CONFIG_DIR CLAUDE_CONFIG_DIR="$OSHIELD_CLAUDE_USER_CONFIG_DIR" claude $argv
+      return $status
+    end
+    if test -z "$profile"
+      env -u CLAUDE_CONFIG_DIR -u OSHIELD_CLAUDE_INJECTED_CONFIG_DIR claude $argv
+      return $status
+    end
+    if not string match -qr '^(/|[A-Za-z]:)' -- "$profile"
+      return 1
+    end
+    test -d "$profile"; or mkdir -p -m 700 -- "$profile" 2>/dev/null
+    env CLAUDE_CONFIG_DIR="$profile" OSHIELD_CLAUDE_INJECTED_CONFIG_DIR="$profile" claude $argv
+  end
+end
+set -e __shield_claude_type
