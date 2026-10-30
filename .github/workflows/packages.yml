@@ -45,6 +45,8 @@ jobs:
           cache: pnpm
       - name: Install (scripts off; no native toolchain on this lane)
         run: pnpm install --ignore-scripts --frozen-lockfile
+      - name: Build workspace packages (tests resolve sibling entries from dist)
+        run: node config/scripts/build-workspace-packages.mjs
       - name: Typecheck
         run: pnpm --filter "@shield/${{ matrix.package }}" typecheck
       - name: Test

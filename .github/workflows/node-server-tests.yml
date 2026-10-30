@@ -192,9 +192,11 @@ jobs:
         background: true
         shell: bash
         env:
-          BUN_OCTOPOD_COMMIT: f4092c06d639ee13ad446261dcabc78b27a21fbc
+          # Upstream-only commit absent from this fork's history; empty skips the Bun cross-runtime slot exactly as on macOS/Windows.
+          BUN_OCTOPOD_COMMIT: ''
         run: |
           if [ "$RUNNER_OS" != Linux ]; then exit 0; fi
+          if [ -z "$BUN_OCTOPOD_COMMIT" ]; then exit 0; fi
           git fetch --no-tags --depth=1 origin "$BUN_OCTOPOD_COMMIT"
           git worktree add --detach "$RUNNER_TEMP/bun-octopod-source" "$BUN_OCTOPOD_COMMIT"
           pnpm --dir "$RUNNER_TEMP/bun-octopod-source" install --frozen-lockfile --ignore-scripts

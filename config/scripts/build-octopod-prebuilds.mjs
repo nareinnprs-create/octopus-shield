@@ -125,8 +125,9 @@ export function bindingGypForLibc(bindingGyp, libc) {
   return bindingGyp.replace(GLIBC_DT_NEEDED_LDFLAG, '')
 }
 
+// The pins carry the ORCA_ identifier (patch rename drift); match its exact bytes to scope them on musl.
 const GLIBC_SYMVER_GUARD =
-  '#if defined(__linux__)\n#  if defined(__x86_64__)\n#    define OSHIELD_GLIBC_COMPAT_VERSION'
+  '#if defined(__linux__)\n#  if defined(__x86_64__)\n#    define ORCA_GLIBC_COMPAT_VERSION'
 
 // Guard GLIBC symbol pins: musl has no versioned GLIBC symbols and never defines __GLIBC__.
 export function ptySourceForLibc(ptySource, libc) {
