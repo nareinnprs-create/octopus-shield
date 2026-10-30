@@ -17,6 +17,7 @@ const SETTINGS_NAV_TARGETS = [
   'general',
   'integrations',
   'accounts',
+  'neuro',
   'browser',
   'git',
   'tasks',

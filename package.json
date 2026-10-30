@@ -215,8 +215,8 @@
     "@anthropic-ai/claude-agent-sdk": "0.3.284",
     "@floating-ui/dom": "1.8.0",
     "@linear/sdk": "^97.0.0",
-    "@shield/process-host": "workspace:*",
     "@parcel/watcher": "^2.5.6",
+    "@shield/process-host": "workspace:*",
     "@xterm/addon-serialize": "0.15.0-beta.301",
     "@xterm/headless": "6.1.0-beta.303",
     "agent-browser": "~0.27.3",
@@ -251,6 +251,8 @@
     "@monaco-editor/react": "^4.7.0",
     "@noble/hashes": "1.8.0",
     "@oxlint/plugins": "1.89.0",
+    "@parcel/watcher-linux-x64-glibc": "2.5.6",
+    "@parcel/watcher-linux-x64-musl": "2.5.6",
     "@playwright/test": "^1.64.1",
     "@sanity/diff-match-patch": "^3.2.1",
     "@shadcn/lint": "~0.1.5",
@@ -345,6 +347,7 @@
     "remark-parse": "^11.0.0",
     "remark-rehype": "11.1.2",
     "remend": "1.4.0",
+    "sherpa-onnx-linux-x64": "1.12.37",
     "shiki": "4.5.0",
     "sonner": "2.0.7",
     "tailwind-merge": "^3.7.0",
@@ -367,7 +370,6 @@
     "sherpa-onnx-darwin-arm64": "1.12.37",
     "sherpa-onnx-darwin-x64": "1.12.37",
     "sherpa-onnx-linux-arm64": "1.12.37",
-    "sherpa-onnx-linux-x64": "1.12.37",
     "sherpa-onnx-win-x64": "1.12.37"
   },
   "lint-staged": {
@@ -380,6 +382,11 @@
     ],
     "{*.{json,css,md,mdx,yml,yaml},!(cloud)/**/*.{json,css,md,mdx,yml,yaml}}": [
       "oxfmt --write --no-error-on-unmatched-pattern"
+    ]
+  },
+  "pnpm": {
+    "neverBuiltDependencies": [
+      "cpu-features"
     ]
   },
   "engines": {

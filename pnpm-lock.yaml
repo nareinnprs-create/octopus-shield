@@ -306,6 +306,12 @@ importers:
       '@oxlint/plugins':
         specifier: 1.89.0
         version: 1.89.0
+      '@parcel/watcher-linux-x64-glibc':
+        specifier: 2.5.6
+        version: 2.5.6
+      '@parcel/watcher-linux-x64-musl':
+        specifier: 2.5.6
+        version: 2.5.6
       '@playwright/test':
         specifier: ^1.64.1
         version: 1.64.1(electron@43.8.1(supports-color@7.2.0))
@@ -588,6 +594,9 @@ importers:
       remend:
         specifier: 1.4.0
         version: 1.4.0
+      sherpa-onnx-linux-x64:
+        specifier: 1.12.37
+        version: 1.12.37
       shiki:
         specifier: 4.5.0
         version: 4.5.0
@@ -647,9 +656,6 @@ importers:
         specifier: 1.12.37
         version: 1.12.37
       sherpa-onnx-linux-arm64:
-        specifier: 1.12.37
-        version: 1.12.37
-      sherpa-onnx-linux-x64:
         specifier: 1.12.37
         version: 1.12.37
       sherpa-onnx-win-x64:
@@ -9849,11 +9855,9 @@ snapshots:
   '@parcel/watcher-linux-arm64-musl@2.5.6':
     optional: true
 
-  '@parcel/watcher-linux-x64-glibc@2.5.6':
-    optional: true
+  '@parcel/watcher-linux-x64-glibc@2.5.6': {}
 
-  '@parcel/watcher-linux-x64-musl@2.5.6':
-    optional: true
+  '@parcel/watcher-linux-x64-musl@2.5.6': {}
 
   '@parcel/watcher-win32-arm64@2.5.6':
     optional: true
@@ -15556,8 +15560,7 @@ snapshots:
   sherpa-onnx-linux-arm64@1.12.37:
     optional: true
 
-  sherpa-onnx-linux-x64@1.12.37:
-    optional: true
+  sherpa-onnx-linux-x64@1.12.37: {}
 
   sherpa-onnx-win-x64@1.12.37:
     optional: true

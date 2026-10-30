@@ -126,3 +126,4 @@ export type TopLevelView =
   | 'artifacts'
   | 'mobile'
   | 'armory'
+  | 'neuro'

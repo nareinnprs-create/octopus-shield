@@ -123,6 +123,7 @@ export type UiViewHistory =
   | 'artifacts'
   | 'mobile'
   | 'armory'
+  | 'neuro'
 
 export type UISliceCore = {
   sidebarOpen: boolean
@@ -164,6 +165,7 @@ export type UISliceCore = {
   previousViewBeforeMobile: Exclude<UiViewHistory, 'mobile'>
   previousViewBeforeArtifacts: Exclude<UiViewHistory, 'artifacts'>
   previousViewBeforeArmory: Exclude<UiViewHistory, 'armory'>
+  previousViewBeforeNeuro: Exclude<UiViewHistory, 'neuro'>
   setActiveView: (view: UISliceCore['activeView']) => void
   taskPageData: TaskPageData
   taskResumeState: TaskResumeState | undefined
@@ -207,6 +209,8 @@ export type UISliceCore = {
   closeArtifactsPage: () => void
   openArmoryPage: () => void
   closeArmoryPage: () => void
+  openNeuroPage: () => void
+  closeNeuroPage: () => void
   openMobilePage: () => void
   closeMobilePage: () => void
   setNewWorkspaceDraft: (draft: NonNullable<UISliceCore['newWorkspaceDraft']>) => void

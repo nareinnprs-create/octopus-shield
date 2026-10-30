@@ -74,6 +74,8 @@ import { getPtyIdForPaneKey } from '../pty/pane/key-state'
 import { registerClaudeAccountHandlers } from '../claude-accounts'
 import { registerOpenCodeGoCredentialsHandlers } from '../opencode-go-credentials'
 import { registerMiniMaxCredentialsHandlers } from '../minimax-credentials'
+import { registerNeuroProviderHandlers } from '../neuro-providers'
+import { registerNeuroSessionHandlers } from '../../neuro/ganglion-sessions-service'
 import { registerZcodePlanCredentialsHandlers } from '../zcode-plan-credentials'
 import { registerGrokAccountHandlers } from '../grok-accounts'
 import { registerCursorAccountHandlers } from '../cursor-accounts'
@@ -114,23 +116,8 @@ import { ensureStructuredAgentSessionHostUnlessRefused } from '../../runtime/str
 import { getAgentSessionAttachmentStore } from '../../native-chat/agent-session-attachments/agent-session-attachment-store-registry'
 import type { PluginService } from '../../plugins/plugin-service'
 import type { PluginMarketplaceHandlerServices } from '../plugin-marketplaces'
-import { settleWithinMs } from '../../quit-teardown-deadline'
-
+import { closeNotificationDismissalsBeforeRelaunch } from '../relaunch-notification-dismissal-close'
 let registered = false
-// Same cap as the restart path's auth preservation: bookkeeping must not hold Restart on a stalled disk.
-const RELAUNCH_DISMISSAL_CLOSE_TIMEOUT_MS = 2_000
-
-async function closeNotificationDismissalsBeforeRelaunch(
-  runtime: ShieldRuntimeService
-): Promise<void> {
-  const result = await settleWithinMs(
-    runtime.closeNotificationDismissals(),
-    RELAUNCH_DISMISSAL_CLOSE_TIMEOUT_MS
-  )
-  if (result.outcome === 'timed-out') {
-    console.warn('[notifications] Relaunching before dismissal recovery state finished saving')
-  }
-}
 
 type CoreHandlerLifecycleOptions = {
   onBeforeRelaunch?: () => void | Promise<void>
@@ -196,6 +183,8 @@ export function registerCoreHandlers(
   registerClaudeAccountHandlers(claudeAccounts)
   registerOpenCodeGoCredentialsHandlers(rateLimits)
   registerMiniMaxCredentialsHandlers(rateLimits)
+  registerNeuroProviderHandlers()
+  registerNeuroSessionHandlers({ runtime, dataDirectory: app.getPath('userData') })
   registerZcodePlanCredentialsHandlers(rateLimits)
   registerGrokAccountHandlers()
   registerCursorAccountHandlers()
@@ -256,11 +245,7 @@ export function registerCoreHandlers(
   registerWorkspaceSpaceHandlers(store)
   registerWorkspacePortHandlers(store)
   registerLocalhostWorktreeLabelHandlers(store)
-  if (commitMessageAgentEnv) {
-    registerFilesystemHandlers(store, commitMessageAgentEnv)
-  } else {
-    registerFilesystemHandlers(store)
-  }
+  registerFilesystemHandlers(store, commitMessageAgentEnv)
   registerFilesystemWatcherHandlers()
   registerRuntimeHandlers(runtime)
   registerRuntimeEnvironmentHandlers(store)

@@ -37,6 +37,8 @@ const {
   registerClaudeAccountHandlersMock,
   registerOpenCodeGoCredentialsHandlersMock,
   registerMiniMaxCredentialsHandlersMock,
+  registerNeuroProviderHandlersMock,
+  registerNeuroSessionHandlersMock,
   registerZcodePlanCredentialsHandlersMock,
   registerGrokAccountHandlersMock,
   registerCursorAccountHandlersMock,
@@ -108,6 +110,8 @@ const {
   registerClaudeAccountHandlersMock: vi.fn(),
   registerOpenCodeGoCredentialsHandlersMock: vi.fn(),
   registerMiniMaxCredentialsHandlersMock: vi.fn(),
+  registerNeuroProviderHandlersMock: vi.fn(),
+  registerNeuroSessionHandlersMock: vi.fn(),
   registerZcodePlanCredentialsHandlersMock: vi.fn(),
   registerGrokAccountHandlersMock: vi.fn(),
   registerCursorAccountHandlersMock: vi.fn(),
@@ -148,6 +152,9 @@ vi.mock('electron', () => ({
   app: {
     getPath: getPathMock,
     once: vi.fn()
+  },
+  ipcMain: {
+    handle: vi.fn()
   }
 }))
 
@@ -359,6 +366,13 @@ vi.mock('../opencode-go-credentials', () => ({
 
 vi.mock('../minimax-credentials', () => ({
   registerMiniMaxCredentialsHandlers: registerMiniMaxCredentialsHandlersMock
+}))
+
+vi.mock('../neuro-providers', () => ({
+  registerNeuroProviderHandlers: registerNeuroProviderHandlersMock
+}))
+vi.mock('../../neuro/ganglion-sessions-service', () => ({
+  registerNeuroSessionHandlers: registerNeuroSessionHandlersMock
 }))
 
 vi.mock('../zcode-plan-credentials', () => ({
@@ -592,6 +606,7 @@ describe('registerCoreHandlers', () => {
     expect(registerClaudeAccountHandlersMock).toHaveBeenCalledWith(claudeAccounts)
     expect(registerOpenCodeGoCredentialsHandlersMock).toHaveBeenCalledWith(rateLimits)
     expect(registerMiniMaxCredentialsHandlersMock).toHaveBeenCalledWith(rateLimits)
+    expect(registerNeuroProviderHandlersMock).toHaveBeenCalledWith()
     expect(registerZcodePlanCredentialsHandlersMock).toHaveBeenCalledWith(rateLimits)
     expect(registerGrokAccountHandlersMock).toHaveBeenCalled()
     expect(registerCursorAccountHandlersMock).toHaveBeenCalled()
@@ -627,7 +642,7 @@ describe('registerCoreHandlers', () => {
     })
     expect(registerEmulatorFrameStreamHandlersMock).toHaveBeenCalled()
     expect(registerEmulatorVideoStreamHandlersMock).toHaveBeenCalled()
-    expect(registerFilesystemHandlersMock).toHaveBeenCalledWith(store)
+    expect(registerFilesystemHandlersMock.mock.calls[0]?.[0]).toBe(store)
     expect(registerRuntimeHandlersMock).toHaveBeenCalledWith(runtime)
     expect(registerRuntimeEnvironmentHandlersMock).toHaveBeenCalledWith(store)
     expect(registerEphemeralVmHandlersMock).toHaveBeenCalledWith(store, undefined)

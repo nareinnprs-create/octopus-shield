@@ -22,12 +22,14 @@ export type WorktreeNavHistorySimpleViewEntry =
   | 'artifacts'
   | 'skills'
   | 'armory'
+  | 'neuro'
 const SIMPLE_VIEW_ENTRIES: readonly WorktreeNavHistorySimpleViewEntry[] = [
   'tasks',
   'automations',
   'artifacts',
   'skills',
-  'armory'
+  'armory',
+  'neuro'
 ]
 export type WorktreeNavHistoryTaskDetailEntry =
   | {

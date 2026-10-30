@@ -109,6 +109,19 @@ export function createUiViewActions(set: UISliceSet, get: UISliceGet): Partial<U
         activeView: state.previousViewBeforeArmory,
         worktreeNavHistoryIndex: rewindHistoryIndexPastView(state, 'armory')
       })),
+    openNeuroPage: () => {
+      get().recordViewVisit('neuro')
+      set((state) => ({
+        activeView: 'neuro',
+        previousViewBeforeNeuro:
+          state.activeView === 'neuro' ? state.previousViewBeforeNeuro : state.activeView
+      }))
+    },
+    closeNeuroPage: () =>
+      set((state) => ({
+        activeView: state.previousViewBeforeNeuro,
+        worktreeNavHistoryIndex: rewindHistoryIndexPastView(state, 'neuro')
+      })),
     openMobilePage: () =>
       set((state) => ({
         activeView: 'mobile',

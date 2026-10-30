@@ -63,6 +63,45 @@ export function buildCapabilitySettingsSections({
       group: 'capabilities',
       badge: translate('auto.hooks.useSettingsNavigationMetadata.7c79d3b7bf', 'Optional')
     },
+    ...(showDesktopOnlySettings
+      ? [
+          {
+            id: 'neuro' as const,
+            title: translate(
+              'auto.hooks.useSettingsNavigationMetadata.neuroTitle',
+              'Neuro Providers'
+            ),
+            description: translate(
+              'auto.hooks.useSettingsNavigationMetadata.neuroDescription',
+              'Connect custom LLM endpoints: OpenAI-compatible APIs, serverless functions, and local models.'
+            ),
+            icon: Network,
+            searchEntries: [
+              {
+                title: translate(
+                  'auto.hooks.useSettingsNavigationMetadata.neuroTitle',
+                  'Neuro Providers'
+                ),
+                description: translate(
+                  'auto.hooks.useSettingsNavigationMetadata.neuroDescription',
+                  'Connect custom LLM endpoints: OpenAI-compatible APIs, serverless functions, and local models.'
+                ),
+                keywords: [
+                  translate('auto.hooks.useSettingsNavigationMetadata.neuroKw1', 'neuro'),
+                  translate('auto.hooks.useSettingsNavigationMetadata.neuroKw2', 'provider'),
+                  translate('auto.hooks.useSettingsNavigationMetadata.neuroKw3', 'ollama'),
+                  translate('auto.hooks.useSettingsNavigationMetadata.neuroKw4', 'openai'),
+                  translate('auto.hooks.useSettingsNavigationMetadata.neuroKw5', 'llama.cpp'),
+                  translate('auto.hooks.useSettingsNavigationMetadata.neuroKw6', 'base url'),
+                  translate('auto.hooks.useSettingsNavigationMetadata.neuroKw7', 'api key'),
+                  translate('auto.hooks.useSettingsNavigationMetadata.neuroKw8', 'custom endpoint')
+                ]
+              }
+            ],
+            group: 'capabilities'
+          }
+        ]
+      : []),
     {
       id: 'orchestration',
       title: translate('auto.hooks.useSettingsNavigationMetadata.58a868e8e4', 'Orchestration'),

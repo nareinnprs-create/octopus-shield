@@ -6,6 +6,7 @@ import { installBrowserFindListener } from './preload-runtime-support'
 import { appApi } from './api/app-bridge'
 import { shieldProfilesApi } from './api/shield-profiles-bridge'
 import { armoryApi } from './api/armory-bridge'
+import { neuroSessionsApi } from './api/neuro-sessions-bridge'
 import { platformApi } from './api/platform-bridge'
 import { wslApi } from './api/wsl-bridge'
 import { wslMoveApi } from './api/wsl-move-bridge'
@@ -77,6 +78,7 @@ import { runtimeEnvironmentsApi } from './api/runtime-environments-bridge'
 import { rateLimitsApi } from './api/rate-limits-bridge'
 import { opencodeGoCredentialsApi } from './api/opencode-go-credentials-bridge'
 import { minimaxCredentialsApi } from './api/minimax-credentials-bridge'
+import { neuroProvidersApi } from './api/neuro-providers-bridge'
 import { zcodePlanCredentialsApi } from './api/zcode-plan-credentials-bridge'
 import { grokAccountsApi } from './api/grok-accounts-bridge'
 import { cursorAccountsApi } from './api/cursor-accounts-bridge'
@@ -103,6 +105,7 @@ const telemetryGetConsentStateApi: PreloadApi['telemetryGetConsentState'] = () =
 const api = {
   app: appApi,
   armory: armoryApi,
+  neuroSessions: neuroSessionsApi,
   shieldProfiles: shieldProfilesApi,
   platform: platformApi,
   wsl: wslApi,
@@ -179,6 +182,7 @@ const api = {
   rateLimits: rateLimitsApi,
   opencodeGoCredentials: opencodeGoCredentialsApi,
   minimaxCredentials: minimaxCredentialsApi,
+  neuroProviders: neuroProvidersApi,
   zcodePlanCredentials: zcodePlanCredentialsApi,
   grokAccounts: grokAccountsApi,
   cursorAccounts: cursorAccountsApi,

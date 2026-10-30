@@ -7,6 +7,7 @@ import type {
   MinimaxCredentialsApi,
   ZcodePlanCredentialsApi
 } from './api/agent-account-api'
+import type { NeuroProvidersApi } from './api/neuro-providers-api'
 import type { HooksApi } from './api/agent-hook-api'
 import type { SkillsApi } from './api/agent-skill-api'
 import type { AgentAwakeApi, AgentStatusApi } from './api/agent-status-api'
@@ -20,6 +21,7 @@ import type {
 import type { AiVaultApi } from './api/ai-vault-api'
 import type { AppApi, E2EApi, PlatformApi } from './api/app-api'
 import type { ArmoryApi } from './api/armory-api'
+import type { NeuroSessionsApi } from './api/neuro-sessions-api'
 import type { AutomationsApi } from './api/automation-api'
 import type { BrowserApi } from './api/browser-api'
 import type { CliApi } from './api/cli-install-api'
@@ -76,6 +78,7 @@ type Merged<T> = { [K in keyof T]: T[K] }
 export type PreloadApi = {
   app: AppApi
   armory: ArmoryApi
+  neuroSessions: NeuroSessionsApi
   shieldProfiles: ShieldProfileApi
   platform: PlatformApi
   e2e: E2EApi
@@ -152,6 +155,7 @@ export type PreloadApi = {
     clearApiKey: () => Promise<{ apiKeyConfigured: boolean }>
   }
   minimaxCredentials: MinimaxCredentialsApi
+  neuroProviders: NeuroProvidersApi
   zcodePlanCredentials: ZcodePlanCredentialsApi
   grokAccounts: GrokAccountsApi
   cursorAccounts: CursorAccountsApi

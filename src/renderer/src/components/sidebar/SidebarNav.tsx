@@ -1,5 +1,5 @@
 import React from 'react'
-import { BookOpen, CalendarClock, EyeOff, Files, Search, Shield, Smartphone } from 'lucide-react'
+import { BookOpen, BrainCircuit, CalendarClock, EyeOff, Files, Search, Shield, Smartphone } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { useAppStore } from '@/store'
 import { cn } from '@/lib/utils'
@@ -57,6 +57,7 @@ const SidebarNav = React.memo(function SidebarNav() {
   const openArtifactsPage = useAppStore((s) => s.openArtifactsPage)
   const openSkillsPage = useAppStore((s) => s.openSkillsPage)
   const openArmoryPage = useAppStore((s) => s.openArmoryPage)
+  const openNeuroPage = useAppStore((s) => s.openNeuroPage)
   const openModal = useAppStore((s) => s.openModal)
   const updateSettings = useAppStore((s) => s.updateSettings)
   const activeView = useAppStore((s) => s.activeView)
@@ -70,6 +71,7 @@ const SidebarNav = React.memo(function SidebarNav() {
   const artifactsActive = activeView === 'artifacts'
   const skillsActive = activeView === 'skills'
   const armoryActive = activeView === 'armory'
+  const neuroActive = activeView === 'neuro'
   const mobileOnboardingBadge = useMobileSidebarOnboardingBadge(showMobileButton)
   const hideAutomationsButton = React.useCallback(() => {
     void updateSettings({ showAutomationsButton: false })
@@ -140,6 +142,28 @@ const SidebarNav = React.memo(function SidebarNav() {
         />
         <span className="flex-1">
           {translate('auto.components.sidebar.SidebarNav.armory', 'Armory')}
+        </span>
+      </button>
+      <button
+        type="button"
+        onClick={openNeuroPage}
+        aria-current={neuroActive ? 'page' : undefined}
+        className={cn(
+          'flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-left text-[13px] font-medium tracking-tight transition-colors',
+          neuroActive
+            ? 'bg-worktree-sidebar-accent text-worktree-sidebar-accent-foreground'
+            : 'text-worktree-sidebar-foreground/60 hover:bg-worktree-sidebar-foreground/8'
+        )}
+      >
+        <BrainCircuit
+          className={cn(
+            'size-4 shrink-0',
+            !neuroActive && 'text-worktree-sidebar-foreground/30'
+          )}
+          strokeWidth={neuroActive ? 2.25 : 1.75}
+        />
+        <span className="flex-1">
+          {translate('auto.components.sidebar.SidebarNav.neuro', 'Neuro Sessions')}
         </span>
       </button>
       {showArtifactsButton ? (

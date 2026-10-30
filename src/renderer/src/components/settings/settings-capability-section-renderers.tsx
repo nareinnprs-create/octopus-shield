@@ -2,6 +2,7 @@ import { AccountsPane } from './AccountsPane'
 import { AgentsPane } from './AgentsPane'
 import { ComputerUsePane } from './ComputerUsePane'
 import { LinearAgentSkillPane } from './LinearAgentSkillPane'
+import { NeuroProvidersPane } from './NeuroProvidersPane'
 import { OrchestrationPane } from './OrchestrationPane'
 import { VoicePane } from './VoicePane'
 import { SettingsSection } from './SettingsSection'
@@ -121,6 +122,26 @@ export function renderLinearSettingsSection(
       searchEntries={navigation.getSectionSearchEntries('linear')}
     >
       {view.isSectionMounted('linear') ? <LinearAgentSkillPane /> : null}
+    </SettingsSection>
+  ) : null
+}
+
+export function renderNeuroSettingsSection(
+  context: SettingsRenderContext
+): React.JSX.Element | null {
+  const { model, navigation, view } = context
+  // The nav entry is desktop-only; keep the page and sidebar in agreement.
+  return model.showDesktopOnlySettings ? (
+    <SettingsSection
+      id="neuro"
+      title={translate('auto.components.settings.Settings.neuroTitle', 'Neuro Providers')}
+      description={translate(
+        'auto.components.settings.Settings.neuroDescription',
+        'Connect custom LLM endpoints: OpenAI-compatible APIs, serverless functions, and local models.'
+      )}
+      searchEntries={navigation.getSectionSearchEntries('neuro')}
+    >
+      {view.isSectionMounted('neuro') ? <NeuroProvidersPane /> : null}
     </SettingsSection>
   ) : null
 }
