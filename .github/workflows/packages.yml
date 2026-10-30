@@ -31,7 +31,8 @@ jobs:
 
   package:
     needs: matrix
-    runs-on: ubuntu-latest
+    # gardens-vm's qemu suite asserts win32 path.join shapes; run its leg where those hold.
+    runs-on: ${{ matrix.package == 'gardens-vm' && 'windows-latest' || 'ubuntu-latest' }}
     strategy:
       fail-fast: false
       matrix:

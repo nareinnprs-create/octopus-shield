@@ -14,7 +14,22 @@ import { dirname, join, relative, resolve } from 'node:path'
 import { resolvePnpmCliInvocation } from './pnpm-cli-invocation.mjs'
 
 const root = resolve(import.meta.dirname, '../..')
-const PACKAGES = [{ name: '@shield/process-host', dir: 'src/packages/process-host' }]
+// Vitest resolves sibling @shield/* deep imports (e.g. @shield/access/permission-evaluate) from
+// dist, so every workspace package must carry a current dist, not just process-host.
+const PACKAGES = [
+  { name: '@shield/access', dir: 'src/packages/access' },
+  { name: '@shield/armory', dir: 'src/packages/armory' },
+  { name: '@shield/audit-store', dir: 'src/packages/audit-store' },
+  { name: '@shield/engine-clients', dir: 'src/packages/engine-clients' },
+  { name: '@shield/engine-contracts', dir: 'src/packages/engine-contracts' },
+  { name: '@shield/ganglion', dir: 'src/packages/ganglion' },
+  { name: '@shield/gardens-vm', dir: 'src/packages/gardens-vm' },
+  { name: '@shield/neuro', dir: 'src/packages/neuro' },
+  { name: '@shield/octopod', dir: 'src/packages/octopod' },
+  { name: '@shield/process-host', dir: 'src/packages/process-host' },
+  { name: '@shield/spar', dir: 'src/packages/spar' },
+  { name: '@shield/suckers', dir: 'src/packages/suckers' }
+]
 // Outputs and build scratch space, not inputs.
 const NON_INPUTS = new Set(['dist', 'node_modules', '.dist-build.lock'])
 const COMPILER_PACKAGES = ['typescript', 'tsx', '@types/node']
