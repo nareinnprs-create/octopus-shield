@@ -51,6 +51,9 @@ function verifyPackagedDaemonEntryBoots(resourcesDir, options = {}) {
 }
 
 const TERMINAL_HOST_BOOT_TIMEOUT_MS = 20_000
+// An x64 slice under Rosetta can take far longer than 20s to boot while the
+// machine is mid-packaging; CI saw spurious "no daemon token" at 20s (arm64 host).
+const CROSS_ARCH_TERMINAL_HOST_BOOT_TIMEOUT_MS = 90_000
 // Arithmetic so the shell echoing the typed command cannot satisfy the check.
 const TERMINAL_HOST_BOOT_COMMAND = 'echo "OK $((6*7))" && exit'
 const TERMINAL_HOST_BOOT_OUTPUT = 'OK 42'
@@ -273,7 +276,7 @@ async function verifyPackagedMacTerminalHostBoots(appPath, { arch, required }) {
     await runTerminalHostRoundTrip({
       command: [...prefix, join(clone, relative(paths.bundle, paths.executable))],
       entry: join(clone, relative(paths.bundle, paths.entry)),
-      deadline: Date.now() + TERMINAL_HOST_BOOT_TIMEOUT_MS,
+      deadline: Date.now() + (prefix.length > 0 ? CROSS_ARCH_TERMINAL_HOST_BOOT_TIMEOUT_MS : TERMINAL_HOST_BOOT_TIMEOUT_MS),
       stderr
     })
   } catch (error) {
