@@ -252,7 +252,9 @@ jobs:
         run: node config/scripts/assert-github-release-is-draft.mjs "${{ inputs.tag }}"
 
       # Check after publish because builder’s single pack/upload invocation has no cheap interposition point.
+      # Qualification builds have no PostHog write key, so DCE strips the telemetry constants the verify greps for.
       - name: Verify telemetry constants present in app.asar
+        if: ${{ !inputs.qualification_only }}
         run: node config/scripts/verify-telemetry-constants.mjs
 
       - name: Upload qualification artifacts
