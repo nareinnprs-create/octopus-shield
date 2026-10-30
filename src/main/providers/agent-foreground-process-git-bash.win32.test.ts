@@ -55,7 +55,7 @@ async function proveIdlePromptCycle(
 
     // Interrupt only after the child is ready, not during a transient shell fork.
     proc.write(
-      "node -e \"console.log(['SHIELD','FOREGROUND_READY'].join('_')); setInterval(() => {}, 1000)\"\r"
+      "node -e \"console.log(['OSHIELD','FOREGROUND_READY'].join('_')); setInterval(() => {}, 1000)\"\r"
     )
     await vi.waitFor(() => expect(output).toContain('OSHIELD_FOREGROUND_READY'), {
       timeout: 10_000
