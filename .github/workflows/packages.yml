@@ -48,7 +48,7 @@ jobs:
       - name: Typecheck
         run: pnpm --filter "@shield/${{ matrix.package }}" typecheck
       - name: Test
-        run: pnpm --filter "@shield/${{ matrix.package }}" test --if-present
+        run: pnpm --filter "@shield/${{ matrix.package }}" test
       - name: Build dist
         run: pnpm --filter "@shield/${{ matrix.package }}" build
       - name: No dist in git (source-only packaging)
