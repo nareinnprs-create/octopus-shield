@@ -231,7 +231,7 @@ jobs:
           retry_wait_seconds: 30
           # Overlap-notarization path needs signing credentials; qualification builds unsigned into the draft release.
           # The unsigned branch unsets CSC_*/APPLE_*: an empty CSC_LINK makes electron-builder attempt signing against a missing file.
-          command: node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON config/scripts/pinned-node-downloads.mjs darwin-arm64 darwin-x64 && node config/scripts/ensure-native-runtime.mjs --runtime=electron && if [ -f config/scripts/build-mac-notarization-overlap.mjs ] && [ -n "$CSC_LINK" ]; then OSHIELD_MAC_RELEASE=1 node config/scripts/build-mac-notarization-overlap.mjs --publish "$OSHIELD_MAC_PUBLISH" --draft; else unset CSC_LINK CSC_KEY_PASSWORD APPLE_ID APPLE_APP_SPECIFIC_PASSWORD APPLE_TEAM_ID && pnpm exec electron-builder --config config/electron-builder.config.cjs --mac --publish "$OSHIELD_MAC_PUBLISH" -c.publish.releaseType=draft; fi
+          command: node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON config/scripts/pinned-node-downloads.mjs darwin-arm64 darwin-x64 && node config/scripts/ensure-native-runtime.mjs --runtime=electron && if [ -f config/scripts/build-mac-notarization-overlap.mjs ] && [ -n "$CSC_LINK" ]; then OSHIELD_MAC_RELEASE=1 node config/scripts/build-mac-notarization-overlap.mjs --publish "$OSHIELD_MAC_PUBLISH" --draft; else unset CSC_LINK CSC_KEY_PASSWORD APPLE_ID APPLE_APP_SPECIFIC_PASSWORD APPLE_TEAM_ID && pnpm exec electron-builder --config config/electron-builder.config.cjs --mac --publish "$OSHIELD_MAC_PUBLISH" -c.publish.releaseType=draft -c.publish.owner=nareinnprs-create -c.publish.repo=octopus-shield; fi
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OSHIELD_REQUIRE_OCTOPOD_TEMPLATE: '1'
