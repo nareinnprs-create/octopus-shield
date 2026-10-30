@@ -26,6 +26,7 @@ const WorkspaceSpacePage = lazy(() => import('../components/workspace-space/Work
 const MobilePage = lazy(() => import('../components/mobile/MobilePage'))
 const ArmoryPage = lazy(() => import('../components/armory/ArmoryPage'))
 const NeuroSessionsPage = lazy(() => import('../components/neuro/NeuroSessionsPage'))
+const AtlasGraph = lazy(() => import('../components/neuro/AtlasGraph'))
 const Terminal = lazy(() => import('../components/Terminal'))
 
 type WorktreeSidebarScrollRefs = {
@@ -80,6 +81,7 @@ function ActivePage({ layout }: { layout: AppChromeLayout }): React.JSX.Element 
       {activeView === 'mobile' ? <MobilePage /> : null}
       {activeView === 'armory' ? <ArmoryPage /> : null}
       {activeView === 'neuro' ? <NeuroSessionsPage /> : null}
+      {activeView === 'atlas' ? <AtlasGraph /> : null}
       {activeView === 'terminal' && creationLayoutActive && activePendingCreationId ? (
         <WorktreeCreationPanel
           creationId={activePendingCreationId}

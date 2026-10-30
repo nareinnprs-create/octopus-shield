@@ -12,7 +12,8 @@ const TOP_LEVEL_VIEW_LOOKUP: Record<TopLevelView, true> = {
   artifacts: true,
   mobile: true,
   armory: true,
-  neuro: true
+  neuro: true,
+  atlas: true
 }
 
 export function isTopLevelView(value: unknown): value is TopLevelView {

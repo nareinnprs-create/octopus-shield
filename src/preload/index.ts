@@ -7,6 +7,7 @@ import { appApi } from './api/app-bridge'
 import { shieldProfilesApi } from './api/shield-profiles-bridge'
 import { armoryApi } from './api/armory-bridge'
 import { neuroSessionsApi } from './api/neuro-sessions-bridge'
+import { neuroAtlasApi } from './api/neuro-atlas-bridge'
 import { platformApi } from './api/platform-bridge'
 import { wslApi } from './api/wsl-bridge'
 import { wslMoveApi } from './api/wsl-move-bridge'
@@ -106,6 +107,7 @@ const api = {
   app: appApi,
   armory: armoryApi,
   neuroSessions: neuroSessionsApi,
+  neuroAtlas: neuroAtlasApi,
   shieldProfiles: shieldProfilesApi,
   platform: platformApi,
   wsl: wslApi,

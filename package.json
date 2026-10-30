@@ -384,11 +384,6 @@
       "oxfmt --write --no-error-on-unmatched-pattern"
     ]
   },
-  "pnpm": {
-    "neverBuiltDependencies": [
-      "cpu-features"
-    ]
-  },
   "engines": {
     "node": "24"
   },

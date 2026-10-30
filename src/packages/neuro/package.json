@@ -1,0 +1,69 @@
+{
+  "name": "@shield/neuro",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Shield Brain Atlas: structure-aware chunker, embedder adapters, incremental repo indexer and semantic/symbol queries over nucleus neuro_* tables (pgvector)",
+  "files": [
+    "dist"
+  ],
+  "type": "commonjs",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "shield-source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./atlas-chunker": {
+      "shield-source": "./src/atlas-chunker.ts",
+      "types": "./dist/atlas-chunker.d.ts",
+      "default": "./dist/atlas-chunker.js"
+    },
+    "./atlas-embedder": {
+      "shield-source": "./src/atlas-embedder.ts",
+      "types": "./dist/atlas-embedder.d.ts",
+      "default": "./dist/atlas-embedder.js"
+    },
+    "./atlas-imports": {
+      "shield-source": "./src/atlas-imports.ts",
+      "types": "./dist/atlas-imports.d.ts",
+      "default": "./dist/atlas-imports.js"
+    },
+    "./atlas-indexer": {
+      "shield-source": "./src/atlas-indexer.ts",
+      "types": "./dist/atlas-indexer.d.ts",
+      "default": "./dist/atlas-indexer.js"
+    },
+    "./atlas-query": {
+      "shield-source": "./src/atlas-query.ts",
+      "types": "./dist/atlas-query.d.ts",
+      "default": "./dist/atlas-query.js"
+    },
+    "./atlas-store-pg": {
+      "shield-source": "./src/atlas-store-pg.ts",
+      "types": "./dist/atlas-store-pg.d.ts",
+      "default": "./dist/atlas-store-pg.js"
+    }
+  },
+  "scripts": {
+    "build": "tsx --conditions=shield-source scripts/build-dist.mjs",
+    "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.test.json",
+    "test": "vitest run --config vitest.config.ts"
+  },
+  "dependencies": {
+    "@shield/process-host": "workspace:*",
+    "pg": "^8.16.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.19.130",
+    "@types/pg": "^8.15.0",
+    "proper-lockfile": "4.1.2",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vitest": "5.0.5"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

@@ -822,6 +822,34 @@ importers:
         specifier: ^3.2.7
         version: 3.2.7(@types/debug@4.1.13)(@types/node@18.19.130)(happy-dom@21.0.4)(jiti@2.7.0)(lightningcss@1.33.0)(msw@2.14.3(@types/node@18.19.130)(typescript@7.0.2))(supports-color@7.2.0)(tsx@4.23.15)(yaml@2.9.1)
 
+  src/packages/neuro:
+    dependencies:
+      '@shield/process-host':
+        specifier: workspace:*
+        version: link:../process-host
+      pg:
+        specifier: ^8.16.0
+        version: 8.23.1(@types/pg@8.23.1)
+    devDependencies:
+      '@types/node':
+        specifier: ^18.19.130
+        version: 18.19.130
+      '@types/pg':
+        specifier: ^8.15.0
+        version: 8.23.1
+      proper-lockfile:
+        specifier: 4.1.2
+        version: 4.1.2
+      tsx:
+        specifier: ^4.23.15
+        version: 4.23.15
+      typescript:
+        specifier: ^7.0.2
+        version: 7.0.2
+      vitest:
+        specifier: 5.0.5
+        version: 5.0.5(patch_hash=a8c4c8af3636bf5cc481bd7ebcaa39c47a6dcc3d12fb3f66559953fe3e8671e3)(@opentelemetry/api@1.9.1)(@types/node@18.19.130)(happy-dom@21.0.4)(msw@2.14.3(@types/node@18.19.130)(typescript@7.0.2))(vite@8.3.5(@types/node@18.19.130)(esbuild@0.28.2)(jiti@2.7.0)(tsx@4.23.15)(yaml@2.9.1))
+
   src/packages/octopod:
     dependencies:
       '@shield/engine-contracts':

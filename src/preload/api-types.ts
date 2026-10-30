@@ -22,6 +22,7 @@ import type { AiVaultApi } from './api/ai-vault-api'
 import type { AppApi, E2EApi, PlatformApi } from './api/app-api'
 import type { ArmoryApi } from './api/armory-api'
 import type { NeuroSessionsApi } from './api/neuro-sessions-api'
+import type { NeuroAtlasApi } from './api/neuro-atlas-api'
 import type { AutomationsApi } from './api/automation-api'
 import type { BrowserApi } from './api/browser-api'
 import type { CliApi } from './api/cli-install-api'
@@ -79,6 +80,7 @@ export type PreloadApi = {
   app: AppApi
   armory: ArmoryApi
   neuroSessions: NeuroSessionsApi
+  neuroAtlas: NeuroAtlasApi
   shieldProfiles: ShieldProfileApi
   platform: PlatformApi
   e2e: E2EApi

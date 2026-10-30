@@ -10,6 +10,7 @@ on:
     paths:
       - 'src/packages/**'
       - '.github/workflows/packages.yml'
+  workflow_dispatch:
 
 concurrency:
   group: packages-${{ github.ref }}

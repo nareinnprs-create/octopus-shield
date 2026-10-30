@@ -122,6 +122,19 @@ export function createUiViewActions(set: UISliceSet, get: UISliceGet): Partial<U
         activeView: state.previousViewBeforeNeuro,
         worktreeNavHistoryIndex: rewindHistoryIndexPastView(state, 'neuro')
       })),
+    openAtlasPage: () => {
+      get().recordViewVisit('atlas')
+      set((state) => ({
+        activeView: 'atlas',
+        previousViewBeforeAtlas:
+          state.activeView === 'atlas' ? state.previousViewBeforeAtlas : state.activeView
+      }))
+    },
+    closeAtlasPage: () =>
+      set((state) => ({
+        activeView: state.previousViewBeforeAtlas,
+        worktreeNavHistoryIndex: rewindHistoryIndexPastView(state, 'atlas')
+      })),
     openMobilePage: () =>
       set((state) => ({
         activeView: 'mobile',

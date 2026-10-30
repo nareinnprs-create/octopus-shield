@@ -58,6 +58,7 @@ const SidebarNav = React.memo(function SidebarNav() {
   const openSkillsPage = useAppStore((s) => s.openSkillsPage)
   const openArmoryPage = useAppStore((s) => s.openArmoryPage)
   const openNeuroPage = useAppStore((s) => s.openNeuroPage)
+  const openAtlasPage = useAppStore((s) => s.openAtlasPage)
   const openModal = useAppStore((s) => s.openModal)
   const updateSettings = useAppStore((s) => s.updateSettings)
   const activeView = useAppStore((s) => s.activeView)
@@ -72,6 +73,7 @@ const SidebarNav = React.memo(function SidebarNav() {
   const skillsActive = activeView === 'skills'
   const armoryActive = activeView === 'armory'
   const neuroActive = activeView === 'neuro'
+  const atlasActive = activeView === 'atlas'
   const mobileOnboardingBadge = useMobileSidebarOnboardingBadge(showMobileButton)
   const hideAutomationsButton = React.useCallback(() => {
     void updateSettings({ showAutomationsButton: false })
@@ -164,6 +166,28 @@ const SidebarNav = React.memo(function SidebarNav() {
         />
         <span className="flex-1">
           {translate('auto.components.sidebar.SidebarNav.neuro', 'Neuro Sessions')}
+        </span>
+      </button>
+      <button
+        type="button"
+        onClick={openAtlasPage}
+        aria-current={atlasActive ? 'page' : undefined}
+        className={cn(
+          'flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-left text-[13px] font-medium tracking-tight transition-colors',
+          atlasActive
+            ? 'bg-worktree-sidebar-accent text-worktree-sidebar-accent-foreground'
+            : 'text-worktree-sidebar-foreground/60 hover:bg-worktree-sidebar-foreground/8'
+        )}
+      >
+        <BrainCircuit
+          className={cn(
+            'size-4 shrink-0',
+            !atlasActive && 'text-worktree-sidebar-foreground/30'
+          )}
+          strokeWidth={atlasActive ? 2.25 : 1.75}
+        />
+        <span className="flex-1">
+          {translate('auto.components.sidebar.SidebarNav.atlas', 'Atlas')}
         </span>
       </button>
       {showArtifactsButton ? (

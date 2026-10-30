@@ -76,6 +76,7 @@ import { registerOpenCodeGoCredentialsHandlers } from '../opencode-go-credential
 import { registerMiniMaxCredentialsHandlers } from '../minimax-credentials'
 import { registerNeuroProviderHandlers } from '../neuro-providers'
 import { registerNeuroSessionHandlers } from '../../neuro/ganglion-sessions-service'
+import { registerNeuroAtlasHandlers } from '../../neuro/atlas-handlers'
 import { registerZcodePlanCredentialsHandlers } from '../zcode-plan-credentials'
 import { registerGrokAccountHandlers } from '../grok-accounts'
 import { registerCursorAccountHandlers } from '../cursor-accounts'
@@ -185,6 +186,7 @@ export function registerCoreHandlers(
   registerMiniMaxCredentialsHandlers(rateLimits)
   registerNeuroProviderHandlers()
   registerNeuroSessionHandlers({ runtime, dataDirectory: app.getPath('userData') })
+  registerNeuroAtlasHandlers()
   registerZcodePlanCredentialsHandlers(rateLimits)
   registerGrokAccountHandlers()
   registerCursorAccountHandlers()

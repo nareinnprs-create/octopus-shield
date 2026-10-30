@@ -39,6 +39,7 @@ const {
   registerMiniMaxCredentialsHandlersMock,
   registerNeuroProviderHandlersMock,
   registerNeuroSessionHandlersMock,
+  registerNeuroAtlasHandlersMock,
   registerZcodePlanCredentialsHandlersMock,
   registerGrokAccountHandlersMock,
   registerCursorAccountHandlersMock,
@@ -112,6 +113,7 @@ const {
   registerMiniMaxCredentialsHandlersMock: vi.fn(),
   registerNeuroProviderHandlersMock: vi.fn(),
   registerNeuroSessionHandlersMock: vi.fn(),
+  registerNeuroAtlasHandlersMock: vi.fn(),
   registerZcodePlanCredentialsHandlersMock: vi.fn(),
   registerGrokAccountHandlersMock: vi.fn(),
   registerCursorAccountHandlersMock: vi.fn(),
@@ -373,6 +375,10 @@ vi.mock('../neuro-providers', () => ({
 }))
 vi.mock('../../neuro/ganglion-sessions-service', () => ({
   registerNeuroSessionHandlers: registerNeuroSessionHandlersMock
+}))
+
+vi.mock('../../neuro/atlas-handlers', () => ({
+  registerNeuroAtlasHandlers: registerNeuroAtlasHandlersMock
 }))
 
 vi.mock('../zcode-plan-credentials', () => ({
