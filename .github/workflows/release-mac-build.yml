@@ -43,13 +43,16 @@ jobs:
     uses: ./.github/workflows/qualified-octopod-template.yml
     with:
       ref: ${{ github.sha }}
+      # This repo has no Blacksmith runners; keep qualification on GitHub-hosted Ubuntu.
+      fast_runners: false
 
   build-mac:
     needs: qualification-template
-    if: ${{ !cancelled() && (!inputs.qualification_only || needs.qualification-template.result == 'success') && github.repository == 'octopusshield/octopus-shield' }}
-    # Keep Blacksmith mac notarization outside SignPath’s GitHub-hosted Windows provenance.
-    runs-on: blacksmith-6vcpu-macos-15
-    timeout-minutes: 60
+    if: ${{ !cancelled() && (!inputs.qualification_only || needs.qualification-template.result == 'success') && (github.repository == 'octopusshield/octopus-shield' || github.repository == 'nareinnprs-create/octopus-shield') }}
+    # Keep mac notarization outside SignPath’s GitHub-hosted Windows provenance.
+    # GitHub-hosted macos-15: this fork has no Blacksmith runners (qualification builds queue forever otherwise).
+    runs-on: macos-15
+    timeout-minutes: 90
     # actions: read fetches the release-cut run's artifacts.
     permissions:
       actions: read
@@ -130,6 +133,7 @@ jobs:
       - uses: ./.github/actions/install-mobile-dependencies
 
       - name: Verify macOS signing environment
+        if: ${{ !inputs.qualification_only }}
         run: node config/scripts/verify-macos-release-env.mjs
         env:
           CSC_LINK: ${{ secrets.MAC_CERTS }}
@@ -225,11 +229,12 @@ jobs:
           timeout_minutes: 45
           max_attempts: 3
           retry_wait_seconds: 30
-          command: node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON config/scripts/pinned-node-downloads.mjs darwin-arm64 darwin-x64 && node config/scripts/ensure-native-runtime.mjs --runtime=electron && if [ -f config/scripts/build-mac-notarization-overlap.mjs ]; then OSHIELD_MAC_RELEASE=1 node config/scripts/build-mac-notarization-overlap.mjs --publish "$OSHIELD_MAC_PUBLISH" --draft; else OSHIELD_MAC_RELEASE=1 pnpm exec electron-builder --config config/electron-builder.config.cjs --mac --publish "$OSHIELD_MAC_PUBLISH" -c.publish.releaseType=draft; fi
+          # Overlap-notarization path needs signing credentials; qualification builds unsigned into the draft release.
+          command: node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON config/scripts/pinned-node-downloads.mjs darwin-arm64 darwin-x64 && node config/scripts/ensure-native-runtime.mjs --runtime=electron && if [ -f config/scripts/build-mac-notarization-overlap.mjs ] && [ -n "$CSC_LINK" ]; then OSHIELD_MAC_RELEASE=1 node config/scripts/build-mac-notarization-overlap.mjs --publish "$OSHIELD_MAC_PUBLISH" --draft; else pnpm exec electron-builder --config config/electron-builder.config.cjs --mac --publish "$OSHIELD_MAC_PUBLISH" -c.publish.releaseType=draft; fi
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OSHIELD_REQUIRE_OCTOPOD_TEMPLATE: '1'
-          OSHIELD_MAC_PUBLISH: ${{ inputs.qualification_only && 'never' || 'always' }}
+          OSHIELD_MAC_PUBLISH: 'always'
           CSC_LINK: ${{ secrets.MAC_CERTS }}
           CSC_KEY_PASSWORD: ${{ secrets.MAC_CERTS_PASSWORD }}
           APPLE_ID: ${{ secrets.APPLE_ID }}
