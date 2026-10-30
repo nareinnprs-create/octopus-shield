@@ -229,7 +229,8 @@ jobs:
         env:
           OSHIELD_REUSE_PREPARED_WINDOWS_SECURITY: ${{ runner.os == 'Windows' && steps.dependencies.outcome == 'success' }}
       - wait: bun-octopod
-      - run: pnpm test:node-server --artifact ${{ runner.os == 'Linux' && '--cross-runtime' || '' }}
+      # Cross-runtime needs the Bun octopod slot; without it (unrecoverable upstream pin) run artifact-mode only.
+      - run: pnpm test:node-server --artifact ${{ runner.os == 'Linux' && steps.bun-octopod.outputs.slot != '' && '--cross-runtime' || '' }}
         env:
           OSHIELD_BUN_OCTOPOD_SLOT: ${{ steps.bun-octopod.outputs.slot }}
           BUN_EXECUTABLE: ${{ steps.bun-octopod.outputs.executable }}
