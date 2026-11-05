@@ -6,6 +6,7 @@ import { registerAppHandlers } from '../app'
 import { registerCliHandlers } from '../cli'
 import { registerPreflightHandlers } from '../preflight'
 import { registerArmoryHandlers } from '../../armory/armory-handlers'
+import { registerArakanConsoleHandlers } from '../../arakan-console/arakan-console-handlers'
 import type { Store } from '../../persistence/loading-store/store'
 import type { ShieldRuntimeService } from '../../runtime/shield-runtime'
 import type { StatsCollector } from '../../stats/collector'
@@ -177,6 +178,7 @@ export function registerCoreHandlers(
   registerCliHandlers()
   registerPreflightHandlers()
   registerArmoryHandlers()
+  registerArakanConsoleHandlers()
   registerUsageProviderHandlers({ claudeUsage, codexUsage, openCodeUsage, museUsage })
   registerCodexAccountHandlers(codexAccounts, () => store.getSettings())
   registerAgentHookHandlers(runtime, { getPtyIdForPaneKey })

@@ -14,13 +14,28 @@ import {
   SelectValue
 } from '@/components/ui/select'
 import { Textarea } from '@/components/ui/textarea'
+import ArakanConsole from '../arakan-console/ArakanConsole'
 
 const POLL_INTERVAL_MS = 2_000
 
 const stateLabel = (state: NeuroSessionView['state']): string =>
   translate(`auto.components.neuro.NeuroSessionsPage.state.${state}`, state)
 
+/** Tab wrapper (B6): Sessions list or the Arakan Console chat surface. */
 export default function NeuroSessionsPage(): React.JSX.Element {
+  const [neuroTab, setNeuroTab] = useState<'sessions' | 'console'>('sessions')
+  return (
+    <div className="flex h-full min-h-0 flex-1 flex-col">
+      {neuroTab === 'console' ? (
+        <ArakanConsole />
+      ) : (
+        <NeuroSessionsList onOpenConsole={() => setNeuroTab('console')} />
+      )}
+    </div>
+  )
+}
+
+function NeuroSessionsList({ onOpenConsole }: { onOpenConsole: () => void }): React.JSX.Element {
   const activeWorktreeId = useAppStore((s) => s.activeWorktreeId)
   const setActiveWorktree = useAppStore((s) => s.setActiveWorktree)
   const [snapshot, setSnapshot] = useState<NeuroSessionsSnapshot | null>(null)
@@ -137,6 +152,15 @@ export default function NeuroSessionsPage(): React.JSX.Element {
             'Tentacle agents delegated through the Ganglion runtime'
           )}
         </span>
+        <Button
+          type="button"
+          size="sm"
+          variant="outline"
+          className="ml-auto shrink-0"
+          onClick={onOpenConsole}
+        >
+          {translate('auto.components.neuro.NeuroSessionsPage.openConsole', 'Arakan Console')}
+        </Button>
       </header>
 
       {listError ? (
@@ -213,7 +237,7 @@ export default function NeuroSessionsPage(): React.JSX.Element {
         ) : null}
       </section>
 
-      <div className="min-h-0 flex-1 overflow-auto px-3 pb-5 md:px-5">
+      <div className="min-h-0 flex-1 overflow-auto px-3 pb-5 scrollbar-sleek md:px-5">
         <table className="w-full border-collapse text-[13px]">
           <thead>
             <tr className="border-b border-border text-left text-muted-foreground">

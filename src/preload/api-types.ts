@@ -21,6 +21,7 @@ import type {
 import type { AiVaultApi } from './api/ai-vault-api'
 import type { AppApi, E2EApi, PlatformApi } from './api/app-api'
 import type { ArmoryApi } from './api/armory-api'
+import type { ArakanConsoleApi } from '../shared/arakan-console-contract'
 import type { NeuroSessionsApi } from './api/neuro-sessions-api'
 import type { NeuroAtlasApi } from './api/neuro-atlas-api'
 import type { AutomationsApi } from './api/automation-api'
@@ -79,6 +80,7 @@ type Merged<T> = { [K in keyof T]: T[K] }
 export type PreloadApi = {
   app: AppApi
   armory: ArmoryApi
+  arakanConsole: ArakanConsoleApi
   neuroSessions: NeuroSessionsApi
   neuroAtlas: NeuroAtlasApi
   shieldProfiles: ShieldProfileApi

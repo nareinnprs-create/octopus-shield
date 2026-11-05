@@ -6,6 +6,7 @@ import { installBrowserFindListener } from './preload-runtime-support'
 import { appApi } from './api/app-bridge'
 import { shieldProfilesApi } from './api/shield-profiles-bridge'
 import { armoryApi } from './api/armory-bridge'
+import { arakanConsoleApi } from './api/arakan-console-bridge'
 import { neuroSessionsApi } from './api/neuro-sessions-bridge'
 import { neuroAtlasApi } from './api/neuro-atlas-bridge'
 import { platformApi } from './api/platform-bridge'
@@ -106,6 +107,7 @@ const telemetryGetConsentStateApi: PreloadApi['telemetryGetConsentState'] = () =
 const api = {
   app: appApi,
   armory: armoryApi,
+  arakanConsole: arakanConsoleApi,
   neuroSessions: neuroSessionsApi,
   neuroAtlas: neuroAtlasApi,
   shieldProfiles: shieldProfilesApi,
