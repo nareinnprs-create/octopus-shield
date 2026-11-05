@@ -10,7 +10,8 @@ import type {
   ArakanConsolePermissionResponse
 } from '../../shared/arakan-console-contract'
 
-const ACP_PROTOCOL_VERSION = '2025-01-01'
+/** ACP wire protocol version: u16 per the binary's deserializer (upstream docs showed a stale string form). */
+const ACP_PROTOCOL_VERSION = 1
 /** Unanswered permission requests auto-deny: fail closed (TODO(verify) ACP option semantics on release). */
 const PERMISSION_TIMEOUT_MS = 120_000
 
@@ -62,7 +63,8 @@ export class ArakanConsoleService {
 
   async open(
     cwd: string,
-    sink: ArakanConsoleEventSink
+    sink: ArakanConsoleEventSink,
+    extraEnv?: Record<string, string>
   ): Promise<{ sessionId: string; backendVersion: string | null }> {
     if (this.child) {
       this.close('reopened')
@@ -76,7 +78,8 @@ export class ArakanConsoleService {
       cwd,
       windowsHide: true,
       shell: false,
-      stdio: ['pipe', 'pipe', 'pipe']
+      stdio: ['pipe', 'pipe', 'pipe'],
+      ...(extraEnv === undefined ? {} : { env: { ...process.env, ...extraEnv } })
     })
     this.child.stdout?.setEncoding('utf8')
     this.child.stdout?.on('data', (chunk: string) => this.onStdout(chunk))
@@ -95,7 +98,7 @@ export class ArakanConsoleService {
     const initResult = await this.request('initialize', { protocolVersion: ACP_PROTOCOL_VERSION })
     this.backendVersion =
       typeof initResult.protocolVersion === 'string' ? initResult.protocolVersion : null
-    const newSession = await this.request('session/new', { cwd })
+    const newSession = await this.request('session/new', { cwd, mcpServers: [] })
     this.acpSessionId =
       typeof newSession.sessionId === 'string' ? newSession.sessionId : `arakan-${Date.now()}`
     return { sessionId: this.acpSessionId, backendVersion: this.backendVersion }

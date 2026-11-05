@@ -19,7 +19,7 @@ export function registerArakanConsoleHandlers(): void {
   }
 
   handleTrusted('arakan-console:open', (event, rawRequest: unknown) => {
-    const request = rawRequest as { cwd?: unknown }
+    const request = rawRequest as { cwd?: unknown; env?: unknown }
     const cwd = typeof request?.cwd === 'string' && request.cwd.length > 0 ? request.cwd : null
     if (cwd === null) {
       return { ok: false as const, reason: 'cwd is required' }
@@ -30,7 +30,13 @@ export function registerArakanConsoleHandlers(): void {
       }
     }
     return service
-      .open(cwd, sink)
+      .open(
+        cwd,
+        sink,
+        typeof request.env === 'object' && request.env !== null
+          ? (request.env as Record<string, string>)
+          : undefined
+      )
       .then((result) => ({ ok: true as const, ...result }))
       .catch((error: unknown) => ({
         ok: false as const,
