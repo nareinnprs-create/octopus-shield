@@ -35,10 +35,10 @@
   !insertmacro SHIELD_REGISTER_DOCUMENT_OPEN_WITH ".tsv" "${TABULAR_PROGID}"
   ; Arakan agent brain on PATH so Neuro can spawn it from any shell (batch C3).
   ${if} $installMode == "all"
-    EnVar::AddValueEx "PATH" "$INSTDIR\resources\arakan\bin"
+    EnVar::AddValueEx "PATH" "$INSTDIR\resources\arakan\bin\win-x64"
   ${else}
     EnVar::SetHKCU
-    EnVar::AddValueEx "PATH" "$INSTDIR\resources\arakan\bin"
+    EnVar::AddValueEx "PATH" "$INSTDIR\resources\arakan\bin\win-x64"
   ${endIf}
   ; AV exclusion offer (opt-in, user-consented): Defender only, exact install dir + arakan bin.
   ; Unsigned security-platform builds draw heuristic flags; this is the legitimate cure we can
@@ -52,7 +52,7 @@
   ${if} $0 != "1"
     MessageBox MB_YESNO|MB_ICONQUESTION "Add Windows Defender exclusions for $INSTDIR?$\\r$\\rOctopus Shield bundles security tooling that antivirus heuristics sometimes flag. Excluding only this folder keeps protection everywhere else." IDYES shield_defender_exclude IDNO shield_defender_skip
     shield_defender_exclude:
-      nsExec::ExecToLog 'powershell -NoProfile -ExecutionPolicy Bypass -Command "try { Add-MpPreference -ExclusionPath \"$INSTDIR\" -ErrorAction Stop; Add-MpPreference -ExclusionPath \"$INSTDIR\resources\arakan\bin\" -ErrorAction Stop } catch { exit 1 }"'
+      nsExec::ExecToLog 'powershell -NoProfile -ExecutionPolicy Bypass -Command "try { Add-MpPreference -ExclusionPath \"$INSTDIR\" -ErrorAction Stop; Add-MpPreference -ExclusionPath \"$INSTDIR\resources\arakan\bin\win-x64\" -ErrorAction Stop } catch { exit 1 }"'
       Pop $1
       ${if} $1 != 0
         MessageBox MB_ICONEXCLAMATION "Could not add Defender exclusions (management policy or Defender off). The app still works; re-run as admin later if needed."

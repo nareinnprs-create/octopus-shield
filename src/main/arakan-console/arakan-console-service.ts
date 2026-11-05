@@ -24,15 +24,23 @@ type PendingRequest = {
 
 export function resolveArakanBinary(): string | null {
   const exe = process.platform === 'win32' ? 'arakan.exe' : 'arakan'
-  // Packaged: resources/arakan/bin/<exe>; dev: repo resources, then cargo target.
+  const subdir =
+    process.platform === 'win32'
+      ? 'win-x64'
+      : process.platform === 'darwin'
+        ? process.arch === 'arm64'
+          ? 'mac-arm64'
+          : 'mac-x64'
+        : 'linux-x64'
+  // Packaged: resources/arakan/bin/<target>/<exe>; dev: repo resources, then cargo target.
   const resourcesPath =
     process.resourcesPath ??
     (process.platform === 'darwin'
       ? join(app.getPath('exe'), '..', '..', 'Resources')
       : join(app.getPath('exe'), '..', 'resources'))
   const candidates = [
-    join(resourcesPath, 'arakan', 'bin', exe),
-    join(app.getAppPath(), 'resources', 'arakan', 'bin', exe),
+    join(resourcesPath, 'arakan', 'bin', subdir, exe),
+    join(app.getAppPath(), 'resources', 'arakan', 'bin', subdir, exe),
     join(app.getAppPath(), '..', 'arakan', 'target', 'debug', exe)
   ]
   return candidates.find((candidate) => existsSync(candidate)) ?? null

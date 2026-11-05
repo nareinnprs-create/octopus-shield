@@ -24,7 +24,7 @@ is_owned_arakan_link() {
   [ -L "$arakan_link" ] || return 1
   local link_target candidate candidate_target
   link_target="$(readlink -f -- "$arakan_link" 2>/dev/null || true)"
-  for candidate in /opt/Shield/resources/arakan/bin/arakan /opt/shield-ide/resources/arakan/bin/arakan /opt/shield/resources/arakan/bin/arakan; do
+  for candidate in /opt/Shield/resources/arakan/bin/linux-x64/arakan /opt/shield-ide/resources/arakan/bin/linux-x64/arakan /opt/shield/resources/arakan/bin/linux-x64/arakan; do
     candidate_target="$(readlink -f -- "$candidate" 2>/dev/null || true)"
     if [ -n "$candidate_target" ] && [ "$link_target" = "$candidate_target" ]; then
       return 0
@@ -51,7 +51,7 @@ for dir in /opt/Shield /opt/shield-ide /opt/shield; do
   fi
 
   # Arakan agent brain on PATH (batch C3); only manage our own symlink.
-  arakan_bin="$dir/resources/arakan/bin/arakan"
+  arakan_bin="$dir/resources/arakan/bin/linux-x64/arakan"
   if [ -f "$arakan_bin" ]; then
     chmod 755 "$arakan_bin" || true
     if { [ ! -e "$arakan_link" ] && [ ! -L "$arakan_link" ]; } || is_owned_arakan_link; then
