@@ -22,6 +22,18 @@ export type ArmoryScopeState = {
 
 export type ArmoryHealthEntryState = 'ok' | 'unhealthy' | 'denied' | 'spawn-failed' | 'skipped'
 
+/** One first-run provisioning check (scope, tools, WSL/docker runtimes, inventory dir). */
+export type ArmorySetupItem = {
+  id: string
+  ok: boolean
+  detail: string
+  hint?: string
+}
+
+export type ArmorySetupState = {
+  items: readonly ArmorySetupItem[]
+}
+
 export type ArmoryHealthEntry = {
   toolId: string
   state: ArmoryHealthEntryState

@@ -1,4 +1,8 @@
-import type { ArmoryScopeState } from '../../../../shared/armory-contract'
+import type {
+  ArmoryScopeState,
+  ArmorySetupItem,
+  ArmorySetupState
+} from '../../../../shared/armory-contract'
 import { cn } from '@/lib/utils'
 import { translate } from '@/i18n/i18n'
 import { Badge } from '@/components/ui/badge'
@@ -6,11 +10,34 @@ import { Badge } from '@/components/ui/badge'
 const describeScope = (scope: ArmoryScopeState): string =>
   [...scope.targets, ...scope.cidrs].join(', ')
 
+const SetupChecklist = ({ items }: { items: readonly ArmorySetupItem[] }): React.JSX.Element => {
+  const failing = items.filter((item) => !item.ok)
+  if (failing.length === 0) {
+    return (
+      <Badge
+        variant="outline"
+        className="border-emerald-600/50 text-emerald-600 dark:text-emerald-400"
+      >
+        {translate('auto.components.armory.ArmoryScopeBanner.setupReady', 'Environment ready')}
+      </Badge>
+    )
+  }
+  return (
+    <span className="truncate font-mono text-xs text-amber-600 dark:text-amber-400">
+      {translate('auto.components.armory.ArmoryScopeBanner.setupPending', 'Setup:')}{' '}
+      {failing
+        .map((item) => `${item.id} — ${item.detail}${item.hint ? ` (${item.hint})` : ''}`)
+        .join(' · ')}
+    </span>
+  )
+}
+
 export function ArmoryScopeBanner(props: {
   scope: ArmoryScopeState | null
+  setup?: ArmorySetupState | null
   onReload: () => void
 }): React.JSX.Element {
-  const { scope, onReload } = props
+  const { scope, setup, onReload } = props
   if (scope === null) {
     return <div className="h-7 shrink-0" />
   }
@@ -40,6 +67,11 @@ export function ArmoryScopeBanner(props: {
             'Exploit-class authorized'
           )}
         </Badge>
+      ) : null}
+      {setup ? (
+        <span className={cn('truncate font-mono text-xs')}>
+          <SetupChecklist items={setup.items} />
+        </span>
       ) : null}
       <button
         type="button"

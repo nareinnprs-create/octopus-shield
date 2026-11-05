@@ -3,6 +3,7 @@ import type {
   ArmoryHealthReport,
   ArmoryRunOutcome,
   ArmoryScopeState,
+  ArmorySetupState,
   ArmoryToolView
 } from '../../../../shared/armory-contract'
 import { translate } from '@/i18n/i18n'
@@ -22,6 +23,7 @@ export default function ArmoryPage(): React.JSX.Element {
   const [tools, setTools] = useState<readonly ArmoryToolView[] | null>(null)
   const [listError, setListError] = useState<string | null>(null)
   const [scope, setScope] = useState<ArmoryScopeState | null>(null)
+  const [setup, setSetup] = useState<ArmorySetupState | null>(null)
   const [health, setHealth] = useState<ArmoryHealthReport | null>(null)
   const [healthRunning, setHealthRunning] = useState(false)
   const [runDialogToolId, setRunDialogToolId] = useState<string | null>(null)
@@ -34,13 +36,14 @@ export default function ArmoryPage(): React.JSX.Element {
     if (!armory) {
       return
     }
-    void Promise.all([armory.list(), armory.scope()])
-      .then(([toolViews, scopeState]) => {
+    void Promise.all([armory.list(), armory.scope(), armory.setup()])
+      .then(([toolViews, scopeState, setupState]) => {
         if (cancelled) {
           return
         }
         setTools(toolViews)
         setScope(scopeState)
+        setSetup(setupState)
         setListError(null)
       })
       .catch((error: unknown) => {
@@ -131,7 +134,11 @@ export default function ArmoryPage(): React.JSX.Element {
         </div>
       ) : null}
 
-      <ArmoryScopeBanner scope={scope} onReload={() => setReloadNonce((nonce) => nonce + 1)} />
+      <ArmoryScopeBanner
+        scope={scope}
+        setup={setup}
+        onReload={() => setReloadNonce((nonce) => nonce + 1)}
+      />
 
       <div className="flex shrink-0 items-center gap-2 px-3 pb-2 md:px-5">
         <Button

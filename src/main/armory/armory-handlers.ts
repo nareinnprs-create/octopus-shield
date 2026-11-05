@@ -1,7 +1,12 @@
 import { ipcMain, app, type IpcMainInvokeEvent } from 'electron'
+import { existsSync } from 'node:fs'
 import { join } from 'node:path'
 import { runProcess } from '@shield/process-host'
-import { loadToolInventory, toolInventoryLoadPaths } from '@shield/armory/inventory'
+import {
+  armoryInventoryDir,
+  loadToolInventory,
+  toolInventoryLoadPaths
+} from '@shield/armory/inventory'
 import { discoverTools, writeDiscoveredInventory } from '@shield/armory/discovery'
 import { buildArgv, runArmoryTool } from '@shield/armory/tool-runner'
 import { scopeFromEnv } from '@shield/armory/tool-scope'
@@ -13,6 +18,8 @@ import type {
   ArmoryRunIpcRequest,
   ArmoryRunOutcome,
   ArmoryScopeState,
+  ArmorySetupItem,
+  ArmorySetupState,
   ArmoryToolView
 } from '../../shared/armory-contract'
 import { ArmoryRunIpcRequestSchema } from '../../shared/armory-contract'
@@ -26,6 +33,8 @@ export type ArmoryHandlerDeps = {
   listTools: () => readonly ArmoryToolDescriptor[]
   /** Best-effort first-run tool discovery; list handlers await it so fresh devices self-populate. */
   ensureDiscovered?: () => Promise<void>
+  /** Resolved userData inventory dir (setup reporting). */
+  inventoryDir?: string
   runVersionProbe: (
     program: string,
     args: readonly string[],
@@ -38,6 +47,7 @@ const defaultArmoryHandlerDeps = (): ArmoryHandlerDeps => {
   const shippedInventoryDir = app.isPackaged
     ? join(process.resourcesPath, 'armory', 'inventory')
     : join(app.getAppPath(), 'resources', 'armory', 'inventory')
+  const inventoryDir = armoryInventoryDir({ userDataPath, env: process.env })
   let discoveryOnce: Promise<void> | null = null
   return {
     env: process.env,
@@ -45,6 +55,7 @@ const defaultArmoryHandlerDeps = (): ArmoryHandlerDeps => {
       loadToolInventory(
         toolInventoryLoadPaths({ userDataPath, env: process.env, shippedInventoryDir })
       ),
+    inventoryDir,
     ensureDiscovered: () => {
       discoveryOnce ??= discoverTools(process.platform, process.env)
         .then((tools) => {
@@ -151,6 +162,72 @@ const runTool = async (deps: ArmoryHandlerDeps, rawRequest: unknown): Promise<Ar
   return { ok: true, record: result.record, auditEvent: armoryRunAuditEvent(result.record) }
 }
 
+const setupReport = async (deps: ArmoryHandlerDeps): Promise<ArmorySetupState> => {
+  const items: ArmorySetupItem[] = []
+  const scope = scopeState(deps)
+  items.push({
+    id: 'scope',
+    ok: scope.authorized,
+    detail: scope.authorized
+      ? `scope: ${[...scope.targets, ...scope.cidrs].join(', ')}`
+      : 'no authorized scope',
+    hint: 'set OSHIELD_ARMORY_SCOPE (e.g. 192.168.1.0/24) and relaunch'
+  })
+  const nmap = deps.listTools().find((tool) => tool.id === 'nmap')
+  items.push({
+    id: 'nmap',
+    ok: nmap?.status === 'ok',
+    detail: nmap?.status === 'ok' ? `nmap found: ${nmap.target}` : 'nmap not discovered',
+    hint: 'install nmap (nmap.org) or add it to PATH; the armory re-probes on next open'
+  })
+  const inventoryDir = deps.inventoryDir ?? ''
+  items.push({
+    id: 'inventory',
+    ok: inventoryDir.length > 0 && existsSync(inventoryDir),
+    detail: inventoryDir.length > 0 ? `inventory: ${inventoryDir}` : 'inventory dir unresolved',
+    hint: 'opens automatically after the first Armory page load'
+  })
+  try {
+    const wsl = await deps.runVersionProbe('wsl', ['--status'], 6_000)
+    items.push({
+      id: 'wsl',
+      ok: wsl.code === 0,
+      detail:
+        wsl.code === 0
+          ? 'WSL available (Ubuntu-backed tools usable)'
+          : `WSL probe exit ${wsl.code}`,
+      hint: 'wsl --install -d Ubuntu enables WSL-runtime tools'
+    })
+  } catch (error) {
+    items.push({
+      id: 'wsl',
+      ok: false,
+      detail: `WSL unavailable: ${(error instanceof Error ? error.message : String(error)).slice(0, DETAIL_MAX_CHARS)}`,
+      hint: 'wsl --install -d Ubuntu enables WSL-runtime tools'
+    })
+  }
+  try {
+    const docker = await deps.runVersionProbe('docker', ['--version'], 6_000)
+    items.push({
+      id: 'docker',
+      ok: docker.code === 0,
+      detail:
+        docker.code === 0
+          ? `docker: ${firstLine(docker.stdout)}`
+          : `docker probe exit ${docker.code}`,
+      hint: 'start Docker Desktop to enable docker-runtime tools'
+    })
+  } catch (error) {
+    items.push({
+      id: 'docker',
+      ok: false,
+      detail: `docker unavailable: ${(error instanceof Error ? error.message : String(error)).slice(0, DETAIL_MAX_CHARS)}`,
+      hint: 'start Docker Desktop to enable docker-runtime tools'
+    })
+  }
+  return { items }
+}
+
 export function registerArmoryHandlers(deps: ArmoryHandlerDeps = defaultArmoryHandlerDeps()): void {
   const handleTrusted = (
     channel: string,
@@ -170,5 +247,6 @@ export function registerArmoryHandlers(deps: ArmoryHandlerDeps = defaultArmoryHa
   })
   handleTrusted('armory:scope', () => scopeState(deps))
   handleTrusted('armory:health', () => healthReport(deps))
+  handleTrusted('armory:setup', () => setupReport(deps))
   handleTrusted('armory:run', (_event, rawRequest: unknown) => runTool(deps, rawRequest))
 }
