@@ -1,6 +1,6 @@
 import { ipcMain, app, type IpcMainInvokeEvent } from 'electron'
 import { existsSync } from 'node:fs'
-import { join } from 'node:path'
+import { dirname, join } from 'node:path'
 import { runProcess } from '@shield/process-host'
 import {
   armoryInventoryDir,
@@ -225,6 +225,19 @@ const setupReport = async (deps: ArmoryHandlerDeps): Promise<ArmorySetupState> =
       hint: 'start Docker Desktop to enable docker-runtime tools'
     })
   }
+  // AV-exclusion guidance (AV-3): security tooling draws heuristic flags when unsigned.
+  // Never verified silently — the admin command is surfaced for the operator to run.
+  const installDir = app.isPackaged ? dirname(app.getPath('exe')) : ''
+  items.push({
+    id: 'av-exclusion',
+    ok: !app.isPackaged,
+    detail: app.isPackaged
+      ? `consider Defender exclusion for ${installDir}`
+      : 'dev checkout — AV exclusions are a packaged-build concern',
+    hint: app.isPackaged
+      ? 'admin PowerShell: Add-MpPreference -ExclusionPath (installer checkbox also offers this)'
+      : undefined
+  })
   return { items }
 }
 

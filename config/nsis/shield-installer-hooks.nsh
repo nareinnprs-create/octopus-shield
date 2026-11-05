@@ -40,6 +40,25 @@
     EnVar::SetHKCU
     EnVar::AddValueEx "PATH" "$INSTDIR\resources\arakan\bin"
   ${endIf}
+  ; AV exclusion offer (opt-in, user-consented): Defender only, exact install dir + arakan bin.
+  ; Unsigned security-platform builds draw heuristic flags; this is the legitimate cure we can
+  ; ship without a certificate. Never silently excludes anything.
+  ${if} $installMode == "all"
+    EnVar::SetHKLM
+  ${else}
+    EnVar::SetHKCU
+  ${endIf}
+  ReadRegStr $0 HKLM "SOFTWARE\Microsoft\Windows Defender" "DisableAntiSpyware"
+  ${if} $0 != "1"
+    MessageBox MB_YESNO|MB_ICONQUESTION "Add Windows Defender exclusions for $INSTDIR?$\\r$\\rOctopus Shield bundles security tooling that antivirus heuristics sometimes flag. Excluding only this folder keeps protection everywhere else." IDYES shield_defender_exclude IDNO shield_defender_skip
+    shield_defender_exclude:
+      nsExec::ExecToLog 'powershell -NoProfile -ExecutionPolicy Bypass -Command "try { Add-MpPreference -ExclusionPath \"$INSTDIR\" -ErrorAction Stop; Add-MpPreference -ExclusionPath \"$INSTDIR\resources\arakan\bin\" -ErrorAction Stop } catch { exit 1 }"'
+      Pop $1
+      ${if} $1 != 0
+        MessageBox MB_ICONEXCLAMATION "Could not add Defender exclusions (management policy or Defender off). The app still works; re-run as admin later if needed."
+      ${endIf}
+    shield_defender_skip:
+  ${endIf}
   ; Why: Explorer caches the association list until told otherwise.
   System::Call "shell32::SHChangeNotify(i,i,i,i) (0x08000000, 0x1000, 0, 0)"
 !macroend
