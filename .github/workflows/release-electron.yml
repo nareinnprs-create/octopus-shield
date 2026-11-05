@@ -31,7 +31,10 @@ jobs:
       - name: Install mobile workspace deps (mobile-web bundle stage needs react-native-web)
         run: pnpm --dir mobile install --frozen-lockfile
       - name: Build Windows installer (NSIS)
-        run: pnpm run build:win -- --publish never
+        run: |
+          pnpm run build:desktop
+          pnpm run ensure:electron-runtime
+          pnpm exec electron-builder --config config/electron-builder.config.cjs --win --publish never
         env:
           CSC_IDENTITY_AUTO_DISCOVERY: 'false'
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -59,7 +62,10 @@ jobs:
       - name: Install mobile workspace deps (mobile-web bundle stage needs react-native-web)
         run: pnpm --dir mobile install --frozen-lockfile
       - name: Build Linux packages (AppImage/deb/rpm)
-        run: pnpm run build:linux -- --publish never
+        run: |
+          pnpm run build:desktop
+          pnpm run ensure:electron-runtime
+          pnpm exec electron-builder --config config/electron-builder.config.cjs --linux AppImage deb rpm --x64 --publish never
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Upload artifacts
