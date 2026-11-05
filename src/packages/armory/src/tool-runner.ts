@@ -45,6 +45,9 @@ export const buildArgv = (
   if (tool.runtime === 'wsl') {
     return { ok: true, argv: ['wsl', '-d', 'Ubuntu', '-u', 'root', '-e', tool.target, ...args] }
   }
+  if (tool.runtime === 'native') {
+    return { ok: true, argv: [tool.target, ...args] }
+  }
   if (!osPathLooksAbsolute(tool.target)) {
     return { ok: false, reason: `win tool target must be an absolute path: ${tool.target}` }
   }

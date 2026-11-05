@@ -5,10 +5,10 @@ export type ArmoryToolView = {
   id: string
   title: string
   category: string
-  runtime: 'win' | 'wsl' | 'docker'
+  runtime: 'win' | 'wsl' | 'docker' | 'native'
   target: string
   scopeClass: string
-  status: 'ok' | 'failed' | 'quarantined-by-av' | 'skipped'
+  status: 'ok' | 'failed' | 'quarantined-by-av' | 'skipped' | 'not-discovered'
 }
 
 /** OSHIELD_ARMORY_SCOPE projection; scope env is operator configuration, not secret material. */

@@ -132,6 +132,11 @@ const bundledPluginResources = {
   from: 'resources/plugins/launch',
   to: 'plugins/launch'
 }
+// Armory tool catalog: JSON rings read on real disk by the main process at first run.
+const armoryInventoryResources = {
+  from: 'resources/armory',
+  to: 'armory'
+}
 // Packaged main/CLI/SSH/speech paths lack pnpm links; copy runtime closure so bare requires cannot fall through to checkout dependencies.
 // Ship only the 166KB emoji dataset used by worktree naming, not all 49MB of emojibase-data.
 const emojiShortcodeDatasetResource = {

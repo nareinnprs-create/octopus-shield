@@ -1,6 +1,8 @@
-import { ipcMain, type IpcMainInvokeEvent } from 'electron'
+import { ipcMain, app, type IpcMainInvokeEvent } from 'electron'
+import { join } from 'node:path'
 import { runProcess } from '@shield/process-host'
-import { defaultInventoryPaths, loadToolInventory } from '@shield/armory/inventory'
+import { loadToolInventory, toolInventoryLoadPaths } from '@shield/armory/inventory'
+import { discoverTools, writeDiscoveredInventory } from '@shield/armory/discovery'
 import { buildArgv, runArmoryTool } from '@shield/armory/tool-runner'
 import { scopeFromEnv } from '@shield/armory/tool-scope'
 import { armoryRunAuditEvent } from '@shield/armory/armory-audit'
@@ -22,6 +24,8 @@ const DETAIL_MAX_CHARS = 80
 export type ArmoryHandlerDeps = {
   env: Readonly<Record<string, string | undefined>>
   listTools: () => readonly ArmoryToolDescriptor[]
+  /** Best-effort first-run tool discovery; list handlers await it so fresh devices self-populate. */
+  ensureDiscovered?: () => Promise<void>
   runVersionProbe: (
     program: string,
     args: readonly string[],
@@ -29,17 +33,37 @@ export type ArmoryHandlerDeps = {
   ) => Promise<{ code: number | null; stdout: string; stderr: string; timedOut?: boolean }>
 }
 
-const defaultArmoryHandlerDeps = (): ArmoryHandlerDeps => ({
-  env: process.env,
-  listTools: () => loadToolInventory(defaultInventoryPaths()),
-  runVersionProbe: (program, args, timeoutMs) =>
-    runProcess({ program, args, timeoutMs }).then((run) => ({
-      code: run.code,
-      stdout: run.stdout,
-      stderr: run.stderr,
-      ...(run.timedOut === true ? { timedOut: true } : {})
-    }))
-})
+const defaultArmoryHandlerDeps = (): ArmoryHandlerDeps => {
+  const userDataPath = app.getPath('userData')
+  const shippedInventoryDir = app.isPackaged
+    ? join(process.resourcesPath, 'armory', 'inventory')
+    : join(app.getAppPath(), 'resources', 'armory', 'inventory')
+  let discoveryOnce: Promise<void> | null = null
+  return {
+    env: process.env,
+    listTools: () =>
+      loadToolInventory(
+        toolInventoryLoadPaths({ userDataPath, env: process.env, shippedInventoryDir })
+      ),
+    ensureDiscovered: () => {
+      discoveryOnce ??= discoverTools(process.platform, process.env)
+        .then((tools) => {
+          writeDiscoveredInventory({ userDataPath, env: process.env }, tools)
+        })
+        .catch(() => {
+          // Discovery is best-effort; the shipped rings keep the armory usable without it.
+        })
+      return discoveryOnce
+    },
+    runVersionProbe: (program, args, timeoutMs) =>
+      runProcess({ program, args, timeoutMs }).then((run) => ({
+        code: run.code,
+        stdout: run.stdout,
+        stderr: run.stderr,
+        ...(run.timedOut === true ? { timedOut: true } : {})
+      }))
+  }
+}
 
 const toToolView = (tool: ArmoryToolDescriptor): ArmoryToolView => ({
   id: tool.id,
@@ -140,7 +164,10 @@ export function registerArmoryHandlers(deps: ArmoryHandlerDeps = defaultArmoryHa
     })
   }
 
-  handleTrusted('armory:list', () => deps.listTools().map(toToolView))
+  handleTrusted('armory:list', async () => {
+    await deps.ensureDiscovered?.()
+    return deps.listTools().map(toToolView)
+  })
   handleTrusted('armory:scope', () => scopeState(deps))
   handleTrusted('armory:health', () => healthReport(deps))
   handleTrusted('armory:run', (_event, rawRequest: unknown) => runTool(deps, rawRequest))

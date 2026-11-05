@@ -40,6 +40,11 @@
       "types": "./dist/inventory.d.ts",
       "default": "./dist/inventory.js"
     },
+    "./discovery": {
+      "shield-source": "./src/discovery.ts",
+      "types": "./dist/discovery.d.ts",
+      "default": "./dist/discovery.js"
+    },
     "./armory-cli": {
       "shield-source": "./src/armory-cli.ts",
       "types": "./dist/armory-cli.d.ts",

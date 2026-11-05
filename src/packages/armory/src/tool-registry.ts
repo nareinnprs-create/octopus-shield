@@ -1,6 +1,7 @@
 /** Armory tool descriptor: one integrated security tool, never executed without scope authorization. */
 
-export type ArmoryRuntime = 'win' | 'wsl' | 'docker'
+/** 'native' is used only by discovery output on macOS/Linux hosts (no wsl/docker wrapper). */
+export type ArmoryRuntime = 'win' | 'wsl' | 'docker' | 'native'
 
 export type ArmoryCategory =
   | 'recon'
@@ -38,7 +39,7 @@ export type ArmoryToolDescriptor = {
   /** Exact invocation producing a version/help string; used by inventory smoke. */
   versionArgv: readonly string[]
   scopeClass: ArmoryScopeClass
-  status: 'ok' | 'failed' | 'quarantined-by-av' | 'skipped'
+  status: 'ok' | 'failed' | 'quarantined-by-av' | 'skipped' | 'not-discovered'
   /**
    * Docker-only: full host argv replacing the default `docker run --rm IMAGE args`
    * pattern (needed for images with entrypoint quirks, e.g. bundle-exec Metasploit).

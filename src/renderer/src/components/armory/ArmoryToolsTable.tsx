@@ -12,7 +12,8 @@ const STATUS_BADGE: Record<ArmoryToolView['status'], { label: string; className?
     label: 'Quarantined',
     className: 'border-destructive/50 text-destructive'
   },
-  skipped: { label: 'Skipped' }
+  skipped: { label: 'Skipped' },
+  'not-discovered': { label: 'Setup needed', className: 'border-amber-500/50 text-amber-500' }
 }
 
 const HEALTH_DETAIL_STATE: Record<ArmoryHealthEntry['state'], string> = {

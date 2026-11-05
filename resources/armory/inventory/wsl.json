@@ -1,0 +1,46 @@
+[
+  {
+    "_note": "Optional runtime ring — only populated when a WSL distro with pentest tools exists. Discovery currently reports native tools; these entries stay not-discovered until a WSL inventory ring lands.",
+    "id": "nmap",
+    "runtime": "wsl",
+    "requiresDiscovery": true,
+    "status": "not-discovered",
+    "notes": "WSL is an optional runtime; runtimes resolve at run time inside the distro."
+  },
+  {
+    "id": "hydra",
+    "runtime": "wsl",
+    "requiresDiscovery": true,
+    "status": "not-discovered"
+  },
+  {
+    "id": "sqlmap",
+    "runtime": "wsl",
+    "requiresDiscovery": true,
+    "status": "not-discovered"
+  },
+  {
+    "id": "nikto",
+    "runtime": "wsl",
+    "requiresDiscovery": true,
+    "status": "not-discovered"
+  },
+  {
+    "id": "ffuf",
+    "runtime": "wsl",
+    "requiresDiscovery": true,
+    "status": "not-discovered"
+  },
+  {
+    "id": "whatweb",
+    "runtime": "wsl",
+    "requiresDiscovery": true,
+    "status": "not-discovered"
+  },
+  {
+    "id": "whois",
+    "runtime": "wsl",
+    "requiresDiscovery": true,
+    "status": "not-discovered"
+  }
+]

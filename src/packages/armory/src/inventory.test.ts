@@ -46,8 +46,22 @@ describe('descriptorsFromInventories', () => {
 
   it('target precedence is image > binPath > exePath > winInvoke', () => {
     const [both, binOverExe, invoked] = descriptorsFromInventories([
-      [entry({ image: 'nmap:latest', binPath: '/usr/bin/nmap', exePath: 'C:\\nmap.exe', winInvoke: 'nmap.exe' })],
-      [entry({ binPath: '/usr/bin/sqlmap', exePath: 'C:\\sqlmap.exe', winInvoke: 'sqlmap.exe', id: 'sqlmap' })],
+      [
+        entry({
+          image: 'nmap:latest',
+          binPath: '/usr/bin/nmap',
+          exePath: 'C:\\nmap.exe',
+          winInvoke: 'nmap.exe'
+        })
+      ],
+      [
+        entry({
+          binPath: '/usr/bin/sqlmap',
+          exePath: 'C:\\sqlmap.exe',
+          winInvoke: 'sqlmap.exe',
+          id: 'sqlmap'
+        })
+      ],
       [entry({ id: 'netexec', runtime: 'win', winInvoke: 'nxc.cmd' })]
     ])
     expect(both?.target).toBe('nmap:latest')
@@ -70,7 +84,10 @@ describe('descriptorsFromInventories', () => {
 
   it('skips unknown tool ids', () => {
     const descriptors = descriptorsFromInventories([
-      [entry({ id: 'totally-unknown-tool', image: 'x:latest' }), entry({ id: 'masscan', image: 'masscan:latest' })]
+      [
+        entry({ id: 'totally-unknown-tool', image: 'x:latest' }),
+        entry({ id: 'masscan', image: 'masscan:latest' })
+      ]
     ])
     expect(descriptors.map((descriptor) => descriptor.id)).toEqual(['masscan'])
   })
@@ -82,7 +99,15 @@ describe('descriptorsFromInventories', () => {
 
   it('keeps failed entries so the runner can refuse them explicitly', () => {
     const [failed] = descriptorsFromInventories([
-      [entry({ id: 'hydra', runtime: 'wsl', binPath: '/usr/bin/hydra', status: 'failed', error: 'build failed' })]
+      [
+        entry({
+          id: 'hydra',
+          runtime: 'wsl',
+          binPath: '/usr/bin/hydra',
+          status: 'failed',
+          error: 'build failed'
+        })
+      ]
     ])
     expect(failed?.status).toBe('failed')
     expect(failed?.scopeClass).toBe('cracking')
@@ -116,7 +141,10 @@ describe('inventory loading', () => {
   it('loads ring files and skips missing rings without losing the rest', () => {
     const dir = tempInventoryDir()
     const wslRing = join(dir, 'wsl.json')
-    writeFileSync(wslRing, JSON.stringify([entry({ id: 'nmap', runtime: 'wsl', binPath: '/usr/bin/nmap' })]))
+    writeFileSync(
+      wslRing,
+      JSON.stringify([entry({ id: 'nmap', runtime: 'wsl', binPath: '/usr/bin/nmap' })])
+    )
 
     const tools = loadToolInventory([wslRing, join(dir, 'missing.json')])
     expect(tools.map((tool) => tool.id)).toEqual(['nmap'])
@@ -134,14 +162,15 @@ describe('inventory loading', () => {
     expect(tools[0]?.target).toBe('nmap:first')
   })
 
-  it('defaultInventoryPaths covers the four ring files under the inventory dir', () => {
+  it('defaultInventoryPaths covers the ring files plus discovery output under the inventory dir', () => {
     process.env.OSHIELD_ARMORY_INVENTORY = tempInventoryDir()
     const paths = defaultInventoryPaths()
     expect(paths.map((path) => path.split(/[\\/]/).at(-1))).toEqual([
       'windows.json',
       'wsl.json',
       'docker.json',
-      'extra.json'
+      'extra.json',
+      'discovered.json'
     ])
     for (const path of paths) {
       expect(path.startsWith(process.env.OSHIELD_ARMORY_INVENTORY)).toBe(true)

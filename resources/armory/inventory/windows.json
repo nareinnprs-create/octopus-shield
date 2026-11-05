@@ -1,0 +1,51 @@
+[
+  {
+    "id": "nmap",
+    "runtime": "win",
+    "requiresDiscovery": true,
+    "status": "not-discovered",
+    "notes": "Placeholder until armory discovery resolves nmap.exe; no hardcoded dev path ships."
+  },
+  {
+    "id": "hydra",
+    "runtime": "win",
+    "requiresDiscovery": true,
+    "status": "not-discovered",
+    "notes": "Placeholder until armory discovery resolves hydra.exe."
+  },
+  {
+    "id": "sqlmap",
+    "runtime": "win",
+    "requiresDiscovery": true,
+    "status": "not-discovered",
+    "notes": "Placeholder until armory discovery resolves the sqlmap entry (python frontend; PATH-only probing)."
+  },
+  {
+    "id": "nikto",
+    "runtime": "win",
+    "requiresDiscovery": true,
+    "status": "not-discovered",
+    "notes": "Placeholder until armory discovery resolves the nikto entry (perl frontend; PATH-only probing)."
+  },
+  {
+    "id": "ffuf",
+    "runtime": "win",
+    "requiresDiscovery": true,
+    "status": "not-discovered",
+    "notes": "Placeholder until armory discovery resolves ffuf.exe."
+  },
+  {
+    "id": "whatweb",
+    "runtime": "win",
+    "requiresDiscovery": true,
+    "status": "not-discovered",
+    "notes": "Placeholder until armory discovery resolves the whatweb entry (ruby frontend; PATH-only probing)."
+  },
+  {
+    "id": "whois",
+    "runtime": "win",
+    "requiresDiscovery": true,
+    "status": "not-discovered",
+    "notes": "Placeholder until armory discovery resolves the whois entry; Sysinternals-style installs vary."
+  }
+]

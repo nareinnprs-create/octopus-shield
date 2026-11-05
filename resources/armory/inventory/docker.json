@@ -1,0 +1,22 @@
+[
+  {
+    "_note": "Optional runtime ring — image targets are supplied by install-ring agents on machines that build/run the images; a fresh device ships these as not-discovered so the UI shows setup state.",
+    "id": "nmap",
+    "runtime": "docker",
+    "requiresDiscovery": true,
+    "status": "not-discovered",
+    "notes": "Docker is an optional runtime; image target resolves when a docker ring is provisioned."
+  },
+  {
+    "id": "sqlmap",
+    "runtime": "docker",
+    "requiresDiscovery": true,
+    "status": "not-discovered"
+  },
+  {
+    "id": "nikto",
+    "runtime": "docker",
+    "requiresDiscovery": true,
+    "status": "not-discovered"
+  }
+]

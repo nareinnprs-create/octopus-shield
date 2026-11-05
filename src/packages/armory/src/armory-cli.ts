@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { appendFileSync, mkdirSync, readFileSync } from 'node:fs'
+import { appendFileSync, existsSync, mkdirSync } from 'node:fs'
 import { dirname, join, resolve } from 'node:path'
 import type { EngineEnvLike } from '@shield/engine-contracts'
 import type { AuditEvent } from '@shield/access/audit-chain'
@@ -8,20 +8,26 @@ import { createPostgresAuditSink, type PostgresAuditSink } from '@shield/audit-s
 import { runProcess } from '@shield/process-host'
 import { armoryRunAuditEvent } from './armory-audit'
 import { buildArgv, runArmoryTool } from './tool-runner'
-import { defaultInventoryPaths, loadToolInventory } from './inventory'
+import { loadToolInventory, toolInventoryLoadPaths } from './inventory'
 import type { ArmoryToolDescriptor } from './tool-registry'
 import { scopeFromEnv } from './tool-scope'
 
 export type ArmoryCliOptions = {
   argv: readonly string[]
   env: EngineEnvLike
-  /** Ring inventory paths; defaults to %TEMP%\opencode\armory\<ring>.json set. */
+  /** Ring inventory paths; defaults to the userData/env-resolved ring set. */
   inventoryPaths?: readonly string[]
+  /** App userData dir (electron app.getPath('userData')) backing inventory and run history. */
+  userDataPath?: string
   out?: (line: string) => void
   err?: (line: string) => void
 }
 
 let pgAuditSink: PostgresAuditSink | null = null
+
+/** Password file resolution: env override, then repo-relative fallback; the secret itself is never printed. */
+const nucleusPasswordFile = (): string =>
+  process.env.OSHIELD_NUCLEUS_PG_PASSWORD_FILE ?? join('infra', '.pg_password')
 
 /** Best-effort nucleus ledger persistence (OSHIELD_AUDIT_PG=1); the printed event stays authoritative on failure. */
 async function persistAuditEventToNucleus(
@@ -32,12 +38,17 @@ async function persistAuditEventToNucleus(
     return
   }
   try {
+    if (!existsSync(nucleusPasswordFile())) {
+      throw new Error(
+        `password file not found: ${nucleusPasswordFile()} — set OSHIELD_NUCLEUS_PG_PASSWORD_FILE`
+      )
+    }
     pgAuditSink ??= createPostgresAuditSink({
       host: '127.0.0.1',
       port: 5435,
       database: 'octopusshield',
       user: 'octopus',
-      passwordFile: process.env.OSHIELD_NUCLEUS_PG_PASSWORD_FILE ?? resolve('infra', '.pg_password')
+      passwordFile: resolve(nucleusPasswordFile())
     })
     await pgAuditSink.append(event, sha256EntryHashFn)
   } catch (error) {
@@ -51,19 +62,36 @@ async function persistAuditEventToNucleus(
 
 export /** Local run-history JSONL (machine-local; the Postgres chain is the tamper-evident system of record). */
 function appendRunHistory(
-  record: { toolId: string; argv: readonly string[]; targets: readonly string[]; exitCode: number | null; timedOut: boolean; durationMs: number },
+  record: {
+    toolId: string
+    argv: readonly string[]
+    targets: readonly string[]
+    exitCode: number | null
+    timedOut: boolean
+    durationMs: number
+  },
+  options: ArmoryCliOptions,
   err: (line: string) => void
 ): void {
+  const file =
+    options.env.OSHIELD_ARMORY_HISTORY ??
+    (options.userDataPath === undefined
+      ? undefined
+      : join(options.userDataPath, 'armory', 'history', 'runs.jsonl'))
+  if (file === undefined) {
+    err('armory: run-history disabled — set OSHIELD_ARMORY_HISTORY or run via the app profile')
+    return
+  }
   try {
-    const file =
-      process.env.OSHIELD_ARMORY_HISTORY ?? 'C:\\Users\\manag\\tools\\armory\\history\\runs.jsonl'
     mkdirSync(dirname(file), { recursive: true })
     appendFileSync(
       file,
-      JSON.stringify({ ts: Date.now(), tool: record.toolId, argv: record.argv, targets: record.targets, exit: record.exitCode, timedOut: record.timedOut, ms: record.durationMs }) + '\n'
+      `${JSON.stringify({ ts: Date.now(), tool: record.toolId, argv: record.argv, targets: record.targets, exit: record.exitCode, timedOut: record.timedOut, ms: record.durationMs })}\n`
     )
   } catch (error) {
-    err(`armory: run-history append failed (non-fatal): ${error instanceof Error ? error.message : String(error)}`)
+    err(
+      `armory: run-history append failed (non-fatal): ${error instanceof Error ? error.message : String(error)}`
+    )
   }
 }
 
@@ -71,7 +99,10 @@ async function runArmoryCli(options: ArmoryCliOptions): Promise<number> {
   const out = options.out ?? ((line: string) => process.stdout.write(`${line}\n`))
   const err = options.err ?? ((line: string) => process.stderr.write(`${line}\n`))
   const argv = options.argv
-  const tools = loadToolInventory(options.inventoryPaths ?? defaultInventoryPaths())
+  const tools = loadToolInventory(
+    options.inventoryPaths ??
+      toolInventoryLoadPaths({ userDataPath: options.userDataPath, env: options.env })
+  )
 
   if (argv[0] === 'list') {
     if (!argv.includes('--fast')) {
@@ -108,11 +139,19 @@ async function runArmoryCli(options: ArmoryCliOptions): Promise<number> {
       .filter((t) => t.length > 0)
     const args = argv.slice(split + 1)
     const targets = declared ?? args.filter((raw) => !raw.startsWith('-'))
+    const timeoutRaw = argv.find((raw) => raw.startsWith('--timeout-ms='))
+    const timeoutMs =
+      timeoutRaw === undefined
+        ? undefined
+        : Number.parseInt(timeoutRaw.slice('--timeout-ms='.length), 10)
     const result = await runArmoryTool(tool, {
       args,
       targets,
       scope,
-      exploitAuthorized
+      exploitAuthorized,
+      ...(timeoutMs === undefined || !Number.isSafeInteger(timeoutMs) || timeoutMs <= 0
+        ? {}
+        : { timeoutMs })
     })
     if (!result.ok) {
       err(`armory: DENIED — ${result.reason}`)
@@ -127,14 +166,17 @@ async function runArmoryCli(options: ArmoryCliOptions): Promise<number> {
     const auditEvent = armoryRunAuditEvent(result.record)
     out(`audit ${JSON.stringify(auditEvent)}`)
     await persistAuditEventToNucleus(auditEvent, err)
-    appendRunHistory(result.record, err)
+    appendRunHistory(result.record, options, err)
     out(
       `armory: ${tool.id} exit=${result.record.exitCode ?? 'timeout'} in ${result.record.durationMs}ms`
     )
     return result.record.exitCode === 0 ? 0 : 1
   }
 
-  async function runHealth(out: (line: string) => void, err: (line: string) => void): Promise<void> {
+  async function runHealth(
+    out: (line: string) => void,
+    err: (line: string) => void
+  ): Promise<void> {
     err('checking every tool (version smoke, 8s cap each)...')
     let healthy = 0
     let checkable = 0

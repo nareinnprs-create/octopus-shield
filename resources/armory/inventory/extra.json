@@ -1,0 +1,24 @@
+[
+  {
+    "_note": "Extra ring for tools outside the primary probe set; same placeholder rules apply (no hardcoded dev paths).",
+    "id": "masscan",
+    "runtime": "win",
+    "requiresDiscovery": true,
+    "status": "not-discovered",
+    "notes": "Placeholder until a masscan inventory resolves a target."
+  },
+  {
+    "id": "tshark",
+    "runtime": "win",
+    "requiresDiscovery": true,
+    "status": "not-discovered",
+    "notes": "Placeholder until a tshark inventory resolves a target."
+  },
+  {
+    "id": "tcpdump",
+    "runtime": "wsl",
+    "requiresDiscovery": true,
+    "status": "not-discovered",
+    "notes": "Placeholder until a tcpdump inventory resolves a target."
+  }
+]
