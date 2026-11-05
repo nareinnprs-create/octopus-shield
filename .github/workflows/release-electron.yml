@@ -28,6 +28,8 @@ jobs:
           cache: pnpm
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+      - name: Install mobile workspace deps (mobile-web bundle stage needs react-native-web)
+        run: pnpm --dir mobile install --frozen-lockfile
       - name: Build Windows installer (NSIS)
         run: pnpm run build:win
         env:
@@ -53,6 +55,8 @@ jobs:
           cache: pnpm
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+      - name: Install mobile workspace deps (mobile-web bundle stage needs react-native-web)
+        run: pnpm --dir mobile install --frozen-lockfile
       - name: Build Linux packages (AppImage/deb/rpm)
         run: pnpm run build:linux
       - name: Upload artifacts
