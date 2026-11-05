@@ -44,7 +44,7 @@
   ; AV exclusion offer (opt-in, user-consented): Defender only, exact install dir + arakan bin.
   ; Unsigned security-platform builds draw heuristic flags; this is the legitimate cure we can
   ; ship without a certificate. Never silently excludes anything.
-  MessageBox MB_YESNO|MB_ICONQUESTION "Add Windows Defender exclusions for $INSTDIR?$\\r$\\rOctopus Shield bundles security tooling that antivirus heuristics sometimes flag. Excluding only this folder keeps protection everywhere else." IDYES shield_defender_exclude IDNO shield_defender_skip
+  MessageBox MB_YESNO|MB_ICONQUESTION "Add Windows Defender exclusions for $INSTDIR?$\r$\rOctopus Shield bundles security tooling that antivirus heuristics sometimes flag. Excluding only this folder keeps protection everywhere else." IDYES shield_defender_exclude IDNO shield_defender_skip
   shield_defender_exclude:
     nsExec::ExecToLog 'powershell -NoProfile -ExecutionPolicy Bypass -Command "try { Add-MpPreference -ExclusionPath \"$INSTDIR\" -ErrorAction Stop; Add-MpPreference -ExclusionPath \"$INSTDIR\resources\arakan\bin\win-x64\" -ErrorAction Stop } catch { exit 1 }"'
     Pop $1
