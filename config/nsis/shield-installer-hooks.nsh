@@ -37,9 +37,9 @@
   ; electron-builder's NSIS bundle ships no EnVar plugin: PATH edits go through PowerShell
   ; (Machine scope for all-users installs, User scope otherwise), dedupe-checked.
   ${if} $installMode == "all"
-    nsExec::ExecToLog 'powershell -NoProfile -ExecutionPolicy Bypass -Command "$d=\"$INSTDIR\resources\arakan\bin\win-x64\"; $p=[Environment]::GetEnvironmentVariable(\"Path\",\"Machine\"); if (($p -split \";\") -notcontains $d) { [Environment]::SetEnvironmentVariable(\"Path\", \"$p;$d\", \"Machine\") }"'
+    nsExec::ExecToLog 'powershell -NoProfile -ExecutionPolicy Bypass -Command "$$d=\"$INSTDIR\resources\arakan\bin\win-x64\"; $$p=[Environment]::GetEnvironmentVariable(\"Path\",\"Machine\"); if (($$p -split \";\") -notcontains $$d) { [Environment]::SetEnvironmentVariable(\"Path\", \"$$p;$$d\", \"Machine\") }"'
   ${else}
-    nsExec::ExecToLog 'powershell -NoProfile -ExecutionPolicy Bypass -Command "$d=\"$INSTDIR\resources\arakan\bin\win-x64\"; $p=[Environment]::GetEnvironmentVariable(\"Path\",\"User\"); if (($p -split \";\") -notcontains $d) { [Environment]::SetEnvironmentVariable(\"Path\", \"$p;$d\", \"User\") }"'
+    nsExec::ExecToLog 'powershell -NoProfile -ExecutionPolicy Bypass -Command "$$d=\"$INSTDIR\resources\arakan\bin\win-x64\"; $$p=[Environment]::GetEnvironmentVariable(\"Path\",\"User\"); if (($$p -split \";\") -notcontains $$d) { [Environment]::SetEnvironmentVariable(\"Path\", \"$$p;$$d\", \"User\") }"'
   ${endIf}
   ; AV exclusion offer (opt-in, user-consented): Defender only, exact install dir + arakan bin.
   ; Unsigned security-platform builds draw heuristic flags; this is the legitimate cure we can
