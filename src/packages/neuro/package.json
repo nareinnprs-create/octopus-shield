@@ -44,6 +44,16 @@
       "shield-source": "./src/atlas-store-pg.ts",
       "types": "./dist/atlas-store-pg.d.ts",
       "default": "./dist/atlas-store-pg.js"
+    },
+    "./copilots": {
+      "shield-source": "./src/copilots.ts",
+      "types": "./dist/copilots.d.ts",
+      "default": "./dist/copilots.js"
+    },
+    "./copilot-bridge": {
+      "shield-source": "./src/copilot-bridge.ts",
+      "types": "./dist/copilot-bridge.d.ts",
+      "default": "./dist/copilot-bridge.js"
     }
   },
   "scripts": {
@@ -52,6 +62,7 @@
     "test": "vitest run --config vitest.config.ts"
   },
   "dependencies": {
+    "@shield/ganglion": "workspace:*",
     "@shield/process-host": "workspace:*",
     "pg": "^8.16.0"
   },

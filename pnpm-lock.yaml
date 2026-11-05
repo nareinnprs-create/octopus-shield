@@ -824,6 +824,9 @@ importers:
 
   src/packages/neuro:
     dependencies:
+      '@shield/ganglion':
+        specifier: workspace:*
+        version: link:../ganglion
       '@shield/process-host':
         specifier: workspace:*
         version: link:../process-host

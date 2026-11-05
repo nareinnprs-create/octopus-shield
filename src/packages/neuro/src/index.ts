@@ -39,3 +39,26 @@ export {
 } from './atlas-query'
 export { createNeuroPgClient, type NeuroPgHandle, type NeuroPgOptions } from './atlas-store-pg'
 export { createAtlasQueryBackend, type AtlasQueryBackend } from './atlas-backend'
+export {
+  BUILTIN_COPILOTS,
+  COPILOT_TOOL_GRANTS,
+  MAX_COPILOT_PROMPT_CHARS,
+  copilotSpawnRequest,
+  createCopilotRegistry,
+  listCopilots,
+  registerCustomCopilot,
+  type CopilotDefinition,
+  type CopilotRegistry,
+  type CopilotSpawnRequest,
+  type CopilotToolGrant,
+  type CustomCopilotInput,
+  type RegisterCopilotOutcome
+} from './copilots'
+export {
+  planCopilotSpawn,
+  spawnCopilotTask,
+  type CopilotSpawnInput,
+  type CopilotSpawnPlan,
+  type CopilotSpawnPlanOutcome,
+  type CopilotSpawner
+} from './copilot-bridge'
