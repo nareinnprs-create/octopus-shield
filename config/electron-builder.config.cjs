@@ -137,6 +137,11 @@ const armoryInventoryResources = {
   from: 'resources/armory',
   to: 'armory'
 }
+// Arakan agent brain binaries (per-platform, CI-built; batch C2) — spawned via PATH shim or bundled dir.
+const arakanBinaryResources = {
+  from: 'resources/arakan',
+  to: 'arakan'
+}
 // Packaged main/CLI/SSH/speech paths lack pnpm links; copy runtime closure so bare requires cannot fall through to checkout dependencies.
 // Ship only the 166KB emoji dataset used by worktree naming, not all 49MB of emojibase-data.
 const emojiShortcodeDatasetResource = {
@@ -152,7 +157,9 @@ const commonExtraResources = [
   skillFreshnessResources,
   ...agentBrowserSkillResources,
   nativeChatVisualsResource,
-  emojiShortcodeDatasetResource
+  emojiShortcodeDatasetResource,
+  armoryInventoryResources,
+  arakanBinaryResources
 ]
 // Native speech addons need real disk paths; copy only the artifact target’s variant.
 const macSpeechNativeResource = {

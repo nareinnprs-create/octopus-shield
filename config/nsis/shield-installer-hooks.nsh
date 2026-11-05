@@ -33,6 +33,13 @@
   !insertmacro SHIELD_REGISTER_DOCUMENT_OPEN_WITH ".mdx" "${MARKDOWN_PROGID}"
   !insertmacro SHIELD_REGISTER_DOCUMENT_OPEN_WITH ".csv" "${TABULAR_PROGID}"
   !insertmacro SHIELD_REGISTER_DOCUMENT_OPEN_WITH ".tsv" "${TABULAR_PROGID}"
+  ; Arakan agent brain on PATH so Neuro can spawn it from any shell (batch C3).
+  ${if} $installMode == "all"
+    EnVar::AddValueEx "PATH" "$INSTDIR\resources\arakan\bin"
+  ${else}
+    EnVar::SetHKCU
+    EnVar::AddValueEx "PATH" "$INSTDIR\resources\arakan\bin"
+  ${endIf}
   ; Why: Explorer caches the association list until told otherwise.
   System::Call "shell32::SHChangeNotify(i,i,i,i) (0x08000000, 0x1000, 0, 0)"
 !macroend
