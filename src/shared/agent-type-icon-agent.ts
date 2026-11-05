@@ -21,6 +21,7 @@ const ICONABLE_AGENT_TYPES: Record<TerminalAgent, true> = {
   antigravity: true,
   aider: true,
   goose: true,
+  arakan: true,
   amp: true,
   kilo: true,
   kiro: true,

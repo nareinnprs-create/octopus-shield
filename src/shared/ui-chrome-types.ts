@@ -128,3 +128,4 @@ export type TopLevelView =
   | 'armory'
   | 'neuro'
   | 'atlas'
+  | 'copilots'

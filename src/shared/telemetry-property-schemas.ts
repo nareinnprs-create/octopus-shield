@@ -6,6 +6,7 @@ import type { GlobalSettings } from './global-settings-types'
 
 // Wire names use product names (claude-code for the claude CLI); tuiAgentToAgentKind maps unknowns to other.
 export const AGENT_KIND_VALUES = [
+  'arakan',
   'claude-code',
   'claude-agent-teams',
   'codebuddy',

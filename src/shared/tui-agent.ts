@@ -1,4 +1,5 @@
 export type TuiAgent =
+  | 'arakan' // Arakan — Octopus Shield's fully-detached agent brain (rebranded goose fork)
   | 'claude'
   | 'claude-agent-teams' // Claude Code Agent Teams via Shield native panes
   | 'codebuddy'

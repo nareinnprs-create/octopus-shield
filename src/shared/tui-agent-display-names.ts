@@ -26,6 +26,7 @@ export const TUI_AGENT_DISPLAY_NAMES: Record<TuiAgent, string> = {
   antigravity: 'Antigravity',
   aider: 'Aider',
   goose: 'Goose',
+  arakan: 'Arakan',
   amp: 'Amp',
   kilo: 'Kilocode',
   kiro: 'Kiro',

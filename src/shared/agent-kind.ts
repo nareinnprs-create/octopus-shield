@@ -24,6 +24,7 @@ const TUI_AGENT_KIND_BY_AGENT = {
   antigravity: 'antigravity',
   aider: 'aider',
   goose: 'goose',
+  arakan: 'arakan',
   amp: 'amp',
   kilo: 'kilo',
   kiro: 'kiro',

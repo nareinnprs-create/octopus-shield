@@ -22,6 +22,7 @@ export const SKILLS_CLI_AGENT_KEY_BY_TUI_AGENT = {
   antigravity: 'antigravity',
   aider: null,
   goose: 'goose',
+  arakan: 'arakan',
   amp: 'amp',
   kilo: 'kilo',
   kiro: 'kiro-cli',

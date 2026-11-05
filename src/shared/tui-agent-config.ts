@@ -1,5 +1,8 @@
 import type { TuiAgent } from './tui-agent'
-import { getShieldCliCommandNameForPlatform, skipsLinuxShieldCliRename } from './shield-cli-command-name'
+import {
+  getShieldCliCommandNameForPlatform,
+  skipsLinuxShieldCliRename
+} from './shield-cli-command-name'
 import type { TuiAgentConfig, TuiAgentConfigSource } from './tui-agent-config-types'
 
 export type {
@@ -178,10 +181,8 @@ const TUI_AGENT_CONFIG_SOURCE: Record<TuiAgent, TuiAgentConfigSource> = {
     detectCmd: 'aider',
     promptInjectionMode: 'stdin-after-start'
   },
-  goose: {
-    detectCmd: 'goose',
-    promptInjectionMode: 'stdin-after-start'
-  },
+  arakan: { detectCmd: 'arakan', promptInjectionMode: 'stdin-after-start' },
+  goose: { detectCmd: 'goose', promptInjectionMode: 'stdin-after-start' },
   amp: {
     detectCmd: 'amp',
     promptInjectionMode: 'stdin-after-start'

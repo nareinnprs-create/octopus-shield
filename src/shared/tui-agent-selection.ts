@@ -4,6 +4,7 @@ import { isTuiAgent } from './tui-agent-config'
 
 // Match desktop catalog order: this determines fallback priority without a selected default.
 export const TUI_AGENT_AUTO_PICK_ORDER = [
+  'arakan',
   'claude',
   'claude-agent-teams',
   'openclaude',
