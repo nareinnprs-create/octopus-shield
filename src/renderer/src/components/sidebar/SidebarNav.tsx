@@ -1,5 +1,15 @@
 import React from 'react'
-import { BookOpen, BrainCircuit, CalendarClock, EyeOff, Files, Search, Shield, Smartphone } from 'lucide-react'
+import {
+  BookOpen,
+  Bot,
+  BrainCircuit,
+  CalendarClock,
+  EyeOff,
+  Files,
+  Search,
+  Shield,
+  Smartphone
+} from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { useAppStore } from '@/store'
 import { cn } from '@/lib/utils'
@@ -59,6 +69,7 @@ const SidebarNav = React.memo(function SidebarNav() {
   const openArmoryPage = useAppStore((s) => s.openArmoryPage)
   const openNeuroPage = useAppStore((s) => s.openNeuroPage)
   const openAtlasPage = useAppStore((s) => s.openAtlasPage)
+  const openCopilotsPage = useAppStore((s) => s.openCopilotsPage)
   const openModal = useAppStore((s) => s.openModal)
   const updateSettings = useAppStore((s) => s.updateSettings)
   const activeView = useAppStore((s) => s.activeView)
@@ -74,6 +85,7 @@ const SidebarNav = React.memo(function SidebarNav() {
   const armoryActive = activeView === 'armory'
   const neuroActive = activeView === 'neuro'
   const atlasActive = activeView === 'atlas'
+  const copilotsActive = activeView === 'copilots'
   const mobileOnboardingBadge = useMobileSidebarOnboardingBadge(showMobileButton)
   const hideAutomationsButton = React.useCallback(() => {
     void updateSettings({ showAutomationsButton: false })
@@ -136,10 +148,7 @@ const SidebarNav = React.memo(function SidebarNav() {
         )}
       >
         <Shield
-          className={cn(
-            'size-4 shrink-0',
-            !armoryActive && 'text-worktree-sidebar-foreground/30'
-          )}
+          className={cn('size-4 shrink-0', !armoryActive && 'text-worktree-sidebar-foreground/30')}
           strokeWidth={armoryActive ? 2.25 : 1.75}
         />
         <span className="flex-1">
@@ -158,10 +167,7 @@ const SidebarNav = React.memo(function SidebarNav() {
         )}
       >
         <BrainCircuit
-          className={cn(
-            'size-4 shrink-0',
-            !neuroActive && 'text-worktree-sidebar-foreground/30'
-          )}
+          className={cn('size-4 shrink-0', !neuroActive && 'text-worktree-sidebar-foreground/30')}
           strokeWidth={neuroActive ? 2.25 : 1.75}
         />
         <span className="flex-1">
@@ -180,14 +186,33 @@ const SidebarNav = React.memo(function SidebarNav() {
         )}
       >
         <BrainCircuit
-          className={cn(
-            'size-4 shrink-0',
-            !atlasActive && 'text-worktree-sidebar-foreground/30'
-          )}
+          className={cn('size-4 shrink-0', !atlasActive && 'text-worktree-sidebar-foreground/30')}
           strokeWidth={atlasActive ? 2.25 : 1.75}
         />
         <span className="flex-1">
           {translate('auto.components.sidebar.SidebarNav.atlas', 'Atlas')}
+        </span>
+      </button>
+      <button
+        type="button"
+        onClick={openCopilotsPage}
+        aria-current={copilotsActive ? 'page' : undefined}
+        className={cn(
+          'flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-left text-[13px] font-medium tracking-tight transition-colors',
+          copilotsActive
+            ? 'bg-worktree-sidebar-accent text-worktree-sidebar-accent-foreground'
+            : 'text-worktree-sidebar-foreground/60 hover:bg-worktree-sidebar-foreground/8'
+        )}
+      >
+        <Bot
+          className={cn(
+            'size-4 shrink-0',
+            !copilotsActive && 'text-worktree-sidebar-foreground/30'
+          )}
+          strokeWidth={copilotsActive ? 2.25 : 1.75}
+        />
+        <span className="flex-1">
+          {translate('auto.components.sidebar.SidebarNav.copilots', 'Copilots')}
         </span>
       </button>
       {showArtifactsButton ? (

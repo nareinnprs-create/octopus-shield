@@ -135,6 +135,19 @@ export function createUiViewActions(set: UISliceSet, get: UISliceGet): Partial<U
         activeView: state.previousViewBeforeAtlas,
         worktreeNavHistoryIndex: rewindHistoryIndexPastView(state, 'atlas')
       })),
+    openCopilotsPage: () => {
+      get().recordViewVisit('copilots')
+      set((state) => ({
+        activeView: 'copilots',
+        previousViewBeforeCopilots:
+          state.activeView === 'copilots' ? state.previousViewBeforeCopilots : state.activeView
+      }))
+    },
+    closeCopilotsPage: () =>
+      set((state) => ({
+        activeView: state.previousViewBeforeCopilots,
+        worktreeNavHistoryIndex: rewindHistoryIndexPastView(state, 'copilots')
+      })),
     openMobilePage: () =>
       set((state) => ({
         activeView: 'mobile',

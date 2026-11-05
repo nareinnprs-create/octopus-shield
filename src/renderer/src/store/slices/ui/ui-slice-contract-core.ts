@@ -125,6 +125,7 @@ export type UiViewHistory =
   | 'armory'
   | 'neuro'
   | 'atlas'
+  | 'copilots'
 
 export type UISliceCore = {
   sidebarOpen: boolean
@@ -168,6 +169,7 @@ export type UISliceCore = {
   previousViewBeforeArmory: Exclude<UiViewHistory, 'armory'>
   previousViewBeforeNeuro: Exclude<UiViewHistory, 'neuro'>
   previousViewBeforeAtlas: Exclude<UiViewHistory, 'atlas'>
+  previousViewBeforeCopilots: Exclude<UiViewHistory, 'copilots'>
   setActiveView: (view: UISliceCore['activeView']) => void
   taskPageData: TaskPageData
   taskResumeState: TaskResumeState | undefined
@@ -215,6 +217,8 @@ export type UISliceCore = {
   closeNeuroPage: () => void
   openAtlasPage: () => void
   closeAtlasPage: () => void
+  openCopilotsPage: () => void
+  closeCopilotsPage: () => void
   openMobilePage: () => void
   closeMobilePage: () => void
   setNewWorkspaceDraft: (draft: NonNullable<UISliceCore['newWorkspaceDraft']>) => void

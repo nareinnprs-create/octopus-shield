@@ -3,6 +3,8 @@
 export type ArakanConsoleOpenRequest = {
   /** Workspace cwd the agent operates in. */
   cwd: string
+  /** ARAKAN_* provider overrides (Neuro vault injection point; absent = process env). */
+  env?: Record<string, string>
 }
 
 export type ArakanConsoleOpenResult =

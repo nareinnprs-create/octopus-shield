@@ -3,7 +3,15 @@ import type { WorktreeNavHistoryViewEntry } from '@/store/slices/worktree-nav-hi
 
 // Replay via setActiveView: open*Page would mutate previousViewBefore* or duplicate history (navigateToIndex).
 export function applyWorktreeNavViewEntry(entry: WorktreeNavHistoryViewEntry): void {
-  if (entry === 'automations' || entry === 'artifacts' || entry === 'skills' || entry === 'armory' || entry === 'neuro' || entry === 'atlas') {
+  if (
+    entry === 'automations' ||
+    entry === 'artifacts' ||
+    entry === 'skills' ||
+    entry === 'armory' ||
+    entry === 'neuro' ||
+    entry === 'atlas' ||
+    entry === 'copilots'
+  ) {
     useAppStore.getState().setActiveView(entry)
     return
   }
