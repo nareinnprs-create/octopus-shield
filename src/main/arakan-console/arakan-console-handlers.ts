@@ -1,9 +1,52 @@
 // Arakan Console IPC (B6): trusted-renderer-gated channels over the singleton acp service.
-import { ipcMain, type IpcMainInvokeEvent } from 'electron'
+import { ipcMain, app, type IpcMainInvokeEvent } from 'electron'
+import { copyFileSync, existsSync, mkdirSync, readFileSync } from 'node:fs'
+import { join } from 'node:path'
+import { homedir } from 'node:os'
 import { isTrustedUIRenderer } from '../ipc/ui'
 import { ArakanConsoleService } from './arakan-console-service'
 
 const service = new ArakanConsoleService()
+
+/**
+ * Provider defaults for bare `arakan acp` sessions: the binary resolves provider+model
+ * from ARAKAN_* env or ~/.arakan/config.yaml, and a fresh device has neither. The shipped
+ * init-config.yaml is the distro's documented default; Neuro settings / explicit request
+ * env always win. Also seeds ~/.arakan/config.yaml once so `arakan configure` agrees.
+ */
+function consoleSpawnEnv(request: { env?: unknown }): Record<string, string> | undefined {
+  const explicit =
+    typeof request?.env === 'object' && request.env !== null
+      ? (request.env as Record<string, string>)
+      : undefined
+  const defaults: Record<string, string> = {}
+  const initPath = app.isPackaged
+    ? join(process.resourcesPath, 'arakan', 'init-config.yaml')
+    : join(app.getAppPath(), 'resources', 'arakan', 'init-config.yaml')
+  try {
+    const text = readFileSync(initPath, 'utf8')
+    for (const line of text.split(/\r?\n/)) {
+      const match = /^(ARAKAN_[A-Z_]+):\s*(.+)$/.exec(line)
+      if (match) {
+        defaults[match[1]] = match[2].trim()
+      }
+    }
+  } catch {
+    // No shipped defaults; caller env decides.
+  }
+  try {
+    const configDir = join(homedir(), '.arakan')
+    const configFile = join(configDir, 'config.yaml')
+    if (!existsSync(configFile)) {
+      mkdirSync(configDir, { recursive: true })
+      copyFileSync(initPath, configFile)
+    }
+  } catch {
+    // Config seeding is best-effort.
+  }
+  const merged = { ...defaults, ...explicit }
+  return Object.keys(merged).length > 0 ? merged : undefined
+}
 
 export function registerArakanConsoleHandlers(): void {
   const handleTrusted = (
@@ -30,13 +73,7 @@ export function registerArakanConsoleHandlers(): void {
       }
     }
     return service
-      .open(
-        cwd,
-        sink,
-        typeof request.env === 'object' && request.env !== null
-          ? (request.env as Record<string, string>)
-          : undefined
-      )
+      .open(cwd, sink, consoleSpawnEnv(request))
       .then((result) => ({ ok: true as const, ...result }))
       .catch((error: unknown) => ({
         ok: false as const,
