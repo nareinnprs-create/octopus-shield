@@ -4,12 +4,12 @@ Operator guide to bring up the full Octopus Shield fabric from scratch on a Wind
 
 **What you end up with:**
 
-| Layer | Components | Endpoint defaults |
-| --- | --- | --- |
-| Nucleus | NATS 2.10, Postgres 16 + pgvector, Redis 7 (loopback-bound) | 4222 / 8222 · 5435 · 6381 |
-| Engines | Wazuh (SIEM), Mythic (C2), Caldera (adversary emulation) | 443/55000 · 7443/5436 · 8890 |
-| Shell | Shield desktop (Electron) | renderer dev port 15200+ |
-| Daemon | `@shield/octopod` health loop + NATS events | probes all of the above |
+| Layer   | Components                                                  | Endpoint defaults            |
+| ------- | ----------------------------------------------------------- | ---------------------------- |
+| Nucleus | NATS 2.10, Postgres 16 + pgvector, Redis 7 (loopback-bound) | 4222 / 8222 · 5435 · 6381    |
+| Engines | Wazuh (SIEM), Mythic (C2), Caldera (adversary emulation)    | 443/55000 · 7443/5436 · 8890 |
+| Shell   | Shield desktop (Electron)                                   | renderer dev port 15200+     |
+| Daemon  | `@shield/octopod` health loop + NATS events                 | probes all of the above      |
 
 > `engines/` is a host-only, gitignored vendored tree (multi-GB). It is not part of the published repo; engine stack lifecycle is outside the repo's source of truth by policy (see `infra/README.md`). Secret files are also gitignored — never print or commit their contents.
 
@@ -164,30 +164,30 @@ node src\packages\octopod\dist\octopod-cli.js --lifetime-ms=9000
 
 Endpoint overrides are parsed by `src/packages/engine-contracts/src/oshield-env.ts`; defaults come from `engine-endpoints.ts` and match the stacks above.
 
-| Variable | Default (unset) | Purpose |
-| --- | --- | --- |
-| `OSHIELD_WAZUH_DASHBOARD_URL` | `https://localhost:443` | Wazuh dashboard |
-| `OSHIELD_WAZUH_MANAGER_API_URL` | `https://localhost:55000` | Wazuh manager API |
-| `OSHIELD_WAZUH_AGENT_TCP_PORT` | `1514` | Agent channel |
-| `OSHIELD_WAZUH_AGENT_ENROLLMENT_PORT` | `1515` | Agent enrollment |
-| `OSHIELD_MYTHIC_UI_URL` | `https://localhost:7443` | Mythic UI (nginx front) |
-| `OSHIELD_MYTHIC_POSTGRES_HOST` / `_PORT` | `localhost:5436` | Mythic's own Postgres |
-| `OSHIELD_MYTHIC_RABBITMQ_HOST` / `_PORT` | `localhost:5672` | Mythic RabbitMQ (compose-internal) |
-| `OSHIELD_CALDERA_UI_URL` | `http://localhost:8890` | Caldera UI |
-| `OSHIELD_CALDERA_API_URL` | `http://localhost:8890` | Caldera API |
-| `OSHIELD_NATS_CLIENT_HOST` / `_PORT` | `localhost:4222` | NATS client |
-| `OSHIELD_NATS_MONITOR_URL` or `_HOST` / `_PORT` | `http://localhost:8222` | NATS monitor (`/healthz`) |
-| `OSHIELD_PGVECTOR_POSTGRES_HOST` / `_PORT` | `localhost:5435` | Nucleus Postgres + pgvector |
-| `OSHIELD_REDIS_HOST` / `_PORT` | `localhost:6381` | Nucleus Redis |
-| `OSHIELD_NATS_TOKEN` | *(none)* | Auth token for the daemon's NATS connection (sent as URL userinfo); must match `NATS_TOKEN` in `infra/.env`. An auth-enabled NATS rejects tokenless clients. |
-| `OSHIELD_ARMORY_SCOPE` | *(empty = deny all)* | Armory target allowlist — comma-separated hostnames, IPs, or IPv4 CIDRs (CIDR prefixes 8–32) |
-| `OSHIELD_ARMORY_EXPLOIT_AUTHORIZED` | *(unset = denied)* | Set to `1` to authorize exploitation/post-exploitation-class Armory tools |
+| Variable                                        | Default (unset)           | Purpose                                                                                                                                                      |
+| ----------------------------------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `OSHIELD_WAZUH_DASHBOARD_URL`                   | `https://localhost:443`   | Wazuh dashboard                                                                                                                                              |
+| `OSHIELD_WAZUH_MANAGER_API_URL`                 | `https://localhost:55000` | Wazuh manager API                                                                                                                                            |
+| `OSHIELD_WAZUH_AGENT_TCP_PORT`                  | `1514`                    | Agent channel                                                                                                                                                |
+| `OSHIELD_WAZUH_AGENT_ENROLLMENT_PORT`           | `1515`                    | Agent enrollment                                                                                                                                             |
+| `OSHIELD_MYTHIC_UI_URL`                         | `https://localhost:7443`  | Mythic UI (nginx front)                                                                                                                                      |
+| `OSHIELD_MYTHIC_POSTGRES_HOST` / `_PORT`        | `localhost:5436`          | Mythic's own Postgres                                                                                                                                        |
+| `OSHIELD_MYTHIC_RABBITMQ_HOST` / `_PORT`        | `localhost:5672`          | Mythic RabbitMQ (compose-internal)                                                                                                                           |
+| `OSHIELD_CALDERA_UI_URL`                        | `http://localhost:8890`   | Caldera UI                                                                                                                                                   |
+| `OSHIELD_CALDERA_API_URL`                       | `http://localhost:8890`   | Caldera API                                                                                                                                                  |
+| `OSHIELD_NATS_CLIENT_HOST` / `_PORT`            | `localhost:4222`          | NATS client                                                                                                                                                  |
+| `OSHIELD_NATS_MONITOR_URL` or `_HOST` / `_PORT` | `http://localhost:8222`   | NATS monitor (`/healthz`)                                                                                                                                    |
+| `OSHIELD_PGVECTOR_POSTGRES_HOST` / `_PORT`      | `localhost:5435`          | Nucleus Postgres + pgvector                                                                                                                                  |
+| `OSHIELD_REDIS_HOST` / `_PORT`                  | `localhost:6381`          | Nucleus Redis                                                                                                                                                |
+| `OSHIELD_NATS_TOKEN`                            | _(none)_                  | Auth token for the daemon's NATS connection (sent as URL userinfo); must match `NATS_TOKEN` in `infra/.env`. An auth-enabled NATS rejects tokenless clients. |
+| `OSHIELD_ARMORY_SCOPE`                          | _(empty = deny all)_      | Armory target allowlist — comma-separated hostnames, IPs, or IPv4 CIDRs (CIDR prefixes 8–32)                                                                 |
+| `OSHIELD_ARMORY_EXPLOIT_AUTHORIZED`             | _(unset = denied)_        | Set to `1` to authorize exploitation/post-exploitation-class Armory tools                                                                                    |
 
 The daemon transport disables TLS trust checks only for the self-signed localhost engine fabric probes (`node-probe-fetch`); strict transport policy stays with the real engine clients.
 
 ## 5. Armory
 
-Armory (`src/packages/armory`) executes integrated security tools only through scope authorization. Tool availability comes from ring inventories written by the install ring agents to `%TEMP%\opencode\armory\wsl.json`, `windows.json`, and `docker.json` (missing rings are skipped, not fatal).
+Armory (`src/packages/armory`) executes integrated security tools only through scope authorization. Tool availability comes from ring inventories in `<userData>/armory/inventory` (`wsl.json`, `windows.json`, and `docker.json`, written by the install ring agents, plus `discovered.json`; missing rings are skipped, not fatal).
 
 ```powershell
 # List merged inventory (status, runtime, scope class, id)
