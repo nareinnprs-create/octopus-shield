@@ -5,6 +5,8 @@
   "type": "commonjs",
   "main": "src/engine.cjs",
   "scripts": {
+    "typecheck": "node --check src/index.cjs || node --check src/engine.cjs || node --check src/goal.cjs",
+    "build": "node --check src/index.cjs || node --check src/engine.cjs",
     "test": "node --test"
   }
 }
