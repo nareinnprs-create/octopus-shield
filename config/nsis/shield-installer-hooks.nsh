@@ -108,6 +108,13 @@
       nsExec::Exec '"$INSTDIR\${APP_EXECUTABLE_FILENAME}" --shield-uninstall-release-wsl-holders'
       Pop $0
     ${endIf}
+    ; Remove the install-time arakan PATH entry: exact dir match, scope mirrors customInstall (batch C3).
+    ${if} $installMode == "all"
+      nsExec::ExecToLog 'powershell -NoProfile -ExecutionPolicy Bypass -Command "$$d=\"$INSTDIR\resources\arakan\bin\win-x64\"; $$p=[Environment]::GetEnvironmentVariable(\"Path\",\"Machine\"); $$new=($$p -split \";\" | Where-Object { $$_ -ne $$d }) -join \";\"; if ($$new -ne $$p) { [Environment]::SetEnvironmentVariable(\"Path\", $$new, \"Machine\") }"'
+    ${else}
+      nsExec::ExecToLog 'powershell -NoProfile -ExecutionPolicy Bypass -Command "$$d=\"$INSTDIR\resources\arakan\bin\win-x64\"; $$p=[Environment]::GetEnvironmentVariable(\"Path\",\"User\"); $$new=($$p -split \";\" | Where-Object { $$_ -ne $$d }) -join \";\"; if ($$new -ne $$p) { [Environment]::SetEnvironmentVariable(\"Path\", $$new, \"User\") }"'
+    ${endIf}
+    Pop $0
     Pop $2
     Pop $1
     Pop $0
