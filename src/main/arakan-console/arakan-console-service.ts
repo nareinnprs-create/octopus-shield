@@ -98,7 +98,17 @@ export class ArakanConsoleService {
     const initResult = await this.request('initialize', { protocolVersion: ACP_PROTOCOL_VERSION })
     this.backendVersion =
       typeof initResult.protocolVersion === 'string' ? initResult.protocolVersion : null
-    const newSession = await this.request('session/new', { cwd, mcpServers: [] })
+    const newSession = await this.request('session/new', { cwd, mcpServers: [] }).catch(
+      (error: unknown) => {
+        const message = error instanceof Error ? error.message : String(error)
+        if (message.includes('timeout')) {
+          throw new Error(
+            'arakan session timed out resolving its provider — start Ollama (ollama serve + pull a model) or set ARAKAN_PROVIDER/ZAI_CODING_PLAN_API_KEY in ~/.arakan/config.yaml + environment, then reopen the Console'
+          )
+        }
+        throw error
+      }
+    )
     this.acpSessionId =
       typeof newSession.sessionId === 'string' ? newSession.sessionId : `arakan-${Date.now()}`
     return { sessionId: this.acpSessionId, backendVersion: this.backendVersion }
