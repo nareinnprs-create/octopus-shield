@@ -94,14 +94,9 @@ const devChannelBuildVersion = isHourlyChannel
     : isAdhocChannel
       ? process.env.OSHIELD_ADHOC_BUILD_VERSION
       : undefined
-// Separate dev-channel repos: 24 hourly tags/day would evict stable/RC from the ten-entry release feed; isolate adhoc/daily from hourly subscribers too.
-const devChannelRepo = isHourlyChannel
-  ? 'shield-hourly'
-  : isDailyChannel
-    ? 'shield-daily'
-    : isAdhocChannel
-      ? 'shield-adhoc'
-      : null
+// dev-channel repos not provisioned on nareinnprs-create; re-add when channels go live
+// (hourly/daily/adhoc previously mapped to shield-hourly/shield-daily/shield-adhoc).
+const devChannelRepo = null
 const appId = 'app.octopusshield.desktop'
 const featureWallResources = {
   from: 'resources/onboarding/feature-wall',
