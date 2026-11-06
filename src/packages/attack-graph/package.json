@@ -1,0 +1,10 @@
+{
+  "name": "@shield/attack-graph",
+  "version": "0.1.0",
+  "private": true,
+  "type": "commonjs",
+  "main": "src/engine.cjs",
+  "scripts": {
+    "test": "node --test"
+  }
+}
