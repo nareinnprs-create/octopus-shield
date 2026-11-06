@@ -10,6 +10,7 @@ import type { RuntimeStore } from './runtime-store-contract'
 import type { TerminalWorkspaceLaunchScope } from './runtime-legacy-worker-terminal-recovery-types'
 import type { TerminalCreateOptions } from './runtime-terminal-contracts'
 import { resolveBareAgentLaunchCommand } from './runtime-agent-launch-resolution'
+import { arakanBundledLaunchCommand } from '../arakan-console/arakan-bundled-binary'
 import {
   buildExecutionHostAgentStartupPlan,
   planExecutionHostStartupWithPromptCandidate
@@ -219,11 +220,17 @@ async function buildRuntimeAgentTerminalStartupOptions(
 
   // Account routing rides over the plan's own env, as a local launch's auth patch does.
   const env = opts.accountEnv ? { ...startupPlan.env, ...opts.accountEnv } : startupPlan.env
+  // Remote hosts run their own arakan; the local bundle only serves local spawns.
+  const bundledCommand = isRemote
+    ? null
+    : arakanBundledLaunchCommand(agent, startupPlan.launchCommand)
   return {
     ...opts,
-    command: startupPlan.launchCommand,
+    command: bundledCommand ?? startupPlan.launchCommand,
     ...(env ? { env } : {}),
-    launchConfig: startupPlan.launchConfig,
+    launchConfig: bundledCommand
+      ? { ...startupPlan.launchConfig, agentCommand: bundledCommand }
+      : startupPlan.launchConfig,
     launchAgent: agent,
     startupCommandDelivery: startupPlan.startupCommandDelivery,
     // A bare command the user typed stays out of launch accounting, as before.
