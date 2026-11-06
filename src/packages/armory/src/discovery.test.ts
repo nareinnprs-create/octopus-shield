@@ -16,14 +16,14 @@ describe('toolCandidates', () => {
 
   it('adds the documented go-install ffuf location under USERPROFILE', () => {
     const { knownFiles } = toolCandidates('ffuf', 'win32', { USERPROFILE: 'C:\\Users\\t' })
-    expect(knownFiles).toContain(join('C:', 'Users', 't', 'go', 'bin', 'ffuf.exe'))
+    expect(knownFiles).toContain(join('C:\\Users\\t', 'go', 'bin', 'ffuf.exe'))
   })
 
   it('mirrors the go-bin location for the X6/X7 Go single-binary tools', () => {
     for (const id of ['nuclei', 'httpx', 'subfinder', 'amass'] as const) {
       const { pathProbe, knownFiles } = toolCandidates(id, 'win32', { USERPROFILE: 'C:\\Users\\t' })
       expect(pathProbe).toBe(id)
-      expect(knownFiles).toEqual([join('C:', 'Users', 't', 'go', 'bin', `${id}.exe`)])
+      expect(knownFiles).toEqual([join('C:\\Users\\t', 'go', 'bin', `${id}.exe`)])
     }
   })
 
