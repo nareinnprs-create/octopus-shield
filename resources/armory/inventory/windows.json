@@ -47,5 +47,33 @@
     "requiresDiscovery": true,
     "status": "not-discovered",
     "notes": "Placeholder until armory discovery resolves the whois entry; Sysinternals-style installs vary."
+  },
+  {
+    "id": "nuclei",
+    "runtime": "win",
+    "requiresDiscovery": true,
+    "status": "not-discovered",
+    "notes": "Placeholder until armory discovery resolves nuclei.exe."
+  },
+  {
+    "id": "httpx",
+    "runtime": "win",
+    "requiresDiscovery": true,
+    "status": "not-discovered",
+    "notes": "Placeholder until armory discovery resolves httpx.exe."
+  },
+  {
+    "id": "subfinder",
+    "runtime": "win",
+    "requiresDiscovery": true,
+    "status": "not-discovered",
+    "notes": "Placeholder until armory discovery resolves subfinder.exe."
+  },
+  {
+    "id": "amass",
+    "runtime": "win",
+    "requiresDiscovery": true,
+    "status": "not-discovered",
+    "notes": "Placeholder until armory discovery resolves amass.exe."
   }
 ]

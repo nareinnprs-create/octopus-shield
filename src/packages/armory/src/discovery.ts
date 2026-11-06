@@ -30,7 +30,11 @@ export const DISCOVERY_TOOL_IDS = [
   'nikto',
   'ffuf',
   'whatweb',
-  'whois'
+  'whois',
+  'nuclei',
+  'httpx',
+  'subfinder',
+  'amass'
 ] as const
 
 export type DiscoveryToolId = (typeof DISCOVERY_TOOL_IDS)[number]
@@ -43,7 +47,12 @@ const PROBE_ARGV: Record<DiscoveryToolId, readonly string[]> = {
   whois: ['--version'],
   hydra: ['-h'],
   sqlmap: ['--version'],
-  ffuf: ['-V']
+  ffuf: ['-V'],
+  // TODO(verify): single-binary Go releases; docs use `-version` for nuclei/httpx/subfinder/amass.
+  nuclei: ['-version'],
+  httpx: ['-version'],
+  subfinder: ['-version'],
+  amass: ['-version']
 }
 
 /**
@@ -52,7 +61,15 @@ const PROBE_ARGV: Record<DiscoveryToolId, readonly string[]> = {
  * PATH-only by design instead of inventing install paths. TODO(verify): revisit
  * against actual installer docs if a "not discovered" report shows up for them.
  */
-const WINDOWS_EXE_IDS = new Set<DiscoveryToolId>(['nmap', 'hydra', 'ffuf'])
+const WINDOWS_EXE_IDS = new Set<DiscoveryToolId>([
+  'nmap',
+  'hydra',
+  'ffuf',
+  'nuclei',
+  'httpx',
+  'subfinder',
+  'amass'
+])
 
 /**
  * Well-known install dirs verified per tool — empty lists mean PATH-only by
@@ -67,6 +84,9 @@ const WELL_KNOWN_DIRS: Partial<
   }
 }
 
+/** Go single-binary releases: documented `go install ...` output lands in USERPROFILE\go\bin. TODO(verify). */
+const GO_BIN_IDS = new Set<DiscoveryToolId>(['ffuf', 'nuclei', 'httpx', 'subfinder', 'amass'])
+
 /** Executable candidates for one tool on one platform; PATH is probed separately via `pathProbe`. */
 export const toolCandidates = (
   id: DiscoveryToolId,
@@ -79,9 +99,8 @@ export const toolCandidates = (
     const files = windowsFileNames(id).flatMap((name) =>
       wellKnownDirs.map((dir) => join(dir, name))
     )
-    if (id === 'ffuf' && env.USERPROFILE) {
-      // Documented `go install github.com/ffuf/ffuf@latest` output: go default GOPATH bin. TODO(verify).
-      files.push(join(env.USERPROFILE, 'go', 'bin', 'ffuf.exe'))
+    if (GO_BIN_IDS.has(id) && env.USERPROFILE) {
+      files.push(join(env.USERPROFILE, 'go', 'bin', `${id}.exe`))
     }
     return { pathProbe: id, knownFiles: [...new Set(files)] }
   }

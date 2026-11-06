@@ -18,6 +18,19 @@ describe('toolCandidates', () => {
     const { knownFiles } = toolCandidates('ffuf', 'win32', { USERPROFILE: 'C:\\Users\\t' })
     expect(knownFiles).toContain(join('C:', 'Users', 't', 'go', 'bin', 'ffuf.exe'))
   })
+
+  it('mirrors the go-bin location for the X6/X7 Go single-binary tools', () => {
+    for (const id of ['nuclei', 'httpx', 'subfinder', 'amass'] as const) {
+      const { pathProbe, knownFiles } = toolCandidates(id, 'win32', { USERPROFILE: 'C:\\Users\\t' })
+      expect(pathProbe).toBe(id)
+      expect(knownFiles).toEqual([join('C:', 'Users', 't', 'go', 'bin', `${id}.exe`)])
+    }
+  })
+
+  it('keeps PATH-only probing when USERPROFILE is unset', () => {
+    const { knownFiles } = toolCandidates('nuclei', 'win32', {})
+    expect(knownFiles).toEqual([])
+  })
 })
 
 describe('discoverTool', () => {
@@ -38,6 +51,9 @@ describe('toInventoryEntries', () => {
 
   it('covers the shipped discovery set ids', () => {
     expect(DISCOVERY_TOOL_IDS).toContain('nmap')
-    expect(DISCOVERY_TOOL_IDS.length).toBeGreaterThanOrEqual(7)
+    expect(DISCOVERY_TOOL_IDS).toEqual(
+      expect.arrayContaining(['nuclei', 'httpx', 'subfinder', 'amass'])
+    )
+    expect(DISCOVERY_TOOL_IDS.length).toBeGreaterThanOrEqual(11)
   })
 })

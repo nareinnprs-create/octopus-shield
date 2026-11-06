@@ -42,5 +42,29 @@
     "runtime": "wsl",
     "requiresDiscovery": true,
     "status": "not-discovered"
+  },
+  {
+    "id": "nuclei",
+    "runtime": "wsl",
+    "requiresDiscovery": true,
+    "status": "not-discovered"
+  },
+  {
+    "id": "httpx",
+    "runtime": "wsl",
+    "requiresDiscovery": true,
+    "status": "not-discovered"
+  },
+  {
+    "id": "subfinder",
+    "runtime": "wsl",
+    "requiresDiscovery": true,
+    "status": "not-discovered"
+  },
+  {
+    "id": "amass",
+    "runtime": "wsl",
+    "requiresDiscovery": true,
+    "status": "not-discovered"
   }
 ]

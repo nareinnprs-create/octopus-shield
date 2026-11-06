@@ -82,6 +82,31 @@ describe('descriptorsFromInventories', () => {
     expect(tshark?.versionArgv).toEqual(['--version'])
   })
 
+  it('maps X6/X7 ids: nuclei to web, httpx/subfinder to recon scope class', () => {
+    const [nuclei, httpx, subfinder] = descriptorsFromInventories([
+      [
+        entry({ id: 'nuclei', image: 'nuclei:latest' }),
+        entry({ id: 'httpx', image: 'httpx:latest' }),
+        entry({ id: 'subfinder', runtime: 'wsl', binPath: '/usr/bin/subfinder' })
+      ]
+    ])
+    expect(nuclei?.category).toBe('web')
+    expect(nuclei?.scopeClass).toBe('web')
+    expect(nuclei?.versionArgv).toEqual(['-version'])
+    expect(httpx?.category).toBe('recon')
+    expect(httpx?.scopeClass).toBe('recon')
+    expect(subfinder?.category).toBe('recon')
+    expect(subfinder?.scopeClass).toBe('recon')
+  })
+
+  it('keeps not-discovered placeholders visible with an empty target', () => {
+    const [placeholder] = descriptorsFromInventories([
+      [entry({ id: 'nuclei', runtime: 'win', status: 'not-discovered', requiresDiscovery: true })]
+    ])
+    expect(placeholder?.target).toBe('')
+    expect(placeholder?.status).toBe('not-discovered')
+  })
+
   it('skips unknown tool ids', () => {
     const descriptors = descriptorsFromInventories([
       [

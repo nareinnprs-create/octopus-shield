@@ -18,5 +18,29 @@
     "runtime": "docker",
     "requiresDiscovery": true,
     "status": "not-discovered"
+  },
+  {
+    "id": "nuclei",
+    "runtime": "docker",
+    "requiresDiscovery": true,
+    "status": "not-discovered"
+  },
+  {
+    "id": "httpx",
+    "runtime": "docker",
+    "requiresDiscovery": true,
+    "status": "not-discovered"
+  },
+  {
+    "id": "subfinder",
+    "runtime": "docker",
+    "requiresDiscovery": true,
+    "status": "not-discovered"
+  },
+  {
+    "id": "amass",
+    "runtime": "docker",
+    "requiresDiscovery": true,
+    "status": "not-discovered"
   }
 ]
