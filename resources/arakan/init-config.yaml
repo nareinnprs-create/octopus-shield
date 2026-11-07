@@ -1,6 +1,5 @@
 # Arakan init-config — applied on first run when no config exists (batch C4).
 # Octopus Shield distro: telemetry compile-stripped, updater removed; live provider keys
 # are injected at spawn from Neuro's encrypted vault as ARAKAN_* env.
-# Local-first default per upstream CUSTOM_DISTROS.md appendix A (TODO(verify) on release).
-ARAKAN_PROVIDER: ollama
-ARAKAN_MODEL: qwen3-coder:latest
+# Provider and model are intentionally unset. Arakan must use the user's saved
+# configuration or explicit Neuro/vault environment, not a forced local provider.

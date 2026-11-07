@@ -9,10 +9,9 @@ import { ArakanConsoleService } from './arakan-console-service'
 const service = new ArakanConsoleService()
 
 /**
- * Provider defaults for bare `arakan acp` sessions: the binary resolves provider+model
- * from ARAKAN_* env or ~/.arakan/config.yaml, and a fresh device has neither. The shipped
- * init-config.yaml is the distro's documented default; Neuro settings / explicit request
- * env always win. Also seeds ~/.arakan/config.yaml once so `arakan configure` agrees.
+ * Provider environment is opt-in. A distro must not override the user's Arakan config;
+ * explicit Neuro/vault environment is still passed through. Also seeds the config template
+ * once so `arakan configure` has the expected directory.
  */
 function consoleSpawnEnv(request: { env?: unknown }): Record<string, string> | undefined {
   const explicit =

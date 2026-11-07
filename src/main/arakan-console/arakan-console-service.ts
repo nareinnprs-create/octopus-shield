@@ -103,7 +103,7 @@ export class ArakanConsoleService {
         const message = error instanceof Error ? error.message : String(error)
         if (message.includes('timeout')) {
           throw new Error(
-            'arakan session timed out resolving its provider — start Ollama (ollama serve + pull a model) or set ARAKAN_PROVIDER/ZAI_CODING_PLAN_API_KEY in ~/.arakan/config.yaml + environment, then reopen the Console'
+            'arakan session timed out resolving its provider — verify the provider/model in ~/.arakan/config.yaml or Neuro settings and its credentials, then reopen the Console'
           )
         }
         throw error
