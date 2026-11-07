@@ -12,7 +12,7 @@ import { cn } from '@/lib/utils'
 type ConsoleRow =
   | { kind: 'user'; text: string }
   | { kind: 'agent'; text: string }
-  | { kind: 'tool'; title: string; status?: string; output?: string }
+  | { kind: 'tool'; toolCallId: string; title: string; status?: string; output?: string }
   | { kind: 'notice'; text: string }
 
 type PendingPermission = {
@@ -64,10 +64,15 @@ export default function ArakanConsole(): React.JSX.Element {
           }
           next.push({ kind: 'agent', text: event.text })
         } else if (event.kind === 'tool-call') {
-          next.push({ kind: 'tool', title: event.title, status: event.status })
+          next.push({
+            kind: 'tool',
+            toolCallId: event.toolCallId,
+            title: event.title,
+            status: event.status
+          })
         } else if (event.kind === 'tool-call-update') {
           const index = next.findLastIndex(
-            (row) => row.kind === 'tool' && row.title === event.title
+            (row) => row.kind === 'tool' && row.toolCallId === event.toolCallId
           )
           if (index !== -1) {
             const row = next[index] as Extract<ConsoleRow, { kind: 'tool' }>
@@ -80,6 +85,8 @@ export default function ArakanConsole(): React.JSX.Element {
         } else if (event.kind === 'notice') {
           next.push({ kind: 'notice', text: event.text })
         } else if (event.kind === 'exited') {
+          setOpen(false)
+          setPendingPermission(null)
           next.push({ kind: 'notice', text: `arakan acp exited (${event.code ?? 'signal'})` })
         }
         return next
@@ -153,9 +160,31 @@ export default function ArakanConsole(): React.JSX.Element {
       if (!api || pendingPermission === null) {
         return
       }
-      void api.respondPermission({ requestId: pendingPermission.requestId, optionId })
-      setRows((previous) => [...previous, { kind: 'notice', text: `permission → ${optionId}` }])
-      setPendingPermission(null)
+      void api
+        .respondPermission({ requestId: pendingPermission.requestId, optionId })
+        .then((result) => {
+          if (result.ok) {
+            setRows((previous) => [
+              ...previous,
+              { kind: 'notice', text: `permission → ${optionId}` }
+            ])
+            setPendingPermission(null)
+            return
+          }
+          setRows((previous) => [
+            ...previous,
+            { kind: 'notice', text: 'permission response was rejected' }
+          ])
+        })
+        .catch((error: unknown) => {
+          setRows((previous) => [
+            ...previous,
+            {
+              kind: 'notice',
+              text: error instanceof Error ? error.message : String(error)
+            }
+          ])
+        })
     },
     [pendingPermission]
   )

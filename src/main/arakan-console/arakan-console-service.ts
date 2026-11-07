@@ -1,5 +1,4 @@
-// Arakan Console service (B6): one long-lived `arakan acp` child per console session.
-// Speaks newline-delimited JSON-RPC per upstream test_acp_client.py framing.
+// oxlint-disable max-lines
 import { spawn, type ChildProcess } from 'node:child_process'
 import { existsSync } from 'node:fs'
 import { join } from 'node:path'
@@ -10,9 +9,7 @@ import type {
   ArakanConsolePermissionResponse
 } from '../../shared/arakan-console-contract'
 
-/** ACP wire protocol version: u16 per the binary's deserializer (upstream docs showed a stale string form). */
 const ACP_PROTOCOL_VERSION = 1
-/** Unanswered permission requests auto-deny: fail closed (TODO(verify) ACP option semantics on release). */
 const PERMISSION_TIMEOUT_MS = 120_000
 
 export type ArakanConsoleEventSink = (event: ArakanConsoleEvent) => void
@@ -33,7 +30,6 @@ export function resolveArakanBinary(): string | null {
           ? 'mac-arm64'
           : 'mac-x64'
         : 'linux-x64'
-  // Packaged: resources/arakan/bin/<target>/<exe>; dev: repo resources, then cargo target.
   const resourcesPath =
     process.resourcesPath ??
     (process.platform === 'darwin'
@@ -90,28 +86,38 @@ export class ArakanConsoleService {
         this.emit({ kind: 'notice', text })
       }
     })
+    this.child.on('error', (error) => {
+      this.emit({ kind: 'notice', text: `arakan acp failed to start: ${error.message}` })
+      this.emit({ kind: 'exited', code: null, reason: 'process error' })
+      this.teardown('process error')
+    })
     this.child.on('exit', (code) => {
       this.emit({ kind: 'exited', code, reason: 'process exited' })
       this.teardown('exited')
     })
 
-    const initResult = await this.request('initialize', { protocolVersion: ACP_PROTOCOL_VERSION })
-    this.backendVersion =
-      typeof initResult.protocolVersion === 'string' ? initResult.protocolVersion : null
-    const newSession = await this.request('session/new', { cwd, mcpServers: [] }).catch(
-      (error: unknown) => {
-        const message = error instanceof Error ? error.message : String(error)
-        if (message.includes('timeout')) {
-          throw new Error(
-            'arakan session timed out resolving its provider — verify the provider/model in ~/.arakan/config.yaml or Neuro settings and its credentials, then reopen the Console'
-          )
+    try {
+      const initResult = await this.request('initialize', { protocolVersion: ACP_PROTOCOL_VERSION })
+      this.backendVersion =
+        typeof initResult.protocolVersion === 'string' ? initResult.protocolVersion : null
+      const newSession = await this.request('session/new', { cwd, mcpServers: [] }).catch(
+        (error: unknown) => {
+          const message = error instanceof Error ? error.message : String(error)
+          if (message.includes('timeout')) {
+            throw new Error(
+              'arakan session timed out resolving its provider — verify the provider/model in ~/.arakan/config.yaml or Neuro settings and its credentials, then reopen the Console'
+            )
+          }
+          throw error
         }
-        throw error
-      }
-    )
-    this.acpSessionId =
-      typeof newSession.sessionId === 'string' ? newSession.sessionId : `arakan-${Date.now()}`
-    return { sessionId: this.acpSessionId, backendVersion: this.backendVersion }
+      )
+      this.acpSessionId =
+        typeof newSession.sessionId === 'string' ? newSession.sessionId : `arakan-${Date.now()}`
+      return { sessionId: this.acpSessionId, backendVersion: this.backendVersion }
+    } catch (error) {
+      this.close('startup failed')
+      throw error
+    }
   }
 
   async prompt(text: string): Promise<void> {
@@ -131,7 +137,7 @@ export class ArakanConsoleService {
     }
     this.clearPermissionTimer(String(response.requestId))
     this.pendingPermission.delete(response.requestId)
-    this.respond(Number(response.requestId), {
+    this.respond(response.requestId, {
       outcome: { optionId: response.optionId, outcome: 'selected' }
     })
     return true
@@ -153,9 +159,7 @@ export class ArakanConsoleService {
     if (child !== null) {
       try {
         child.kill()
-      } catch {
-        // Already gone.
-      }
+      } catch {}
     }
   }
 
@@ -170,8 +174,11 @@ export class ArakanConsoleService {
     }
     this.permissionTimers.clear()
     this.pendingPermission.clear()
+    this.stdoutBuffer = ''
     this.acpSessionId = null
+    this.backendVersion = null
     this.child = null
+    this.sink = null
   }
 
   private emit(event: ArakanConsoleEvent): void {
@@ -277,7 +284,6 @@ export class ArakanConsoleService {
     }
     this.pendingPermission.set(rawId, request)
     const timer = setTimeout(() => {
-      // Fail closed: unanswered permission requests deny with the first reject-ish option.
       const deny = options.find((option) => option.kind.includes('reject')) ?? options[0]
       if (deny !== undefined) {
         this.respondPermission({ requestId: rawId, optionId: deny.optionId })
@@ -311,7 +317,13 @@ export class ArakanConsoleService {
         reject(new Error('arakan acp stdin unavailable'))
         return
       }
-      stdin.write(payload)
+      try {
+        stdin.write(payload)
+      } catch (error) {
+        clearTimeout(timer)
+        this.pending.delete(id)
+        reject(error instanceof Error ? error : new Error(String(error)))
+      }
     })
   }
 
